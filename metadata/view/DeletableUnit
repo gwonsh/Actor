@@ -1,0 +1,166 @@
+{
+    "type": "Ext.container.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "stretch",
+        "designer|userAlias": "deletableunit",
+        "designer|userClassName": "DeletableUnit",
+        "height": null,
+        "layout": "hbox",
+        "style": [
+            "{",
+            "    'border-radius':'5px',",
+            "    'border':'1px solid #cecece'",
+            "}"
+        ],
+        "width": null
+    },
+    "configAlternates": {
+        "container|align": "string",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "layout": "string",
+        "style": "object",
+        "width": "auto"
+    },
+    "name": "MyContainer35",
+    "designerId": "3a64f485-368d-4a2b-a504-c39ff79e0f22",
+    "viewControllerInstanceId": "fbf2beb6-7565-45bf-8716-78dabd8801e1",
+    "viewModelInstanceId": "117de01b-48f4-403e-a3ff-920c3b8f95d4",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "content",
+                "layout|flex": null,
+                "padding": 5
+            },
+            "configAlternates": {
+                "itemId": "string",
+                "layout|flex": "number",
+                "padding": "auto"
+            },
+            "name": "MyContainer35",
+            "designerId": "ef5bba8e-682c-4b3a-8dc7-0cc2a6af7405"
+        },
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "cls": null,
+                "designer|uiInterfaceName": "plain-toolbar-small",
+                "glyph": null,
+                "itemId": "btnDestory",
+                "style": "border-radius:0",
+                "text": "-",
+                "width": 23
+            },
+            "configAlternates": {
+                "style": "string",
+                "cls": "string",
+                "designer|uiInterfaceName": "string",
+                "glyph": "auto",
+                "itemId": "string",
+                "text": "string",
+                "width": "auto"
+            },
+            "name": "MyButton29",
+            "designerId": "b082ff0f-1a32-461e-a9e2-0a087cdc7771",
+            "cn": [
+                {
+                    "type": "fixedfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|params": [
+                            "button",
+                            "e"
+                        ],
+                        "fn": "handler",
+                        "implHandler": [
+                            "button.up('container').destroy();"
+                        ]
+                    },
+                    "configAlternates": {
+                        "designer|params": "typedarray",
+                        "fn": "string",
+                        "implHandler": "code"
+                    },
+                    "name": "handler",
+                    "designerId": "49296ad1-38d7-497d-8483-ab01236bd110"
+                }
+            ]
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "component"
+                ],
+                "fn": "addContent",
+                "implHandler": [
+                    "var ca = this.down('#content');",
+                    "ca.add(component);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "addContent",
+            "designerId": "4afdb355-e622-4d5f-ad98-df2f451ee2b8"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "src"
+                ],
+                "fn": "addImage",
+                "implHandler": [
+                    "var iStyle = 'background-image:url('+src+');background-size:cover;background-position:center';",
+                    "var image = {",
+                    "    xtype:'component',",
+                    "    style:iStyle",
+                    "};",
+                    "this.insert(0, image);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "addImage",
+            "designerId": "a0027648-003c-4185-a321-73d6b417f816"
+        }
+    ]
+}

@@ -1,0 +1,353 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "bodyPadding": 20,
+        "categoryId": "`''`",
+        "container|align": "stretch",
+        "designer|userAlias": "datagroupwindow",
+        "designer|userClassName": "DataGroupWindow",
+        "ghost": true,
+        "height": null,
+        "itemId": "mywindow",
+        "layout": "vbox",
+        "maximizable": true,
+        "modal": true,
+        "style": null,
+        "title": null,
+        "type": "normal",
+        "width": 850
+    },
+    "configAlternates": {
+        "style": "string",
+        "bodyPadding": "auto",
+        "categoryId": "string",
+        "container|align": "string",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "ghost": "object",
+        "height": "auto",
+        "itemId": "string",
+        "layout": "string",
+        "maximizable": "boolean",
+        "modal": "boolean",
+        "title": "string",
+        "type": "string",
+        "width": "auto"
+    },
+    "name": "MyWindow",
+    "designerId": "395be899-0f33-4a85-a1ba-b4173ad04828",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "categoryId",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "type",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "162dde2b-35a3-4341-8eec-0206d94cc81c",
+    "viewModelInstanceId": "2f258c78-27fc-4b9f-b759-dd12506c3839",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "listContainer",
+                "layout": "fit",
+                "layout|flex": 1,
+                "style": null
+            },
+            "configAlternates": {
+                "style": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyContainer13",
+            "designerId": "f5d43b56-d17c-497f-bb29-da8138aaad83",
+            "cn": [
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "dgGrid",
+                        "style": "border:1px solid #cecece",
+                        "title": null,
+                        "type": "normal"
+                    },
+                    "configAlternates": {
+                        "style": "string",
+                        "itemId": "string",
+                        "title": "string",
+                        "type": "string"
+                    },
+                    "name": "MyGridPanel1",
+                    "designerId": "c87f0335-bf14-44a2-be59-99d84e683ce6",
+                    "customConfigs": [
+                        {
+                            "group": "(Custom Properties)",
+                            "name": "type",
+                            "type": "string"
+                        }
+                    ],
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "string",
+                                "text": "String"
+                            },
+                            "configAlternates": {
+                                "dataIndex": "datafield",
+                                "text": "string"
+                            },
+                            "name": "MyColumn3",
+                            "designerId": "cbd5bbab-91db-4751-9e35-a039491ea514"
+                        },
+                        {
+                            "type": "Ext.view.Table",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyTable1",
+                            "designerId": "c421bfad-7a15-4252-ad65-98aeed91be0a",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.plugin.DragDrop",
+                                    "reference": {
+                                        "name": "plugins",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "ddGroup": "gridData"
+                                    },
+                                    "configAlternates": {
+                                        "ddGroup": "string"
+                                    },
+                                    "name": "MyGridDragDropPlugin",
+                                    "designerId": "d4094818-a008-4c5c-be63-d775c3a02320"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayInfo": true,
+                                "dock": "bottom",
+                                "itemId": "pagingToolbar",
+                                "width": 360
+                            },
+                            "configAlternates": {
+                                "displayInfo": "boolean",
+                                "dock": "string",
+                                "itemId": "string",
+                                "width": "auto"
+                            },
+                            "name": "MyPagingToolbar",
+                            "designerId": "3d11c108-789c-415d-9dfa-c87909d22322",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "Label",
+                                        "hideLabel": true,
+                                        "itemId": "dgSearch",
+                                        "layout|flex": null,
+                                        "margin": "0 0 0 3"
+                                    },
+                                    "configAlternates": {
+                                        "fieldLabel": "string",
+                                        "hideLabel": "boolean",
+                                        "itemId": "string",
+                                        "layout|flex": "number",
+                                        "margin": "auto"
+                                    },
+                                    "name": "MyTextField2",
+                                    "designerId": "fb6ae890-779e-40b3-8047-5401935d4fa9",
+                                    "cn": [
+                                        {
+                                            "type": "viewcontrollereventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onDgSearchAfterRender",
+                                                "implHandler": [
+                                                    "component.el.on('keyup', function(e){",
+                                                    "    if(e.keyCode == '13'){",
+                                                    "        component.up('window').down('#findData').fireEvent('click', component.up('window').down('#findData'));",
+                                                    "    }",
+                                                    "});"
+                                                ],
+                                                "name": "afterrender",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onDgSearchAfterRender",
+                                            "designerId": "60373613-1707-44f5-a552-401bc595b7ab"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "glyph": "xf002@FontAwesome",
+                                        "itemId": "findData",
+                                        "layout|flex": null,
+                                        "margin": "0 6 0 6",
+                                        "text": null
+                                    },
+                                    "configAlternates": {
+                                        "glyph": "auto",
+                                        "itemId": "string",
+                                        "layout|flex": "number",
+                                        "margin": "auto",
+                                        "text": "string"
+                                    },
+                                    "name": "MyButton5",
+                                    "designerId": "a79c4214-5ccd-40e6-b0fd-2f10545a7e81",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onFindDataClick",
+                                                "implHandler": [
+                                                    "var val = encodeURIComponent(button.up('pagingtoolbar').down('#dgSearch').getValue());",
+                                                    "var ctrl = getController('Main');",
+                                                    "var cId = button.up('window').relatedCategory;",
+                                                    "var query = \"&se_all=\" + val + '&ca_id=' + cId;",
+                                                    "",
+                                                    "var grid = button.up('pagingtoolbar').up('gridpanel');",
+                                                    "grid.mask();",
+                                                    "grid.on('listcomplete', function onListComplete(cId, grid){",
+                                                    "    grid.un('listcomplete', onListComplete);",
+                                                    "    grid.unmask();",
+                                                    "});",
+                                                    "",
+                                                    "ctrl.getServerData(cId, query, button.up('pagingtoolbar').up('gridpanel'));"
+                                                ],
+                                                "name": "click",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onFindDataClick",
+                                            "designerId": "3d30368c-2adf-46ba-98c6-74c44823ca2d"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onWindowBeforeRender",
+                "implHandler": [
+                    "var ctrl = getController('Main');",
+                    "var rc = component.relatedCategory;",
+                    "var grid = component.down('gridpanel');",
+                    "grid.numOfItem = 30;",
+                    "ctrl.getServerData(rc, '&ca_id=' + rc, grid);"
+                ],
+                "name": "beforerender",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onWindowBeforeRender",
+            "designerId": "7f0f9fcd-15dc-4372-b020-c69b9dfcf7ee"
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onMywindowAfterLayout",
+                "implHandler": [
+                    "container.center();"
+                ],
+                "name": "afterlayout",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onMywindowAfterLayout",
+            "designerId": "d687fefb-6dcc-4771-afac-5beaf4d1d4d3"
+        }
+    ]
+}

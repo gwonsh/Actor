@@ -1,0 +1,454 @@
+{
+    "type": "Ext.container.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "stretch",
+        "designer|userAlias": "datasetgridbox",
+        "designer|userClassName": "DatasetGridBox",
+        "height": null,
+        "layout": "vbox",
+        "style": null,
+        "width": null
+    },
+    "configAlternates": {
+        "container|align": "string",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "layout": "string",
+        "style": "object",
+        "width": "auto"
+    },
+    "name": "MyContainer11",
+    "designerId": "c397f5a6-de62-471b-95d4-2f9597b7e0de",
+    "viewControllerInstanceId": "5ea50a43-0e9d-4297-bd6a-c2359fbd6c1d",
+    "viewModelInstanceId": "1204817a-1704-4356-8139-0e4b2d8f3ae0",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "middle",
+                "height": 27,
+                "itemId": "datasetHeader",
+                "layout": "hbox",
+                "layout|flex": null,
+                "width": "100%"
+            },
+            "configAlternates": {
+                "container|align": "string",
+                "height": "auto",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number",
+                "width": "auto"
+            },
+            "name": "MyContainer11",
+            "designerId": "8f7da320-4f19-46b6-a047-60b35aa6c108",
+            "cn": [
+                {
+                    "type": "Ext.form.Label",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "cls": [
+                            "x-form-item-label-default"
+                        ],
+                        "itemId": "title",
+                        "layout|flex": null,
+                        "text": null
+                    },
+                    "configAlternates": {
+                        "cls": "typedarray",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "text": "string"
+                    },
+                    "name": "MyLabel3",
+                    "designerId": "2deb8dbd-2c34-476d-8486-f9a712016e7c"
+                },
+                {
+                    "type": "Ext.toolbar.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1
+                    },
+                    "configAlternates": {
+                        "layout|flex": "number"
+                    },
+                    "name": "MySpacer1",
+                    "designerId": "a79eadb8-0b58-421c-86ba-212dba34f9dc"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|uiInterfaceName": "plain-toolbar-small",
+                        "glyph": "xf0fe@FontAwesome",
+                        "height": 24,
+                        "itemId": "btnAddColumn",
+                        "layout|flex": null,
+                        "margin": "0 2 0 0",
+                        "text": null,
+                        "tooltip": [
+                            "{addRow}"
+                        ],
+                        "ui": "plain-toolbar-small",
+                        "width": 24
+                    },
+                    "configAlternates": {
+                        "tooltip": "binding",
+                        "designer|uiInterfaceName": "string",
+                        "glyph": "auto",
+                        "height": "auto",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "margin": "auto",
+                        "text": "string",
+                        "ui": "string",
+                        "width": "auto"
+                    },
+                    "name": "MyButton2",
+                    "designerId": "d7635333-3106-4f65-973b-3d5bfda7d77b",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onBtnAddColumnClick",
+                                "implHandler": [
+                                    "var grid = button.up('datasetgridbox').down('gridpanel');",
+                                    "var store = grid.getStore();",
+                                    "var emptyData = {subIdx:''};",
+                                    "Ext.Array.each(grid.colsInfo, function(entry){",
+                                    "    if(entry.cols_type != 'date'){",
+                                    "        emptyData[entry.cols_idx] = '';",
+                                    "    }",
+                                    "});",
+                                    "store.add(emptyData);",
+                                    ""
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string",
+                                "scope": "string"
+                            },
+                            "name": "onBtnAddColumnClick",
+                            "designerId": "f10b31dd-f45a-4f75-8cb0-18637dfb8b70"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|uiInterfaceName": "plain-toolbar-small",
+                        "glyph": "xf146@FontAwesome",
+                        "height": 24,
+                        "itemId": "btnDelColumn",
+                        "layout|flex": null,
+                        "margin": "0 2 0 0",
+                        "text": null,
+                        "tooltip": [
+                            "{delRow}"
+                        ],
+                        "ui": "plain-toolbar-small",
+                        "width": 24
+                    },
+                    "configAlternates": {
+                        "tooltip": "binding",
+                        "designer|uiInterfaceName": "string",
+                        "glyph": "auto",
+                        "height": "auto",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "margin": "auto",
+                        "text": "string",
+                        "ui": "string",
+                        "width": "auto"
+                    },
+                    "name": "MyButton3",
+                    "designerId": "2bb57c4f-0121-41bc-a7a9-923b0e028e5e",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onBtnDelColumnClick",
+                                "implHandler": [
+                                    "var grid = button.up('datasetgridbox').down('gridpanel');",
+                                    "var selected = grid.getSelectionModel().getSelection();",
+                                    "var store = grid.getStore();",
+                                    "store.on('remove', function onRemove(){",
+                                    "    store.un('remove', onRemove);",
+                                    "//     if(store.getCount() === 0){",
+                                    "//         var emptyData = {subIdx:''};",
+                                    "//         Ext.Array.each(grid.colsInfo, function(entry){",
+                                    "//             if(entry.cols_type != 'date'){",
+                                    "//                 emptyData[entry.cols_idx] = '';",
+                                    "//             }",
+                                    "//         });",
+                                    "//         store.insert(0, emptyData);",
+                                    "//     }",
+                                    "    grid.getView().refresh();",
+                                    "});",
+                                    "if(selected.length === 0){",
+                                    "    Ext.MessageBox.alert(loc.main.notice, loc.upload.noneSelected);",
+                                    "}",
+                                    "else{",
+                                    "    store.remove(selected);",
+                                    "}"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string",
+                                "scope": "string"
+                            },
+                            "name": "onBtnDelColumnClick",
+                            "designerId": "fba2e9d9-8a85-4960-9f27-ff4e75c7fd0f"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|uiInterfaceName": "plain-toolbar-small",
+                        "glyph": "xf1f8@FontAwesome",
+                        "height": 24,
+                        "itemId": "btnDelAllColumn",
+                        "layout|flex": null,
+                        "margin": null,
+                        "text": null,
+                        "tooltip": [
+                            "{delAllRow}"
+                        ],
+                        "ui": "plain-toolbar-small",
+                        "width": 24
+                    },
+                    "configAlternates": {
+                        "tooltip": "binding",
+                        "designer|uiInterfaceName": "string",
+                        "glyph": "auto",
+                        "height": "auto",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "margin": "auto",
+                        "text": "string",
+                        "ui": "string",
+                        "width": "auto"
+                    },
+                    "name": "MyButton4",
+                    "designerId": "a432d968-ac5d-4079-9115-4d6051928ab7",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onBtnDelAllColumnClick",
+                                "implHandler": [
+                                    "var grid = button.up('datasetgridbox').down('gridpanel');",
+                                    "var store = grid.getStore();",
+                                    "store.removeAll();",
+                                    "var emptyData = {subIdx:''};",
+                                    "Ext.Array.each(grid.colsInfo, function(entry){",
+                                    "    if(entry.cols_type != 'date'){",
+                                    "        emptyData[entry.cols_idx] = '';",
+                                    "    }",
+                                    "});",
+                                    "store.insert(0, emptyData);"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string",
+                                "scope": "string"
+                            },
+                            "name": "onBtnDelAllColumnClick",
+                            "designerId": "17b01ff4-b2c2-4e94-a002-e08b6a0005a0"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "getGrid",
+                "implHandler": [
+                    "return this.down('#datasetGrid');"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getGrid",
+            "designerId": "3049244e-baa7-46b1-9727-80fa9117f21f"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "needSummary"
+                ],
+                "fn": "setGrid",
+                "implHandler": [
+                    "var grid = {",
+                    "    xtype: 'gridpanel',",
+                    "    dataIdx: '',",
+                    "    colsInfo: [",
+                    "",
+                    "    ],",
+                    "    itemId: 'datasetGrid',",
+                    "    style: {",
+                    "        border: '1px solid #cecece'",
+                    "    },",
+                    "    bodyBorder: true,",
+                    "    header: false,",
+                    "    columns: [",
+                    "        {",
+                    "            xtype: 'gridcolumn',",
+                    "            dataIndex: 'string',",
+                    "            text: 'String'",
+                    "        }",
+                    "    ],",
+                    "    plugins: [",
+                    "        {",
+                    "            ptype: 'cellediting',",
+                    "            clicksToEdit: 1",
+                    "        }",
+                    "    ],",
+                    "    selModel: {",
+                    "        selType: 'checkboxmodel',",
+                    "        checkOnly: true,",
+                    "        showHeaderCheckbox: true",
+                    "    },",
+                    "    listeners: {",
+                    "        afterlayout: function(container, component){",
+                    "            // get the summary row",
+                    "            var sumRows = container.el.select('.x-grid-row-summary').elements;",
+                    "            if(sumRows.length === 0) return;",
+                    "            // all of td elements in summary row",
+                    "            var tds = Ext.get(sumRows[0]).select('td').elements;",
+                    "            if(component.layoutCount == 1){",
+                    "                //save the number of td before it removed",
+                    "                container.tdLen = tds.length;",
+                    "            }",
+                    "            for(var i=0; i<2; i++){",
+                    "                if(i === 0){",
+                    "                    tds[i].style.textAlign = 'center';",
+                    "                    tds[i].setAttribute('colspan', 2);",
+                    "                    tds[i].style.color = '#7792A9';",
+                    "                    tds[i].style.verticalAlign = 'middle';",
+                    "                    tds[i].textContent = loc.main.total;",
+                    "                }",
+                    "                else{",
+                    "                    //remove td as many as combined by colspan to write '합계' in tr elements",
+                    "                    if(tds.length == container.tdLen) Ext.get(tds[i]).destroy();",
+                    "                }",
+                    "            }",
+                    "        }",
+                    "    }",
+                    "};",
+                    "if(needSummary){",
+                    "    grid.features = [{ftype: 'summary'}];",
+                    "}",
+                    "this.add(grid);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "designer|params": "typedarray"
+            },
+            "name": "setGrid",
+            "designerId": "7122ead4-30cf-4db9-b14f-22f90e0665ea"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "title"
+                ],
+                "fn": "addTitle",
+                "implHandler": [
+                    "var lb = this.down('#title');",
+                    "lb.setText(title);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "addTitle",
+            "designerId": "5320e80c-876d-49db-a716-872035ee5151"
+        }
+    ]
+}

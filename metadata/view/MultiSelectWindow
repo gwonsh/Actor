@@ -1,0 +1,528 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "center",
+        "container|padding": 35,
+        "designer|userAlias": "multiselectwindow",
+        "designer|userClassName": "MultiSelectWindow",
+        "ghost": true,
+        "height": null,
+        "itemId": null,
+        "layout": "vbox",
+        "title": null,
+        "width": 400
+    },
+    "configAlternates": {
+        "container|align": "string",
+        "container|padding": "auto",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "ghost": "object",
+        "height": "auto",
+        "itemId": "string",
+        "layout": "string",
+        "title": "string",
+        "width": "auto"
+    },
+    "name": "MyWindow",
+    "designerId": "3ddce40e-6ec5-4696-9bdc-e6fc44d0b04c",
+    "viewControllerInstanceId": "11f4f139-9a58-4405-8090-bb9a21fb7c46",
+    "viewModelInstanceId": "f8155e6f-aa64-465e-8e1a-0f3dfc80f52a",
+    "cn": [
+        {
+            "type": "Ext.form.field.ComboBox",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|displayName": null,
+                "displayField": "name",
+                "fieldLabel": [
+                    "{option1}"
+                ],
+                "itemId": "firstOption",
+                "labelWidth": 70,
+                "layout|flex": null,
+                "queryMode": null,
+                "valueField": "name",
+                "width": "100%"
+            },
+            "configAlternates": {
+                "fieldLabel": "binding",
+                "designer|displayName": "string",
+                "displayField": "datafield",
+                "itemId": "string",
+                "labelWidth": "number",
+                "layout|flex": "number",
+                "queryMode": "string",
+                "valueField": "datafield",
+                "width": "auto"
+            },
+            "name": "MyComboBox1",
+            "designerId": "3bd30905-77fe-4e1f-aa4c-157feef1193e",
+            "cn": [
+                {
+                    "type": "basiceventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onFirstOptionSelect",
+                        "implHandler": [
+                            "var sbDt = record.data.subData;",
+                            "var sndOpt = this.down('#secondOption');",
+                            "sndOpt.setDisabled(false);",
+                            "sndOpt.value = '';",
+                            "var sData = [];",
+                            "Ext.Array.each(sbDt, function(item){",
+                            "    sData.push({name:item});",
+                            "});",
+                            "var store = Ext.create('Ext.data.Store', {",
+                            "    fields:['name'],",
+                            "    data:sData",
+                            "});",
+                            "sndOpt.setStore(store);"
+                        ],
+                        "name": "select",
+                        "scope": "me"
+                    },
+                    "configAlternates": {
+                        "fn": "string",
+                        "implHandler": "code",
+                        "name": "string",
+                        "scope": "string"
+                    },
+                    "name": "onFirstOptionSelect",
+                    "designerId": "23d06200-abc4-4ea8-bad2-4bf7e2574e2f"
+                }
+            ]
+        },
+        {
+            "type": "Ext.form.field.ComboBox",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|displayName": null,
+                "disabled": true,
+                "displayField": "name",
+                "fieldLabel": [
+                    "{option2}"
+                ],
+                "itemId": "secondOption",
+                "labelWidth": 70,
+                "layout|flex": null,
+                "queryMode": "local",
+                "valueField": "name",
+                "width": "100%"
+            },
+            "configAlternates": {
+                "fieldLabel": "binding",
+                "designer|displayName": "string",
+                "disabled": "boolean",
+                "displayField": "datafield",
+                "itemId": "string",
+                "labelWidth": "number",
+                "layout|flex": "number",
+                "queryMode": "string",
+                "valueField": "datafield",
+                "width": "auto"
+            },
+            "name": "MyComboBox2",
+            "designerId": "425f8688-8f7c-40b7-a71d-452b2c5364bc"
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "cls": [
+                    "add-multiselcted-box"
+                ],
+                "container|align": "stretch",
+                "height": null,
+                "layout": "hbox",
+                "layout|flex": null
+            },
+            "configAlternates": {
+                "cls": "typedarray",
+                "container|align": "string",
+                "height": "auto",
+                "layout": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyContainer21",
+            "designerId": "3613bfe9-abc0-48f7-95eb-b4bae78d4882",
+            "cn": [
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "stretch",
+                        "layout": "vbox",
+                        "layout|flex": 1
+                    },
+                    "configAlternates": {
+                        "container|align": "string",
+                        "layout": "string",
+                        "layout|flex": "number"
+                    },
+                    "name": "MyContainer22",
+                    "designerId": "9ed2872d-a462-4dea-b7fd-7b5c0af9c193",
+                    "cn": [
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "cls": "btn-grey",
+                                "focusCls": "btn-grey-focus",
+                                "height": 30,
+                                "itemId": "btnAdd",
+                                "layout|flex": null,
+                                "overCls": "btn-grey-over",
+                                "style": null,
+                                "text": "Add",
+                                "width": 70
+                            },
+                            "configAlternates": {
+                                "cls": "string",
+                                "focusCls": "string",
+                                "height": "auto",
+                                "itemId": "string",
+                                "layout|flex": "number",
+                                "overCls": "string",
+                                "style": "object",
+                                "text": "string",
+                                "width": "auto"
+                            },
+                            "name": "MyButton10",
+                            "designerId": "6e46c130-ae25-473d-8879-92cbca754d77",
+                            "cn": [
+                                {
+                                    "type": "viewcontrollereventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onBtnAddClick",
+                                        "implHandler": [
+                                            "var fstOpt = button.up('window').down('#firstOption');",
+                                            "var sndOpt = button.up('window').down('#secondOption');",
+                                            "var valFld = button.up('window').down('#valueField');",
+                                            "var preVal = (valFld.getValue() === '')? '' : valFld.getValue() + ',';",
+                                            "var value = '';",
+                                            "if(fstOpt.getValue() === '' || fstOpt.getValue() === null || fstOpt.getValue() === undefined){",
+                                            "    Ext.toast(loc.upload.selectFirstOption);",
+                                            "    return;",
+                                            "}",
+                                            "else if(sndOpt.getValue() === '' || sndOpt.getValue() === null || sndOpt.getValue() === undefined){",
+                                            "    var cfm = confirm(loc.upload.selectSecondOption);",
+                                            "    if(cfm){",
+                                            "        value = preVal + sndOpt.getValue() + fstOpt.getValue() + '-[' + sndOpt.getValue() + ']';",
+                                            "    }",
+                                            "    else{",
+                                            "        return;",
+                                            "    }",
+                                            "}",
+                                            "else{",
+                                            "    value = preVal + fstOpt.getValue() + '-[' + sndOpt.getValue() + ']';",
+                                            "}",
+                                            "valFld.setValue(value);",
+                                            "fstOpt.setValue('');",
+                                            "sndOpt.setValue('');",
+                                            "sndOpt.disable();"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "configAlternates": {
+                                        "fn": "string",
+                                        "implHandler": "code",
+                                        "name": "string",
+                                        "scope": "string"
+                                    },
+                                    "name": "onBtnAddClick",
+                                    "designerId": "46bd6b44-ee79-4a62-99a5-f88bf2968bdc"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "cls": "btn-grey",
+                                "focusCls": "btn-grey-focus",
+                                "height": 30,
+                                "itemId": "btnClear",
+                                "layout|flex": null,
+                                "margin": "4 0 0 0",
+                                "overCls": "btn-grey-over",
+                                "text": "CLEAR",
+                                "width": 70
+                            },
+                            "configAlternates": {
+                                "cls": "string",
+                                "focusCls": "string",
+                                "height": "auto",
+                                "itemId": "string",
+                                "layout|flex": "number",
+                                "margin": "auto",
+                                "overCls": "string",
+                                "text": "string",
+                                "width": "auto"
+                            },
+                            "name": "MyButton11",
+                            "designerId": "eebef46b-10fa-4f77-bd73-91cc3f6218b8",
+                            "cn": [
+                                {
+                                    "type": "viewcontrollereventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onBtnClearClick",
+                                        "implHandler": [
+                                            "",
+                                            "var valFld = button.up('window').down('#valueField');",
+                                            "",
+                                            "valFld.setValue('');"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "configAlternates": {
+                                        "fn": "string",
+                                        "implHandler": "code",
+                                        "name": "string",
+                                        "scope": "string"
+                                    },
+                                    "name": "onBtnClearClick",
+                                    "designerId": "1c5eabaf-8a0c-40f9-9274-9c543e129f71"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.TextArea",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Label",
+                        "hideLabel": true,
+                        "itemId": "valueField",
+                        "layout|flex": null,
+                        "margin": "0 0 0 4",
+                        "readOnly": true,
+                        "width": 256
+                    },
+                    "configAlternates": {
+                        "fieldLabel": "string",
+                        "hideLabel": "boolean",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "margin": "auto",
+                        "readOnly": "boolean",
+                        "width": "auto"
+                    },
+                    "name": "MyTextArea",
+                    "designerId": "61c8e590-1f69-4300-b12a-b8548efef501"
+                }
+            ]
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "store"
+                ],
+                "fn": "setFirstStore",
+                "implHandler": [
+                    "var fstOpt = this.down('#firstOption');",
+                    "fstOpt.setStore(store);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setFirstStore",
+            "designerId": "6b1b0111-7115-44f8-ad73-3214bb8746c5"
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "middle",
+                "container|pack": "center",
+                "layout": "hbox",
+                "layout|flex": 1,
+                "margin": "16 0 0 0"
+            },
+            "configAlternates": {
+                "container|align": "string",
+                "container|pack": "string",
+                "layout": "string",
+                "layout|flex": "number",
+                "margin": "auto"
+            },
+            "name": "MyContainer23",
+            "designerId": "5335b0f8-d471-48ba-97a0-ddb1a52b8015",
+            "cn": [
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "glyph": "xf05d@FontAwesome",
+                        "itemId": "btnOK",
+                        "layout|flex": null,
+                        "text": [
+                            "{entry}"
+                        ],
+                        "width": null
+                    },
+                    "configAlternates": {
+                        "text": "binding",
+                        "glyph": "auto",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "width": "auto"
+                    },
+                    "name": "MyButton12",
+                    "designerId": "368fd053-edbd-4696-8ffa-03e1ddd6eca9",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onBtnOKClick",
+                                "implHandler": [
+                                    "var w = button.up('window');",
+                                    "w.setTitle('');",
+                                    "w.close();"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string",
+                                "scope": "string"
+                            },
+                            "name": "onBtnOKClick",
+                            "designerId": "1c9feb5e-7675-41e1-bea6-ff0a37ae73ef"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "glyph": "xf00d@FontAwesome",
+                        "itemId": "btnCancel",
+                        "layout|flex": null,
+                        "margin": "0 0 0 10",
+                        "text": [
+                            "{cancel}"
+                        ],
+                        "width": null
+                    },
+                    "configAlternates": {
+                        "text": "binding",
+                        "glyph": "auto",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "margin": "auto",
+                        "width": "auto"
+                    },
+                    "name": "MyButton13",
+                    "designerId": "47fdb3ac-5ddf-4592-b0c1-96f6cea09700",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onBtnCancelClick",
+                                "implHandler": [
+                                    "var w = button.up('window');",
+                                    "var w = button.up('window');",
+                                    "w.destroy();"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string",
+                                "scope": "string"
+                            },
+                            "name": "onBtnCancelClick",
+                            "designerId": "e5419b89-44ee-4a59-b06c-45c4d5e8dffa"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

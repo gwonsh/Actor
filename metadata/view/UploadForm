@@ -1,0 +1,792 @@
+{
+    "type": "Ext.form.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "bodyPadding": 25,
+        "cls": [
+            "upload-form"
+        ],
+        "container|align": "stretch",
+        "designer|userAlias": "uploadform",
+        "designer|userClassName": "UploadForm",
+        "height": null,
+        "itemId": "myform",
+        "layout": "vbox",
+        "scrollable": true,
+        "standardSubmit": true,
+        "title": null,
+        "width": null
+    },
+    "configAlternates": {
+        "scrollable": "boolean",
+        "bodyPadding": "auto",
+        "cls": "typedarray",
+        "container|align": "string",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "itemId": "string",
+        "layout": "string",
+        "standardSubmit": "boolean",
+        "title": "string",
+        "width": "auto"
+    },
+    "name": "MyForm",
+    "designerId": "eefbb3ca-9dc8-4194-82a8-e78d421e3f19",
+    "viewControllerInstanceId": "15df185b-d27f-426f-8c07-a068b873eb43",
+    "viewModelInstanceId": "4c2302fe-9692-4d94-a1cb-2264772a5e2b",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "hbox",
+                "layout|flex": null,
+                "width": null
+            },
+            "configAlternates": {
+                "layout": "string",
+                "layout|flex": "number",
+                "width": "auto"
+            },
+            "name": "MyContainer5",
+            "designerId": "1cfd4ae4-c05d-459c-9ff3-0c4b626f88ad",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "cls": [
+                            "requestform-space"
+                        ],
+                        "fieldLabel": null,
+                        "itemId": "fdSubject",
+                        "labelAlign": "top",
+                        "layout|flex": 1,
+                        "name": "bd_subject"
+                    },
+                    "configAlternates": {
+                        "cls": "typedarray",
+                        "itemId": "string",
+                        "labelAlign": "string",
+                        "layout|flex": "number",
+                        "name": "string",
+                        "fieldLabel": "string"
+                    },
+                    "name": "MyTextField",
+                    "designerId": "a6875b1a-804f-471c-af90-6606648ffa26",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onFdSubjectRender",
+                                "implHandler": [
+                                    "if(getController('Main').getListTab().getActiveTab())",
+                                    "    component.setFieldLabel(getController('Main').getListTab().getActiveTab().subjectTitle);"
+                                ],
+                                "name": "render",
+                                "scope": "me"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string",
+                                "scope": "string"
+                            },
+                            "name": "onFdSubjectRender",
+                            "designerId": "4346f173-cb03-4b59-9bf6-de32ad09e991"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": "submitvalue",
+                        "fieldLabel": [
+                            "{colortag}"
+                        ],
+                        "itemId": "fdColortag",
+                        "labelAlign": "top",
+                        "labelSeparator": null,
+                        "labelWidth": 70,
+                        "layout|flex": null,
+                        "margin": "0 0 0 15",
+                        "name": "bd_colortag",
+                        "valueField": "colorcode",
+                        "width": 200
+                    },
+                    "configAlternates": {
+                        "fieldLabel": "binding",
+                        "displayField": "datafield",
+                        "itemId": "string",
+                        "labelAlign": "string",
+                        "labelSeparator": "string",
+                        "labelWidth": "number",
+                        "layout|flex": "number",
+                        "margin": "auto",
+                        "name": "string",
+                        "valueField": "datafield",
+                        "width": "auto"
+                    },
+                    "name": "MyComboBox",
+                    "designerId": "5c500d37-2076-4d4c-8b60-b32da699fb16",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onFdColortagRender",
+                                "implHandler": [
+                                    "if(config.option.colorTag == '1' || config.option.colorTag == 'true'){",
+                                    "    var store = Ext.create('Ext.data.Store', {",
+                                    "        fields:[",
+                                    "            {",
+                                    "                name:'colorcode'",
+                                    "            },",
+                                    "            {",
+                                    "                name:'colorname',",
+                                    "                convert:function(v, rec){",
+                                    "                    if(v === null || v === ''|| v === undefined ){",
+                                    "                        v = rec.get('colorcode');",
+                                    "                    }",
+                                    "                    return v;",
+                                    "                }",
+                                    "            },",
+                                    "            {",
+                                    "                name:'submitvalue',",
+                                    "                convert:function(v, rec){",
+                                    "                    var cn = rec.get('colorname');",
+                                    "                    var cc = rec.get('colorcode');",
+                                    "                    if(cn === null || cn === ''|| cn === undefined ){",
+                                    "                        cn = cc;",
+                                    "                    }",
+                                    "                    return cc + ', ' + cn;",
+                                    "                }",
+                                    "            }",
+                                    "        ],",
+                                    "        data:companyInfo.colortag",
+                                    "    });",
+                                    "    component.setStore(store);",
+                                    "}",
+                                    "else{",
+                                    "    component.setHidden(true);",
+                                    "}"
+                                ],
+                                "name": "render",
+                                "scope": "me"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string",
+                                "scope": "string"
+                            },
+                            "name": "onFdColortagRender",
+                            "designerId": "cf7a3463-87c7-418b-ac56-409df09238ab"
+                        },
+                        {
+                            "type": "Ext.view.BoundList",
+                            "reference": {
+                                "name": "listConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "itemSelector": "div"
+                            },
+                            "configAlternates": {
+                                "itemSelector": "string"
+                            },
+                            "name": "MyBoundList",
+                            "designerId": "cdf17d31-f330-4595-a500-615f31b37987",
+                            "cn": [
+                                {
+                                    "type": "Ext.XTemplate",
+                                    "reference": {
+                                        "name": "itemTpl",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|displayName": "itemTpl",
+                                        "implHandler": [
+                                            "<tpl for='.'>",
+                                            "    <div style='background-color:{colorcode};width:100%;height:100%;font-size:12px'>{colorname}</div>",
+                                            "</tpl>"
+                                        ]
+                                    },
+                                    "configAlternates": {
+                                        "designer|displayName": "string",
+                                        "implHandler": "code"
+                                    },
+                                    "name": "itemTpl",
+                                    "designerId": "bc476c72-d638-4e1c-9f83-c72dac000fc6"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "stretch",
+                "hidden": true,
+                "html": null,
+                "itemId": "attachCon",
+                "layout": "vbox",
+                "layout|flex": null,
+                "margin": "10 0 0 0"
+            },
+            "configAlternates": {
+                "html": "string",
+                "container|align": "string",
+                "hidden": "boolean",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number",
+                "margin": "auto"
+            },
+            "name": "MyContainer7",
+            "designerId": "4242650d-8e8e-4a01-9b70-603b89357bef",
+            "cn": [
+                {
+                    "type": "Ext.form.Label",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "cls": [
+                            "x-form-item-label-default"
+                        ],
+                        "hidden": true,
+                        "itemId": "titleExistFile",
+                        "layout|flex": null,
+                        "text": [
+                            "{attachedFile}"
+                        ]
+                    },
+                    "configAlternates": {
+                        "text": "binding",
+                        "cls": "typedarray",
+                        "hidden": "boolean",
+                        "itemId": "string",
+                        "layout|flex": "number"
+                    },
+                    "name": "MyLabel",
+                    "designerId": "1455fddb-6c42-4b8d-8a76-1005bcfeaa8f"
+                },
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "delEntry": [
+                            "[]"
+                        ],
+                        "id": null,
+                        "itemId": "existFilesCon",
+                        "layout|flex": null
+                    },
+                    "configAlternates": {
+                        "delEntry": "array",
+                        "id": "string",
+                        "itemId": "string",
+                        "layout|flex": "number"
+                    },
+                    "name": "MyContainer8",
+                    "designerId": "8b90e8ee-3cd5-4edc-bdd7-486624cd9584",
+                    "customConfigs": [
+                        {
+                            "group": "(Custom Properties)",
+                            "name": "delEntry",
+                            "type": "string"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": null,
+                        "hidden": null,
+                        "itemId": "attachboxHeader",
+                        "layout|flex": null,
+                        "padding": null
+                    },
+                    "configAlternates": {
+                        "height": "auto",
+                        "hidden": "boolean",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "padding": "auto"
+                    },
+                    "name": "MyContainer9",
+                    "designerId": "39f72550-b73c-4e1d-8622-c6ab25a46202",
+                    "cn": [
+                        {
+                            "type": "Ext.form.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "cls": [
+                                    "x-form-item-label-default"
+                                ],
+                                "hidden": true,
+                                "itemId": "lbNewFileAdded",
+                                "text": [
+                                    "{addAttachFile}"
+                                ]
+                            },
+                            "configAlternates": {
+                                "text": "binding",
+                                "cls": "typedarray",
+                                "hidden": "boolean",
+                                "itemId": "string"
+                            },
+                            "name": "MyLabel2",
+                            "designerId": "d835d07c-808d-4d93-afea-52026f0f060d"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "cls": [
+                            "requestform_space"
+                        ],
+                        "height": null,
+                        "itemId": "fileList",
+                        "layout": "column",
+                        "layout|flex": null,
+                        "margin": "10 0 0 0",
+                        "width": "100%"
+                    },
+                    "configAlternates": {
+                        "cls": "typedarray",
+                        "height": "auto",
+                        "itemId": "string",
+                        "layout": "string",
+                        "layout|flex": "number",
+                        "margin": "auto",
+                        "width": "auto"
+                    },
+                    "name": "MyContainer11",
+                    "designerId": "d2218a30-6ca1-44e9-9410-bb13bbda18b7"
+                },
+                {
+                    "type": "Ext.form.Label",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "hidden": true,
+                        "itemId": "howToRemove",
+                        "layout|flex": null,
+                        "style": "color:#5FA2DD !important",
+                        "text": null
+                    },
+                    "configAlternates": {
+                        "style": "string",
+                        "hidden": "boolean",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "text": "string"
+                    },
+                    "name": "MyLabel6",
+                    "designerId": "5e0e36c0-4a5e-4b2e-b327-b75d2570fa8a"
+                }
+            ]
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "cls": [
+                    "requestform_space"
+                ],
+                "container|align": "stretch",
+                "itemId": "customFieldCon",
+                "layout": "vbox",
+                "layout|flex": null
+            },
+            "configAlternates": {
+                "cls": "typedarray",
+                "container|align": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyContainer6",
+            "designerId": "bd3fce9f-f3a8-4d81-b3b2-02abec7784e6"
+        },
+        {
+            "type": "linkedinstance",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "enableFont": false,
+                "height": 200,
+                "itemId": "fdContent",
+                "labelAlign": "top",
+                "layout|flex": 1,
+                "name": "bd_content"
+            },
+            "configAlternates": {
+                "enableFont": "boolean",
+                "height": "auto",
+                "itemId": "string",
+                "labelAlign": "string",
+                "layout|flex": "number",
+                "name": "string"
+            },
+            "name": "extendhtmleditor",
+            "designerId": "f4800913-dcd3-432b-a0c7-a636fcf35318",
+            "masterInstanceId": "45f14633-41b9-4445-87f1-8cc5ed39380c",
+            "cn": [
+                {
+                    "type": "basiceventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onHtmleditorAfterRender",
+                        "implHandler": [
+                            "component.setFieldLabel(loc.main.description);"
+                        ],
+                        "name": "afterrender",
+                        "scope": "me"
+                    },
+                    "configAlternates": {
+                        "fn": "string",
+                        "implHandler": "code",
+                        "name": "string",
+                        "scope": "string"
+                    },
+                    "name": "onHtmleditorAfterRender",
+                    "designerId": "c5d34573-e89e-41e7-ac2c-fbdd9f9346fd"
+                }
+            ]
+        },
+        {
+            "type": "Ext.form.field.Hidden",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fieldLabel": null,
+                "itemId": "fdRefer",
+                "layout|flex": null,
+                "name": "bd_refer",
+                "value": null
+            },
+            "configAlternates": {
+                "fieldLabel": "string",
+                "itemId": "string",
+                "layout|flex": "number",
+                "name": "string",
+                "value": "object"
+            },
+            "name": "MyHiddenField3",
+            "designerId": "a9c5db4e-4d9b-41bd-947d-2ca820498f34"
+        },
+        {
+            "type": "Ext.form.field.Hidden",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fieldLabel": "Receiver",
+                "itemId": "fdReceiver",
+                "layout|flex": null,
+                "name": "bd_receiver",
+                "value": null
+            },
+            "configAlternates": {
+                "fieldLabel": "string",
+                "itemId": "string",
+                "layout|flex": "number",
+                "name": "string",
+                "value": "object"
+            },
+            "name": "MyHiddenField1",
+            "designerId": "ef63ec98-62dd-434a-bf71-cbda1f222dff"
+        },
+        {
+            "type": "Ext.form.field.Hidden",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fieldLabel": "Reader",
+                "itemId": "fdReader",
+                "layout|flex": null,
+                "name": "bd_reader",
+                "value": null
+            },
+            "configAlternates": {
+                "fieldLabel": "string",
+                "itemId": "string",
+                "layout|flex": "number",
+                "name": "string",
+                "value": "object"
+            },
+            "name": "MyHiddenField2",
+            "designerId": "92ff64a0-a483-47ac-832b-24971ccb1ee6"
+        },
+        {
+            "type": "Ext.form.field.Hidden",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fieldLabel": null,
+                "itemId": "bdIdx",
+                "layout|flex": null,
+                "name": "bd_idx"
+            },
+            "configAlternates": {
+                "fieldLabel": "string",
+                "itemId": "string",
+                "layout|flex": "number",
+                "name": "string"
+            },
+            "name": "MyHiddenField",
+            "designerId": "1b16ec78-507d-4183-91fe-4673f8df6e8b"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "value"
+                ],
+                "fn": "setSubject",
+                "implHandler": [
+                    "this.down('#fdSubject').setValue(value);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setSubject",
+            "designerId": "e352c4ba-8437-4a6a-9dd1-e84500e9e650"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "value"
+                ],
+                "fn": "setRemark",
+                "implHandler": [
+                    "this.down('#fdContent').setValue(value);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setRemark",
+            "designerId": "0bdade10-b9ea-4ce7-b04f-a2e2690086b3"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "value"
+                ],
+                "fn": "setColortag",
+                "implHandler": [
+                    "this.down('#fdColortag').setValue(value);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setColortag",
+            "designerId": "fb673691-ed00-459e-9525-e9a6014bd212"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "value"
+                ],
+                "fn": "setRefer",
+                "implHandler": [
+                    "this.down('#fdRefer').setValue(value);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setRefer",
+            "designerId": "296dc6ba-da40-4563-985a-fe605a701082"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "value"
+                ],
+                "fn": "setReceiver",
+                "implHandler": [
+                    "this.down('#fdReceiver').setValue(value);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setReceiver",
+            "designerId": "78061bb5-c0aa-44c3-9f7f-06f0fd513ffd"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "value"
+                ],
+                "fn": "setReader",
+                "implHandler": [
+                    "this.down('#fdReader').setValue(value);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setReader",
+            "designerId": "f847a667-1e13-4f2f-846b-659ba54c58c4"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "hideBasicField",
+                "implHandler": [
+                    "this.down('#fdSubject').setHidden(true);",
+                    "this.down('#fdContent').setHidden(true);",
+                    "this.down('#fdColortag').setHidden(true);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "hideBasicField",
+            "designerId": "6d08202b-21af-4765-b5e6-07cac86cb899"
+        }
+    ]
+}

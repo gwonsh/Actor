@@ -1,0 +1,307 @@
+{
+    "type": "Ext.container.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "bottom",
+        "designer|userAlias": "selectrecordfield",
+        "designer|userClassName": "SelectRecordField",
+        "height": null,
+        "layout": "hbox",
+        "width": "100%"
+    },
+    "configAlternates": {
+        "container|align": "string",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "layout": "string",
+        "width": "auto"
+    },
+    "name": "MyContainer1",
+    "designerId": "e3fc37dd-d62d-485d-b587-4768aa31e46f",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "hi",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "0be5bf2b-3272-438e-8b3d-566fd02ae013",
+    "viewModelInstanceId": "b1db8657-5c04-4328-9865-42f314eee7d7",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|padding": "10 0 0 0",
+                "hidden": true,
+                "itemId": "imageCon",
+                "layout": "hbox",
+                "layout|flex": 1,
+                "width": "100%"
+            },
+            "configAlternates": {
+                "hidden": "boolean",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number",
+                "width": "auto",
+                "container|padding": "auto"
+            },
+            "name": "MyContainer1",
+            "designerId": "fdad4e4d-1719-4e39-9a8f-055e624f3bcf",
+            "cn": [
+                {
+                    "type": "Ext.form.Label",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "baseCls": null,
+                        "cls": [
+                            "x-form-item-label-default"
+                        ],
+                        "itemId": "imageLabel",
+                        "layout|flex": null,
+                        "style": null,
+                        "text": null
+                    },
+                    "configAlternates": {
+                        "baseCls": "string",
+                        "cls": "typedarray",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "style": "object",
+                        "text": "string"
+                    },
+                    "name": "MyLabel1",
+                    "designerId": "f62ee8fb-dabd-4aba-905b-db77261fb4af"
+                },
+                {
+                    "type": "Ext.Img",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": null,
+                        "hidden": null,
+                        "itemId": null,
+                        "layout|flex": null,
+                        "margin": "0 0 0 10",
+                        "src": null,
+                        "width": 60
+                    },
+                    "configAlternates": {
+                        "height": "auto",
+                        "hidden": "boolean",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "margin": "auto",
+                        "width": "auto",
+                        "src": "uri"
+                    },
+                    "name": "MyImg",
+                    "designerId": "bb36f9cc-99f9-4342-8664-81f14f4b7be4"
+                },
+                {
+                    "type": "Ext.toolbar.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "spacer",
+                        "layout|flex": 1,
+                        "width": null
+                    },
+                    "configAlternates": {
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "width": "auto"
+                    },
+                    "name": "MySpacer2",
+                    "designerId": "00a2cfc1-ed91-474b-b306-c90a0688cbad"
+                }
+            ]
+        },
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "iconCls": "fa fa-folder-o",
+                "itemId": "btnSelect",
+                "layout|flex": null,
+                "style": [
+                    "{",
+                    "   'border-radius':'0'",
+                    "}"
+                ],
+                "text": null
+            },
+            "configAlternates": {
+                "iconCls": "string",
+                "itemId": "string",
+                "layout|flex": "number",
+                "text": "string",
+                "style": "object"
+            },
+            "name": "MyButton2",
+            "designerId": "c4cb5a4d-28a8-4ad6-8169-e3d82fea730b",
+            "cn": [
+                {
+                    "type": "viewcontrollereventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onBtnSelectClick",
+                        "implHandler": [
+                            "var me = this;",
+                            "var rId = button.connectCategory;",
+                            "var grpWin = Ext.create(appName + '.view.DataGroupWindow', {",
+                            "    scrollable:true,",
+                            "    cls:'upload-form',",
+                            "    modal:true,",
+                            "    fieldId:button.fieldId,",
+                            "    maxHeight:windowMaxHeight - 30,",
+                            "    relatedCategory:rId",
+                            "}).show();",
+                            "",
+                            "var dgGrid = grpWin.down('#dgGrid');",
+                            "dgGrid.on('cellclick', function(tableview, dgTd, cellIndex, rec){",
+                            "    var value;",
+                            "    var fileVal = '';",
+                            "    var fieldId = grpWin.fieldId;",
+                            "    if(rec.get('bd_file').length > 0){",
+                            "        fileVal = rec.get('bd_file')[0].thumb_path;",
+                            "        fileVal += '?file_name=' + encodeURIComponent(rec.get('bd_file')[0].file_name);",
+                            "        fileVal += '--bd_subject=' + encodeURIComponent(rec.get('bd_subject'));",
+                            "        fileVal += '--bd_idx=' + rec.get('bd_idx');//for downloading",
+                            "    }",
+                            "    value = rec.data;",
+                            "    var obj = {};",
+                            "    obj['record_' + rId] = value;",
+                            "    obj['file_' + rId] = fileVal;",
+                            "    var img = button.up('container').down('image');//image component in SelectRecordField",
+                            "    if(button.fieldId == 'bd_file'){//when bd_file selected, set src to image",
+                            "        img.setSrc(fileVal);",
+                            "    }",
+                            "    button.up('window').getViewModel().setData(obj);",
+                            "    grpWin.close();",
+                            "",
+                            "});"
+                        ],
+                        "name": "click",
+                        "scope": "me"
+                    },
+                    "configAlternates": {
+                        "fn": "string",
+                        "implHandler": "code",
+                        "name": "string",
+                        "scope": "string"
+                    },
+                    "name": "onBtnSelectClick",
+                    "designerId": "bdd412c3-1c04-4c1d-93ea-ab013e05e9b6"
+                }
+            ]
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "categoryId",
+                    "fieldId",
+                    "field"
+                ],
+                "fn": "setRecordInfo",
+                "implHandler": [
+                    "this.down('#btnSelect').fieldId = fieldId;",
+                    "this.down('#btnSelect').connectCategory = categoryId;",
+                    "var finder = '';",
+                    "",
+                    "if(basicItems.indexOf(fieldId) != -1){//기본정보를 불러오는경우",
+                    "    finder = '{record_'+categoryId+'.' + fieldId + '}';",
+                    "}",
+                    "else{//필드정보를 불러오는 경우",
+                    "    finder = '{record_'+categoryId+'.id' + fieldId + '}';",
+                    "}",
+                    "if(fieldId == 'bd_file'){",
+                    "    finder = '{file_' + categoryId + '}';",
+                    "}",
+                    "field.bind = {",
+                    "    value:finder",
+                    "};",
+                    "",
+                    "this.insert(0, field);//받아온 필드를 첫번째 배치",
+                    "if(fieldId == 'bd_file'){//파일을 선택하면 이미지로 표시하기 위해 textfield 숨김",
+                    "    this.setConfig({align:'top'});",
+                    "    this.align = 'top';",
+                    "    this.down('textfield').setHidden(true);",
+                    "    this.down('#imageCon').setHidden(false);",
+                    "    this.down('#imageLabel').setText(field.fieldLabel);",
+                    "}",
+                    "if(field.xtype == 'htmleditor'){",
+                    "    this.setConfig({align:'top'});",
+                    "}",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setRecordInfo",
+            "designerId": "1aadc069-d53a-4622-9a51-7c1dd65e1fe4"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "index"
+                ],
+                "fn": "getButtonColor",
+                "implHandler": [
+                    "var colors = ['#4a635f', '#62623d', '#635d4a', '#634f4a', '#A5A8AB'];",
+                    "return colors[index];"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getButtonColor",
+            "designerId": "b5b24f4e-0a99-451d-a4f7-23a96910b674"
+        }
+    ]
+}

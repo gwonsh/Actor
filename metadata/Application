@@ -1,0 +1,85 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "controllers": [
+            "Config",
+            "Login",
+            "Main",
+            "Message",
+            "Post",
+            "Search",
+            "Util",
+            "Viewer",
+            "Work"
+        ],
+        "models": [
+            "CategoryModel"
+        ],
+        "name": "Actor",
+        "requires": [
+            "Ext.chart.CartesianChart",
+            "Ext.chart.axis.Numeric",
+            "Ext.chart.axis.Category",
+            "Ext.chart.series.Bar",
+            "Ext.chart.interactions.ItemHighlight",
+            "Ext.grid.column.Date"
+        ],
+        "stores": [
+            "CategoryStore",
+            "FieldStore",
+            "FontAwesomeStore",
+            "FormStore",
+            "MessageInStore",
+            "MessageOutStore",
+            "UserStore"
+        ],
+        "views": [
+            "MainView",
+            "Viewer",
+            "Door",
+            "CategoryContainer",
+            "Shortcut",
+            "GridGallery",
+            "GridNormal",
+            "GridSchedule",
+            "GridText",
+            "UploadForm",
+            "UploadStatusWindow",
+            "UploadWindow",
+            "ActorWindow",
+            "AttachUnit",
+            "CategorySetWindow",
+            "DatasetGridBox",
+            "DeletableUnit",
+            "DeleteWindow",
+            "FormUnit",
+            "GridColorChip",
+            "LinkedData",
+            "LinkingWindow",
+            "MultiSelectWindow",
+            "SalesInfoByClientWin",
+            "SelectRecordField",
+            "ViewedWindow",
+            "ColorWindow",
+            "ColorPickerWindow",
+            "ExtendHtmlEditor",
+            "DataGroupWindow",
+            "LinkUnit"
+        ]
+    },
+    "configAlternates": {
+        "name": "string",
+        "views": "typedarray",
+        "controllers": "typedarray",
+        "models": "typedarray",
+        "stores": "typedarray",
+        "requires": "typedarray"
+    },
+    "name": "Application",
+    "designerId": "application"
+}

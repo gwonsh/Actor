@@ -1,0 +1,194 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "bodyPadding": "20 6 20 20",
+        "designer|userAlias": "viewedwindow",
+        "designer|userClassName": "ViewedWindow",
+        "ghost": true,
+        "height": "80%",
+        "scrollable": true,
+        "title": [
+            "{recentlyViewed}"
+        ],
+        "width": 640,
+        "x": 70,
+        "y": 126
+    },
+    "configAlternates": {
+        "title": "binding",
+        "bodyPadding": "auto",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "ghost": "object",
+        "height": "auto",
+        "scrollable": "auto",
+        "width": "auto",
+        "x": "number",
+        "y": "number"
+    },
+    "name": "MyWindow",
+    "designerId": "93fc52e8-578a-4176-8c4e-82472c7b7d74",
+    "viewControllerInstanceId": "2f4ab4df-dbc2-4b51-83d0-d8b448ab163e",
+    "viewModelInstanceId": "bf494279-8c6d-435f-acc3-9a6c67c93fae",
+    "cn": [
+        {
+            "type": "Ext.view.View",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": "100%",
+                "itemId": "recentViewed",
+                "itemSelector": "div.recentViewedUnit",
+                "scrollable": true,
+                "width": "100%"
+            },
+            "configAlternates": {
+                "scrollable": "boolean",
+                "height": "auto",
+                "itemId": "string",
+                "itemSelector": "string",
+                "width": "auto"
+            },
+            "name": "MyView1",
+            "designerId": "c7a7dff0-619c-4b1e-8904-01c2a37356d0",
+            "cn": [
+                {
+                    "type": "Ext.XTemplate",
+                    "reference": {
+                        "name": "itemTpl",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "itemTpl",
+                        "implHandler": [
+                            "<tpl for='.'>",
+                            "    <div class='recentViewedUnit'>",
+                            "        <div style='background-image:url({[this.checkIfImage(values)]})' class='imageUnit'></div>",
+                            "        <div style='width:120px;margin-top:10px;overflow:hidden;white-space: nowrap'>{bd_subject}</div>",
+                            "        <div style='width:100%'>{[this.getRegDate(values)]}</div>",
+                            "    </div>",
+                            "</tpl>"
+                        ]
+                    },
+                    "configAlternates": {
+                        "designer|displayName": "string",
+                        "implHandler": "code"
+                    },
+                    "name": "itemTpl",
+                    "designerId": "7ce505ac-239a-4ab3-9c62-98ebea034db8",
+                    "cn": [
+                        {
+                            "type": "templatefunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "values"
+                                ],
+                                "fn": "checkIfImage",
+                                "implHandler": [
+                                    "var files = values.bd_file;",
+                                    "if(files.length === 0) return;",
+                                    "",
+                                    "var val = 'resources/images/ico_noimage.gif';",
+                                    "var isImage = getController('Config').isImage(files[0]);",
+                                    "if(isImage){",
+                                    "    val = files[0].thumb_path + '/T';",
+                                    "}",
+                                    "return val;"
+                                ]
+                            },
+                            "configAlternates": {
+                                "designer|params": "typedarray",
+                                "fn": "string",
+                                "implHandler": "code"
+                            },
+                            "name": "checkIfImage",
+                            "designerId": "7a86da46-ddd5-40b7-8643-173d5bbf9bed"
+                        },
+                        {
+                            "type": "templatefunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "values"
+                                ],
+                                "fn": "getRegDate",
+                                "implHandler": [
+                                    "var regDate = values.bd_regdate.slice(0, 10);",
+                                    "return regDate;"
+                                ]
+                            },
+                            "configAlternates": {
+                                "designer|params": "typedarray",
+                                "fn": "string",
+                                "implHandler": "code"
+                            },
+                            "name": "getRegDate",
+                            "designerId": "003f2a37-91de-4088-90d2-fb66c64f9f5c"
+                        }
+                    ]
+                },
+                {
+                    "type": "viewcontrollereventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onRecentViewedItemClick",
+                        "implHandler": [
+                            "var mainCtr = getController('Main');",
+                            "var viewer = Ext.getCmp('viewPanel').down('#viewer');",
+                            "if(viewer){",
+                            "    if(viewer.bdIdx == record.get('bd_idx')){",
+                            "        if(!Ext.getCmp('eastPanel').getCollapsed()){",
+                            "            Ext.getCmp('eastPanel').setCollapsed(true);",
+                            "            return;",
+                            "        }",
+                            "        else {",
+                            "            Ext.getCmp('eastPanel').setCollapsed(false);",
+                            "        }",
+                            "    }",
+                            "    else{",
+                            "        Ext.getCmp('eastPanel').setCollapsed(false);",
+                            "    }",
+                            "}",
+                            "else{",
+                            "    Ext.getCmp('eastPanel').setCollapsed(false);",
+                            "}",
+                            "getController('Main').viewDocument(record, '', 'Information', index, true);"
+                        ],
+                        "name": "itemclick",
+                        "scope": "me"
+                    },
+                    "configAlternates": {
+                        "fn": "string",
+                        "implHandler": "code",
+                        "name": "string",
+                        "scope": "string"
+                    },
+                    "name": "onRecentViewedItemClick",
+                    "designerId": "f30d0688-2509-405d-8339-165f87824c27"
+                }
+            ]
+        }
+    ]
+}

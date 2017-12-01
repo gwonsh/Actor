@@ -1,0 +1,183 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "salesinfobyclientwin",
+        "designer|userClassName": "SalesInfoByClientWin",
+        "ghost": true,
+        "height": 768,
+        "id": "saWin",
+        "layout": "border",
+        "modal": true,
+        "padding": null,
+        "title": "My Window",
+        "width": 1024
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "ghost": "object",
+        "height": "auto",
+        "id": "string",
+        "layout": "string",
+        "modal": "boolean",
+        "padding": "auto",
+        "title": "string",
+        "width": "auto"
+    },
+    "name": "MyWindow",
+    "designerId": "a37ac11a-3dfa-4e5b-85b1-e3d365f8ec7a",
+    "viewControllerInstanceId": "5d58732d-9369-45ed-a3d8-27521098f506",
+    "viewModelInstanceId": "a8e78c28-9e73-4ae2-aaf2-2e45fe6010ad",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|padding": 10,
+                "id": null,
+                "itemId": "westPanel",
+                "layout": "border",
+                "layout|region": "center",
+                "layout|split": true,
+                "title": [
+                    "{activityList}"
+                ]
+            },
+            "configAlternates": {
+                "title": "binding",
+                "container|padding": "auto",
+                "html": "object",
+                "id": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|region": "string",
+                "layout|split": "boolean"
+            },
+            "name": "MyPanel5",
+            "designerId": "fbdc98ae-9383-4bf4-83f1-a4a3e7f03c9c",
+            "cn": [
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": "30%",
+                        "itemId": "findedList",
+                        "layout": null,
+                        "layout|flex": null,
+                        "layout|region": "north",
+                        "layout|split": true,
+                        "scrollable": true
+                    },
+                    "configAlternates": {
+                        "scrollable": "boolean",
+                        "height": "auto",
+                        "itemId": "string",
+                        "layout": "string",
+                        "layout|flex": "number",
+                        "layout|region": "string",
+                        "layout|split": "boolean"
+                    },
+                    "name": "MyContainer5",
+                    "designerId": "4f92b429-b9ac-44d4-b0ee-7eff6d2f14f7"
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "stretch",
+                "html": null,
+                "itemId": "centerPanel",
+                "layout": "vbox",
+                "layout|flex": null,
+                "layout|region": "east",
+                "title": [
+                    "{seeActContent}"
+                ],
+                "width": "65%"
+            },
+            "configAlternates": {
+                "html": "string",
+                "title": "binding",
+                "container|align": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number",
+                "layout|region": "string",
+                "width": "auto"
+            },
+            "name": "MyPanel7",
+            "designerId": "44131671-0012-457e-a9c6-20681cdef65b",
+            "cn": [
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": null,
+                        "container|padding": "0 0 15 0",
+                        "itemId": "searchCon",
+                        "layout": "hbox",
+                        "style": "background-color:white"
+                    },
+                    "configAlternates": {
+                        "style": "string",
+                        "container|align": "string",
+                        "container|padding": "auto",
+                        "itemId": "string",
+                        "layout": "string"
+                    },
+                    "name": "MyContainer34",
+                    "designerId": "4906b698-728f-40c1-80e7-068b4055fa6e"
+                },
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "flex": 1,
+                        "height": "100%",
+                        "itemId": "viewAct",
+                        "padding": 15,
+                        "scrollable": true,
+                        "width": "100%"
+                    },
+                    "configAlternates": {
+                        "scrollable": "boolean",
+                        "flex": "number",
+                        "height": "auto",
+                        "itemId": "string",
+                        "padding": "auto",
+                        "width": "auto"
+                    },
+                    "name": "MyContainer6",
+                    "designerId": "eef81c57-cbbc-4888-9f17-becfbc1ea868"
+                }
+            ]
+        }
+    ]
+}

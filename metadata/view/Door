@@ -1,0 +1,704 @@
+{
+    "type": "Ext.container.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "door",
+        "designer|userClassName": "Door",
+        "floating": true,
+        "height": "100%",
+        "id": "door",
+        "itemId": "door",
+        "layout": "card",
+        "style": [
+            "{",
+            "    'background-color':'#2D3E50'",
+            "}"
+        ],
+        "width": "100%"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "floating": "boolean",
+        "height": "auto",
+        "itemId": "string",
+        "layout": "string",
+        "style": "object",
+        "width": "auto",
+        "id": "string"
+    },
+    "name": "Door1",
+    "designerId": "db0f9cf9-2229-4900-a03e-2f61673f2b9b",
+    "viewControllerInstanceId": "b130044a-1ea1-40d1-bdde-46c92913c3fe",
+    "viewModelInstanceId": "ca511125-3923-41ee-9b64-75f52e607949",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "cls": [
+                    "login"
+                ],
+                "container|align": "middle",
+                "container|pack": "center",
+                "height": null,
+                "itemId": "loginCon",
+                "layout": "hbox",
+                "style": null,
+                "width": null
+            },
+            "configAlternates": {
+                "bodyPadding": "auto",
+                "title": "string",
+                "container|align": "string",
+                "container|pack": "string",
+                "height": "auto",
+                "itemId": "string",
+                "layout": "string",
+                "style": "object",
+                "width": "auto",
+                "cls": "typedarray"
+            },
+            "name": "MyContainer3",
+            "designerId": "c76213d7-32a1-4142-8bb1-b9c164bed96f",
+            "cn": [
+                {
+                    "type": "Ext.Component",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 250,
+                        "itemId": "loginLogo",
+                        "layout|flex": null,
+                        "style": [
+                            "{siteLogo}"
+                        ],
+                        "width": 212
+                    },
+                    "configAlternates": {
+                        "height": "auto",
+                        "layout|flex": "number",
+                        "style": "binding",
+                        "width": "auto",
+                        "itemId": "string"
+                    },
+                    "name": "MyComponent",
+                    "designerId": "932f49cd-accc-4ed9-b2ab-30832e88ad00"
+                },
+                {
+                    "type": "Ext.toolbar.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 30,
+                        "layout|flex": null
+                    },
+                    "configAlternates": {
+                        "height": "auto",
+                        "layout|flex": "number"
+                    },
+                    "name": "MySpacer3",
+                    "designerId": "1d51a03c-2539-4e94-b1cf-4be9e93fe03a"
+                },
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|padding": "0 0 0 30",
+                        "height": null,
+                        "hidden": null,
+                        "itemId": "loginFrm",
+                        "layout": "vbox",
+                        "style": null,
+                        "width": null
+                    },
+                    "configAlternates": {
+                        "container|align": "string",
+                        "height": "auto",
+                        "hidden": "boolean",
+                        "layout": "string",
+                        "style": "object",
+                        "width": "auto",
+                        "container|padding": "auto",
+                        "itemId": "string"
+                    },
+                    "name": "MyContainer4",
+                    "designerId": "732ce325-420a-4a02-a181-bb0741351154",
+                    "cn": [
+                        {
+                            "type": "Ext.form.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "height": null,
+                                "layout|flex": null,
+                                "style": [
+                                    "{",
+                                    "    color:'white',",
+                                    "    'font-size':'36px',",
+                                    "    'text-align':'left',",
+                                    "    'font-weight':500,",
+                                    "    'line-height':'36px'",
+                                    "}"
+                                ],
+                                "text": [
+                                    "{siteName}"
+                                ]
+                            },
+                            "configAlternates": {
+                                "layout|flex": "number",
+                                "text": "binding",
+                                "height": "auto",
+                                "style": "object"
+                            },
+                            "name": "MyLabel1",
+                            "designerId": "499c4eda-a15b-476a-b606-cfb88dc27b45"
+                        },
+                        {
+                            "type": "Ext.form.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "height": null,
+                                "layout|flex": null,
+                                "style": [
+                                    "{",
+                                    "    color:'#9baab9',",
+                                    "    'font-size':'14.7px',",
+                                    "    'text-align':'left',",
+                                    "    'margin-top':'7px'",
+                                    "}"
+                                ],
+                                "text": [
+                                    "{siteTitle}"
+                                ]
+                            },
+                            "configAlternates": {
+                                "layout|flex": "number",
+                                "style": "object",
+                                "text": "binding",
+                                "height": "auto"
+                            },
+                            "name": "MyLabel2",
+                            "designerId": "6d6e68a9-8c1a-4b4c-81b6-499ab4a6a8a1"
+                        },
+                        {
+                            "type": "Ext.toolbar.Spacer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "height": 20,
+                                "layout|flex": 1
+                            },
+                            "configAlternates": {
+                                "height": "auto",
+                                "layout|flex": "number"
+                            },
+                            "name": "MySpacer",
+                            "designerId": "70080621-27d1-4f23-a80b-791d4f7be98b"
+                        },
+                        {
+                            "type": "Ext.form.field.Text",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fieldLabel": [
+                                    "{userId}"
+                                ],
+                                "itemId": "fdId",
+                                "labelStyle": "color:#9baab9",
+                                "labelWidth": 76,
+                                "layout|flex": null,
+                                "style": null,
+                                "width": 236
+                            },
+                            "configAlternates": {
+                                "fieldLabel": "binding",
+                                "labelStyle": "string",
+                                "labelWidth": "number",
+                                "layout|flex": "number",
+                                "style": "object",
+                                "width": "auto",
+                                "itemId": "string"
+                            },
+                            "name": "MyTextField",
+                            "designerId": "8c094ffe-9b58-4a34-b273-011c489c15e4"
+                        },
+                        {
+                            "type": "Ext.form.field.Text",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fieldLabel": [
+                                    "{password}"
+                                ],
+                                "inputType": "password",
+                                "itemId": "fdPass",
+                                "labelStyle": "color:#9baab9",
+                                "labelWidth": 76,
+                                "layout|flex": null,
+                                "style": null,
+                                "width": 236
+                            },
+                            "configAlternates": {
+                                "fieldLabel": "binding",
+                                "layout|flex": "number",
+                                "labelStyle": "string",
+                                "labelWidth": "number",
+                                "style": "object",
+                                "width": "auto",
+                                "inputType": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyTextField1",
+                            "designerId": "aea40d3c-69a1-45ba-b4ec-5b2f5ad0d5fb"
+                        },
+                        {
+                            "type": "Ext.toolbar.Spacer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "height": 10,
+                                "layout|flex": null,
+                                "width": null
+                            },
+                            "configAlternates": {
+                                "height": "auto",
+                                "layout|flex": "number",
+                                "width": "auto"
+                            },
+                            "name": "MySpacer2",
+                            "designerId": "cacdb590-adde-4611-838b-ee57b54e28c0"
+                        },
+                        {
+                            "type": "Ext.form.RadioGroup",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fieldLabel": null,
+                                "id": "languageSelect",
+                                "labelWidth": 0,
+                                "layout|flex": null,
+                                "width": null
+                            },
+                            "configAlternates": {
+                                "fieldLabel": "string",
+                                "id": "string",
+                                "labelWidth": "number",
+                                "layout|flex": "number",
+                                "width": "auto"
+                            },
+                            "name": "MyRadioGroup",
+                            "designerId": "6e6af65f-9078-4505-b702-be5d20c8b244",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Radio",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "boxLabel": "한국어",
+                                        "checked": true,
+                                        "fieldLabel": null,
+                                        "itemId": "rdKorean",
+                                        "labelStyle": null
+                                    },
+                                    "configAlternates": {
+                                        "boxLabel": "string",
+                                        "checked": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelStyle": "string"
+                                    },
+                                    "name": "MyRadio",
+                                    "designerId": "0c2479a0-1a11-482c-b55b-76557540fdbf",
+                                    "cn": [
+                                        {
+                                            "type": "viewcontrollereventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onRdKoreanChange",
+                                                "implHandler": [
+                                                    "var oldLan = localStorage.getItem('baseLanguage');",
+                                                    "var newLan;",
+                                                    "if(newValue){",
+                                                    "    localStorage.setItem('baseLanguage', 'Korean');",
+                                                    "    getController('Config').setLanguage('Korean');",
+                                                    "    newLan = 'Korean';",
+                                                    "}",
+                                                    "else{",
+                                                    "    localStorage.setItem('baseLanguage', 'English');",
+                                                    "    getController('Config').setLanguage('English');",
+                                                    "    newLan = 'English';",
+                                                    "}",
+                                                    "if(oldLan !== newLan) {",
+                                                    "    window.location.href = 'index.html';",
+                                                    "}"
+                                                ],
+                                                "name": "change",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onRdKoreanChange",
+                                            "designerId": "a2b35b47-b8f3-4bd5-9fad-15a3b49f9a09"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.form.field.Radio",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "boxLabel": "Englisth",
+                                        "fieldLabel": null,
+                                        "fieldStyle": null,
+                                        "itemId": "rdEnglish",
+                                        "labelStyle": null,
+                                        "style": [
+                                            "{",
+                                            "    'margin-left':'13px'",
+                                            "}"
+                                        ]
+                                    },
+                                    "configAlternates": {
+                                        "boxLabel": "string",
+                                        "fieldLabel": "string",
+                                        "fieldStyle": "string",
+                                        "itemId": "string",
+                                        "labelStyle": "string",
+                                        "style": "object"
+                                    },
+                                    "name": "MyRadio1",
+                                    "designerId": "0a704539-60d1-4d85-ad0b-d53a89bc8670"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.toolbar.Spacer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "height": 28,
+                                "layout|flex": null
+                            },
+                            "configAlternates": {
+                                "height": "auto",
+                                "layout|flex": "number"
+                            },
+                            "name": "MySpacer7",
+                            "designerId": "a64fafcb-36cb-46dd-9ec9-9706f58a2761"
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "itemId": "loginButton",
+                                "layout|flex": null,
+                                "margin": null,
+                                "text": [
+                                    "{login}"
+                                ],
+                                "width": 145
+                            },
+                            "configAlternates": {
+                                "layout|flex": "number",
+                                "text": "binding",
+                                "itemId": "string",
+                                "width": "auto",
+                                "margin": "auto"
+                            },
+                            "name": "MyButton",
+                            "designerId": "7e5ffb5a-bf93-4e09-aa41-c7c30a6bc1c1",
+                            "cn": [
+                                {
+                                    "type": "viewcontrollereventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onLoginButtonClick",
+                                        "implHandler": [
+                                            "var usrVal = Ext.getCmp('door').down('#fdId').getValue();",
+                                            "var pasVal = Ext.getCmp('door').down('#fdPass').getValue();",
+                                            "",
+                                            "Ext.data.JsonP.request({",
+                                            "    url:getLoginApi(),",
+                                            "    params:{",
+                                            "        nv_id:usrVal,",
+                                            "        nv_pass:pasVal",
+                                            "    },",
+                                            "    success:function(response){",
+                                            "        if(response.result){",
+                                            "            localStorage.setItem('userId', usrVal);",
+                                            "            sessionId = usrVal;",
+                                            "            getController('Login').onLoginSuccess(Ext.getCmp('door'));",
+                                            "        }",
+                                            "        else{",
+                                            "            alert(loc.login.loginInfo);",
+                                            "        }",
+                                            "    },",
+                                            "    failure:function(response){",
+                                            "        alert('Network connection problem');",
+                                            "    }",
+                                            "",
+                                            "});"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "configAlternates": {
+                                        "fn": "string",
+                                        "implHandler": "code",
+                                        "name": "string",
+                                        "scope": "string"
+                                    },
+                                    "name": "onLoginButtonClick",
+                                    "designerId": "e98e28e3-739a-4aee-b67a-91091c2f5e59"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onLoginFrmAfterRender",
+                                "implHandler": [
+                                    "//Apply menu languageset by binding",
+                                    "if(localStorage.getItem('baseLanguage')){",
+                                    "    var baseLan = localStorage.getItem('baseLanguage');",
+                                    "    if(baseLan == 'Korean'){",
+                                    "        component.down('#rdKorean').setValue(true);",
+                                    "    }",
+                                    "    else if(baseLan === undefined || baseLan === null){",
+                                    "        if(localLanguage == 'Korean'){",
+                                    "            component.down('#rdKorean').setValue(true);",
+                                    "        }",
+                                    "        else{",
+                                    "            component.down('#rdEnglish').setValue(true);",
+                                    "        }",
+                                    "    }",
+                                    "    else{",
+                                    "        component.down('#rdEnglish').setValue(true);",
+                                    "    }",
+                                    "}"
+                                ],
+                                "name": "afterrender",
+                                "scope": "me"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string",
+                                "scope": "string"
+                            },
+                            "name": "onLoginFrmAfterRender",
+                            "designerId": "43a16c81-815a-4552-a5f3-065ce7764e76"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "center",
+                "container|pack": "center",
+                "designer|createAlias": null,
+                "height": null,
+                "itemId": "shortcutCon",
+                "layout": "vbox",
+                "style": null,
+                "width": null
+            },
+            "configAlternates": {
+                "bodyPadding": "auto",
+                "title": "string",
+                "container|align": "string",
+                "container|pack": "string",
+                "height": "auto",
+                "itemId": "string",
+                "layout": "string",
+                "style": "object",
+                "width": "auto",
+                "cls": "typedarray",
+                "designer|createAlias": "string"
+            },
+            "name": "MyContainer5",
+            "designerId": "96e1f777-1ddd-4fc8-a35b-bab82b008631",
+            "cn": [
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "cls": [
+                            "shortcut-box"
+                        ],
+                        "container|align": "stretch",
+                        "itemId": "shortcutsBox",
+                        "layout": "hbox",
+                        "layout|flex": null
+                    },
+                    "configAlternates": {
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "container|align": "string",
+                        "layout": "string",
+                        "cls": "typedarray"
+                    },
+                    "name": "MyContainer6",
+                    "designerId": "4fcba168-0509-4e47-b662-6fc9032f7726"
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onDoorAfterRender",
+                "implHandler": [
+                    "//try loging in by Enter",
+                    "component.el.dom.onkeyup = function(e){",
+                    "    if(e.keyCode == 13){",
+                    "        component.down('#loginButton').fireEvent('click');",
+                    "    }",
+                    "};"
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onDoorAfterRender",
+            "designerId": "92e44001-3885-4858-b730-9f4f4e42f667"
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onDoorBeforeRender",
+                "implHandler": [
+                    "",
+                    "// var siteName = '한영나염';",
+                    "// var siteTitle = '날염 지식정보 처리시스템';",
+                    "// var siteLogo = {",
+                    "//     \"background-image\":\"url(resources/images/hylogo.png)\",",
+                    "//     'background-repeat':'no-repeat',",
+                    "//     'opacity':0.1",
+                    "// };",
+                    "// Ext.getDoc().dom.title = siteTitle;",
+                    "",
+                    "var siteName = 'SMARTORI ACTOR';",
+                    "var siteTitle = 'Data management system';",
+                    "var siteLogo = {",
+                    "    \"background-image\":\"url(resources/images/actorlogo.png)\",",
+                    "    'background-repeat':'no-repeat',",
+                    "    'opacity':0.1",
+                    "};",
+                    "",
+                    "this.getViewModel().setData({",
+                    "    siteName:siteName,",
+                    "    siteTitle:siteTitle,",
+                    "    siteLogo:siteLogo",
+                    "});"
+                ],
+                "name": "beforerender",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onDoorBeforeRender",
+            "designerId": "c630141c-673e-4182-9d10-b57a48be6161"
+        }
+    ]
+}

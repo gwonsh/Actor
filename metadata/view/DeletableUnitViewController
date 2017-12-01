@@ -1,0 +1,18 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "deletableunit",
+        "designer|userClassName": "DeletableUnitViewController"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "name": "MyContainer35ViewController",
+    "designerId": "fbf2beb6-7565-45bf-8716-78dabd8801e1"
+}

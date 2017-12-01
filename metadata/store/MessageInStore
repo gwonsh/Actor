@@ -1,0 +1,379 @@
+{
+    "type": "jsonpstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": false,
+        "designer|userClassName": "MessageInStore",
+        "pageSize": 50,
+        "storeId": "MessageInStore"
+    },
+    "configAlternates": {
+        "autoLoad": "boolean",
+        "designer|userClassName": "string",
+        "storeId": "string",
+        "pageSize": "number"
+    },
+    "name": "MyJsonPStore",
+    "designerId": "5ab1605f-9c16-42e6-97ba-31c400f82de5",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.JsonP",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "api": [
+                    "{",
+                    "    read:domain + '/message/recv?psize=50'",
+                    "}"
+                ],
+                "limitParam": "psize",
+                "startParam": null
+            },
+            "configAlternates": {
+                "api": "object",
+                "startParam": "string",
+                "limitParam": "string"
+            },
+            "name": "MyJsonPProxy2",
+            "designerId": "9f7a8ad4-de96-4bb4-abb5-3d43cbfdd74b",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "messageList",
+                        "totalProperty": "page.totCount"
+                    },
+                    "configAlternates": {
+                        "rootProperty": "string",
+                        "totalProperty": "string"
+                    },
+                    "name": "MyJsonReader2",
+                    "designerId": "654253f6-7de6-451f-8548-75758563ad06"
+                }
+            ]
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "bd_idx"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField11",
+            "designerId": "2c4c8667-63d5-41af-b884-532b2fe152f1"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "content"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField12",
+            "designerId": "9a57702a-c40b-410b-ba42-6c6064ad5e54"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "idx"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField13",
+            "designerId": "de88dc72-5a75-40fe-94f0-dd900fad737c"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "message_type"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField17",
+            "designerId": "7a2e64bc-1a99-4657-89ae-4200e2715630"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "recv_list"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField22",
+            "designerId": "94a13060-a82b-4176-83be-c9d5fa60f832"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "send_date_time"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField35",
+            "designerId": "4072c3ef-f7c3-4e49-94f7-32a291777778"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "send_read_time"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField36",
+            "designerId": "b7c7d5db-2c6b-4500-99e4-b007bd4e7b72"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "subject"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField37",
+            "designerId": "550ee881-71ed-4c18-a064-dbf253f45e5d"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "send_id"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField38",
+            "designerId": "4f72ede9-a805-4407-b9da-23342a5f2a4f"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "send_name"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField39",
+            "designerId": "adb6f577-d2a9-4165-8cb7-ad62acfb9263"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "send_photo"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField40",
+            "designerId": "663ece64-6a46-4f6d-8e75-8456240db0a1"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "recv_id"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField43",
+            "designerId": "b1b939ad-280f-470f-bb24-e1cc57e57cf7"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "unread"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField47",
+            "designerId": "69d2dde5-d9d7-41b8-bf68-4e59e3cc7114"
+        },
+        {
+            "type": "Ext.data.field.Boolean",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "defaultValue": null,
+                "name": "isDoc"
+            },
+            "configAlternates": {
+                "defaultValue": "object",
+                "name": "string"
+            },
+            "name": "MyBoolean1",
+            "designerId": "ebb54cc2-3766-4c1c-99ce-9c2fdf861f31"
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onJsonpstoreLoad",
+                "implHandler": [
+                    "var noReadsNor = 0;",
+                    "var noReadsCfm = 0;",
+                    "for(var i=0; i<records.length; i++){",
+                    "    if(records[i].get('message_type') !== 0) records[i].set('isDoc', true);",
+                    "    if(records[i].get('send_read_time') === null){//check if the message has not been read",
+                    "        if(records[i].get('message_type') === 0){//check if the message is a simple message",
+                    "            noReadsNor ++;",
+                    "            if(getController('Main').getListTab()){",
+                    "                if(getController('Main').getListTab().getActiveTab()){",
+                    "                    if(getController('Main').getListTab().getActiveTab().id == 'messageInGrid'){",
+                    "                        var tr = getController('Main').getListTab().getActiveTab().getEl().select('.x-grid-row').elements[i];",
+                    "                        tr.style.backgroundColor = '#fdf8f0';//change color for unread tr",
+                    "                        records[i].set('unread', true);",
+                    "                    }",
+                    "                }",
+                    "            }",
+                    "        }",
+                    "        else{//check if the message is a document",
+                    "            noReadsCfm ++;",
+                    "            if(getController('Main').getListTab()){",
+                    "                if(getController('Main').getListTab().getActiveTab()){",
+                    "                    if(getController('Main').getListTab().getActiveTab().id == 'documentInGrid'){",
+                    "                        var tr = getController('Main').getListTab().getActiveTab().getEl().select('.x-grid-row').elements[i];",
+                    "                        tr.style.backgroundColor = '#fdf8f0';//change color for unread tr",
+                    "                        records[i].set('unread', true);",
+                    "                    }",
+                    "                }",
+                    "            }",
+                    "        }",
+                    "    }",
+                    "    else{",
+                    "        records[i].set('unread', false);",
+                    "    }",
+                    "}",
+                    "",
+                    "////////////////////////////////////////////////////////////////",
+                    "// show number of unread messages on message or document box  //",
+                    "////////////////////////////////////////////////////////////////",
+                    "",
+                    "var cateCon = Ext.getCmp('categoryContainer');",
+                    "var mBox = cateCon.down('#messageBox');",
+                    "var dBox = cateCon.down('#documentBox');",
+                    "if(!Ext.get('unReadMsgNum')){//save first title of message box",
+                    "    cateCon.msgTitle = mBox.getTitle();",
+                    "}",
+                    "if(!Ext.get('unReadDocNum')){//save first title of document box",
+                    "    cateCon.docTitle = dBox.getTitle();",
+                    "}",
+                    "var unR = cateCon.down('#unReadMessages');",
+                    "var unRDoc = cateCon.down('#unReadDocMessages');",
+                    "",
+                    "if(noReadsNor !== 0){",
+                    "    unR.setHtml(noReadsNor);//write unread messages to message button(in)",
+                    "    /* write unread messages to message box(in) */",
+                    "    mBox.setTitle(cateCon.msgTitle + '<sup id=\"unReadMsgNum\" style=\"margin:0 0 0 5px;font-size:12px;color:#5e93bb\">'+noReadsNor+'</sup>');",
+                    "}",
+                    "if(noReadsCfm !== 0){",
+                    "    unRDoc.setHtml(noReadsCfm);//write unread document to document button(in)",
+                    "    /* write unread messages to document box(in) */",
+                    "    dBox.setTitle(cateCon.docTitle + '<sup id=\"unReadDocNum\" style=\"margin:0 0 0 5px;font-size:12px;color:#5e93bb\">'+noReadsCfm+'</sup>');",
+                    "}",
+                    "store.fireEvent('messagestorecomplete', store);"
+                ],
+                "name": "load",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onJsonpstoreLoad",
+            "designerId": "2ede3d2d-6b9f-4b0f-a12a-bdba7f1c85f9"
+        }
+    ]
+}

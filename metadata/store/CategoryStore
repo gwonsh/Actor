@@ -1,0 +1,96 @@
+{
+    "type": "jsonptreestore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "CategoryStore",
+        "model": "CategoryModel",
+        "storeId": "CategoryStore"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyJsonPTreeStore",
+    "designerId": "50bd2d07-0255-496d-b098-1a7a3073bdc6",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.JsonP",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "api": [
+                    "{",
+                    "    read    : getCategoryListApi()",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "api": "object"
+            },
+            "name": "MyJsonPProxy",
+            "designerId": "26d003af-141b-440d-b4ab-1a9c4c120b77",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "keepRawData": true
+                    },
+                    "configAlternates": {
+                        "keepRawData": "boolean"
+                    },
+                    "name": "MyJsonReader",
+                    "designerId": "67e984d6-f644-49f9-b047-b49edd796a58"
+                }
+            ]
+        },
+        {
+            "type": "Ext.util.Filter",
+            "reference": {
+                "name": "filters",
+                "type": "object"
+            },
+            "codeClass": null,
+            "name": "MyFilter",
+            "designerId": "c8f261f7-3933-4b69-917e-b555128298ff",
+            "cn": [
+                {
+                    "type": "fixedfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|params": [
+                            "item"
+                        ],
+                        "fn": "filterFn",
+                        "implHandler": [
+                            "if(!item.get('isHidden') && !item.get('isBoard')) return true;"
+                        ]
+                    },
+                    "configAlternates": {
+                        "designer|params": "typedarray",
+                        "fn": "string",
+                        "implHandler": "code"
+                    },
+                    "name": "filterFn",
+                    "designerId": "0a533e3f-24cc-4d14-b10d-ecd403237304"
+                }
+            ]
+        }
+    ]
+}

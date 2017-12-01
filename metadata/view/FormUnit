@@ -1,0 +1,174 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "bodyStyle": [
+            "{'background-color':'transparent'}"
+        ],
+        "container|align": "center",
+        "container|pack": "center",
+        "container|padding": null,
+        "designer|userAlias": "formunit",
+        "designer|userClassName": "FormUnit",
+        "height": 314,
+        "layout": "vbox",
+        "overCls": "thumbnail-mouseover",
+        "padding": null,
+        "scrollable": true,
+        "style": null,
+        "width": 214
+    },
+    "configAlternates": {
+        "style": "string",
+        "scrollable": "boolean",
+        "bodyStyle": "object",
+        "container|align": "string",
+        "container|pack": "string",
+        "container|padding": "auto",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "layout": "string",
+        "overCls": "string",
+        "padding": "auto",
+        "width": "auto"
+    },
+    "name": "FormUnit1",
+    "designerId": "400649e7-e8c1-440f-b0ca-8dcf5fd4e716",
+    "viewControllerInstanceId": "a0efc4e1-2bf0-4f97-b8c3-a76a06034bba",
+    "viewModelInstanceId": "2e20af7b-02d6-46fc-8b63-77fa7d4cdca7",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "center",
+                "container|pack": "center",
+                "container|padding": 5,
+                "height": 310,
+                "layout": "vbox",
+                "margin": null,
+                "overCls": null,
+                "style": "background-color:white;border:1px solid #cecece",
+                "width": 210
+            },
+            "configAlternates": {
+                "style": "string",
+                "container|align": "string",
+                "container|pack": "string",
+                "container|padding": "auto",
+                "height": "auto",
+                "layout": "string",
+                "margin": "auto",
+                "overCls": "string",
+                "width": "auto"
+            },
+            "name": "MyContainer28",
+            "designerId": "56ba6a77-37a4-4ad6-a581-36ec35d97b5b",
+            "cn": [
+                {
+                    "type": "Ext.form.Label",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "title",
+                        "layout|flex": null,
+                        "style": "text-align:center;font-weight:bold",
+                        "text": null
+                    },
+                    "configAlternates": {
+                        "style": "string",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "text": "string"
+                    },
+                    "name": "MyLabel7",
+                    "designerId": "aa9ba920-73e8-468d-9815-0f7e2a0bfea9"
+                },
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "disabled": null,
+                        "height": 270,
+                        "itemId": "formImage",
+                        "layout|flex": null,
+                        "overCls": null,
+                        "style": null,
+                        "width": "100%"
+                    },
+                    "configAlternates": {
+                        "style": "string",
+                        "disabled": "boolean",
+                        "height": "auto",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "overCls": "string",
+                        "width": "auto"
+                    },
+                    "name": "MyContainer27",
+                    "designerId": "87c8bfa3-2231-413c-939e-dbee5dd413bb"
+                },
+                {
+                    "type": "Ext.toolbar.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1
+                    },
+                    "configAlternates": {
+                        "layout|flex": "number"
+                    },
+                    "name": "MySpacer5",
+                    "designerId": "e5574c71-af52-47e2-891a-d6e70eff7197"
+                },
+                {
+                    "type": "Ext.form.Label",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "floating": null,
+                        "hidden": true,
+                        "itemId": "formClass",
+                        "layout|flex": null,
+                        "margin": "-10 0 0 0 ",
+                        "style": "position:absolute",
+                        "text": "My Label"
+                    },
+                    "configAlternates": {
+                        "style": "string",
+                        "floating": "boolean",
+                        "hidden": "boolean",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "margin": "auto",
+                        "text": "string"
+                    },
+                    "name": "MyLabel8",
+                    "designerId": "47c5b2a7-75a3-4148-914f-4357c3eae2e3"
+                }
+            ]
+        }
+    ]
+}

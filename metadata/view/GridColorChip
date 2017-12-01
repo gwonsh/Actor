@@ -1,0 +1,133 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "bodyPadding": 25,
+        "bodyStyle": "border-top:1px solid #cecece !important",
+        "closable": true,
+        "designer|userAlias": "gridcolorchip",
+        "designer|userClassName": "GridColorChip",
+        "height": null,
+        "scrollable": true,
+        "title": null,
+        "type": "colorChip",
+        "width": null
+    },
+    "configAlternates": {
+        "scrollable": "boolean",
+        "bodyPadding": "auto",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "title": "string",
+        "type": "string",
+        "width": "auto",
+        "closable": "boolean",
+        "bodyStyle": "string"
+    },
+    "name": "GridGallery1",
+    "designerId": "b628b0a1-cf0e-414a-a0e8-e0fae8c829aa",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "type",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "4e29b12a-e7a8-4122-84db-c75ce113b3b0",
+    "viewModelInstanceId": "1f6fbb16-f8a3-490e-89ae-60862aa22b8d",
+    "cn": [
+        {
+            "type": "Ext.view.View",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "galleryView",
+                "itemSelector": "div.gunit",
+                "selectedItemCls": "colorchip-selected"
+            },
+            "configAlternates": {
+                "itemSelector": "string",
+                "itemId": "string",
+                "selectedItemCls": "string"
+            },
+            "name": "MyView1",
+            "designerId": "4500bc61-f4d4-4020-824c-7259a99b521b",
+            "cn": [
+                {
+                    "type": "Ext.XTemplate",
+                    "reference": {
+                        "name": "tpl",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "tpl",
+                        "implHandler": [
+                            "<tpl for=\".\">",
+                            "    <div style=\"display:inline-block;width:100px;height:140px\" title=\"{delta}\">",
+                            "            <div class=\"gunit\" style=\"width:100px;height:100px;background-color:{[this.getCode(values)]}\">",
+                            "            </div>",
+                            "            <div style=\"width:100%;font-size:12px\">",
+                            "                <table cellpadding=\"0\" cellspacing=\"0\">",
+                            "                    <tr>",
+                            "                        <td style=\"text-align:left;width:36px;color:#7ba3b0;font-weight:600\">CODE</td>",
+                            "                        <td style=\"font-weight:700\">{bd_subject}</td>",
+                            "                    </tr>",
+                            "                    <tr>",
+                            "                        <td style=\"text-align:left;color:#7ba3b0;font-weight:600\">HEX</td>",
+                            "                        <td>{[this.getCode(values)]}</td>",
+                            "                    </tr>                    ",
+                            "                </table>",
+                            "",
+                            "        </div>        ",
+                            "    </div>",
+                            "</tpl>"
+                        ]
+                    },
+                    "configAlternates": {
+                        "designer|displayName": "string",
+                        "implHandler": "code"
+                    },
+                    "name": "tpl",
+                    "designerId": "ebeeb84f-9670-44e2-915e-06e681dda8f2",
+                    "cn": [
+                        {
+                            "type": "templatefunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "values"
+                                ],
+                                "fn": "getCode",
+                                "implHandler": [
+                                    "var val = values.idcolorHex;",
+                                    "if(val.indexOf('#') == -1) val = '#' + val;",
+                                    "return val.trim();"
+                                ]
+                            },
+                            "configAlternates": {
+                                "designer|params": "typedarray",
+                                "fn": "string",
+                                "implHandler": "code"
+                            },
+                            "name": "getCode",
+                            "designerId": "c2c10b47-6bff-40b0-988d-c7c801abe814"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

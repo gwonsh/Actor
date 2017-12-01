@@ -1,0 +1,22 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "data": [
+            "true"
+        ],
+        "designer|userAlias": "categorysetwindow",
+        "designer|userClassName": "CategorySetWindowViewModel"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "data": "object"
+    },
+    "name": "MyWindowViewModel",
+    "designerId": "f59d3063-d856-4f3f-a94b-1246d1a2202d"
+}

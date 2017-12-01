@@ -1,0 +1,18 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "linkeddata",
+        "designer|userClassName": "LinkedDataViewModel"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "name": "MyContainer11ViewModel",
+    "designerId": "6bf9283b-10e9-49ef-ace6-237bd0ed6cbf"
+}

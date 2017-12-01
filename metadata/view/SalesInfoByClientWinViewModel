@@ -1,0 +1,18 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "salesinfobyclientwin",
+        "designer|userClassName": "SalesInfoByClientWinViewModel"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "name": "MyWindowViewModel",
+    "designerId": "a8e78c28-9e73-4ae2-aaf2-2e45fe6010ad"
+}

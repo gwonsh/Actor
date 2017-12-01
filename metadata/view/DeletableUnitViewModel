@@ -1,0 +1,18 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "deletableunit",
+        "designer|userClassName": "DeletableUnitViewModel"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "name": "MyContainer35ViewModel",
+    "designerId": "117de01b-48f4-403e-a3ff-920c3b8f95d4"
+}

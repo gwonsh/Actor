@@ -1,0 +1,18 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "gridcolorchip",
+        "designer|userClassName": "GridColorChipViewModel"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "name": "GridGalleryViewModel1",
+    "designerId": "1f6fbb16-f8a3-490e-89ae-60862aa22b8d"
+}

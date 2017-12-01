@@ -1,0 +1,187 @@
+{
+    "type": "Ext.grid.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "closable": true,
+        "componentCls": "gridtext",
+        "designer|userAlias": "gridtext",
+        "designer|userClassName": "GridText",
+        "height": 250,
+        "id": null,
+        "itemId": null,
+        "title": "My Grid Panel",
+        "type": "text",
+        "width": 400
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "id": "string",
+        "itemId": "string",
+        "title": "string",
+        "type": "string",
+        "width": "auto",
+        "closable": "boolean",
+        "componentCls": "string"
+    },
+    "name": "GridNormal1",
+    "designerId": "6d803f93-9041-40e8-84d4-e5ec76eb87d0",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "categoryId",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "type",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "13e04f8f-0c65-4301-a8a1-d286f056102b",
+    "viewModelInstanceId": "8067a2e2-0f8d-4eb4-90aa-aa01e8bd1254",
+    "cn": [
+        {
+            "type": "Ext.grid.column.Column",
+            "reference": {
+                "name": "columns",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "dataIndex": "string",
+                "hidden": true,
+                "text": "String"
+            },
+            "configAlternates": {
+                "dataIndex": "datafield",
+                "hidden": "boolean",
+                "text": "string"
+            },
+            "name": "MyColumn",
+            "designerId": "a5271ea1-e1f6-4333-92ab-dd348ed7d843"
+        },
+        {
+            "type": "Ext.selection.CheckboxModel",
+            "reference": {
+                "name": "selModel",
+                "type": "object"
+            },
+            "codeClass": null,
+            "configAlternates": {
+                "mode": "string"
+            },
+            "name": "MyCheckboxSelectionModel",
+            "designerId": "728f40b8-edea-4c3f-bb22-249439752c14"
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onGridNormalHeaderClick",
+                "implHandler": [
+                    "// var grid = ct.up('gridpanel');",
+                    "// var cif = column.colsInfo;",
+                    "// if(cif !== undefined){//when header has cols information(given by getGridColumns())",
+                    "//     var menu = Ext.create('Ext.menu.Menu');",
+                    "//     if(cif.cols_type == 'radio' || cif.cols_type == 'select' || cif.cols_type == 'check'){",
+                    "//         Ext.Array.each(cif.cols_data, function(entry){",
+                    "//             var item = {",
+                    "//                 text:entry,",
+                    "//                 listeners:[",
+                    "//                     {",
+                    "//                         click:function(item, e){",
+                    "//                             var store = grid.getStore();",
+                    "//                             store.currentPage = 1;",
+                    "//                             var idx = getController('Search').getSearchIdx(cif.cols_idx);",
+                    "//                             var query = '&ca_id=' + grid.categoryId + '&se_data_'+idx+'='+item.text;",
+                    "//                             getController('Search').search(query, store);",
+                    "//                         }",
+                    "//                     }",
+                    "//                 ]",
+                    "//             };",
+                    "//             menu.add(item);",
+                    "//             menu.showBy(e.target, 'tc-bc');",
+                    "//         });",
+                    "//     }",
+                    "//     else if(cif.cols_type == 'colorchk'){",
+                    "//         Ext.Array.each(cif.cols_data, function(entry, index){",
+                    "//             var margin = '0 0 0 0';",
+                    "//             if(index === 0){",
+                    "//                 margin = '10 0 0 0';",
+                    "//             }",
+                    "//             var html = '<div style=\"float:left;width:13px;height:13px;background-color:'+entry[1]+'\"></div>';",
+                    "//             html += '<span style=\"float:left;margin-left:3px\">' + entry[0] + '</span';",
+                    "//             var item = {",
+                    "//                 xtype:'button',",
+                    "//                 ui: 'plain-toolbar-small',",
+                    "//                 textAlign:'left',",
+                    "//                 height:25,",
+                    "//                 margin:margin,",
+                    "//                 value: encodeURIComponent(entry[2]),",
+                    "//                 html:html,",
+                    "//                 handler:function(button){",
+                    "//                     var idx = getController('Search').getSearchIdx(cif.cols_idx);",
+                    "//                     var store = grid.getStore();",
+                    "//                     store.currentPage = 1;",
+                    "//                     var query = '&ca_id=' + grid.categoryId + '&se_data_'+idx+'='+button.value.toString();",
+                    "//                     getController('Search').search(query, store);",
+                    "//                     menu.destroy();",
+                    "//                 }",
+                    "//             };",
+                    "//             menu.add(item);",
+                    "//         });",
+                    "//         menu.showBy(e.target, 'tc-bc');",
+                    "",
+                    "//     }",
+                    "//     else if(cif.cols_type == 'textarea' || cif.cols_type == 'datagrp' || cif.cols_type == 'text' || cif.cols_type == 'dbtext' || cif.cols_type == 'number' || cif.cols_type == 'dbl_select' || cif.cols_type == 'url'){",
+                    "//         var item = Ext.create('Ext.form.field.Text',{",
+                    "//             xtype:'textfield',",
+                    "//             width:120,",
+                    "//             margin:5,",
+                    "//             listeners:[",
+                    "//                 {",
+                    "//                     render:function(textfield){",
+                    "//                         textfield.el.on('keyup', function(e){",
+                    "//                             if(e.keyCode == 13){",
+                    "//                                 var idx = getController('Search').getSearchIdx(cif.cols_idx);",
+                    "//                                 var store = grid.getStore();",
+                    "//                                 store.currentPage = 1;",
+                    "//                                 var query = '&ca_id=' + grid.categoryId + '&se_data_'+idx+'='+item.getValue();",
+                    "//                                 getController('Search').search(query, store);",
+                    "//                                 menu.destroy();",
+                    "//                             }",
+                    "//                         });",
+                    "//                     }",
+                    "//                 }",
+                    "//             ]",
+                    "//         });",
+                    "//         menu.add(item);",
+                    "//         menu.showBy(e.target, 'tc-bc');",
+                    "//     }",
+                    "",
+                    "// }"
+                ],
+                "name": "headerclick",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onGridNormalHeaderClick",
+            "designerId": "98eac1d9-303a-4642-9cec-7ddb0ca0c03e"
+        }
+    ]
+}

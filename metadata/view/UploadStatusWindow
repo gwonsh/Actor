@@ -1,0 +1,143 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "stretch",
+        "designer|userAlias": "uploadstatuswindow",
+        "designer|userClassName": "UploadStatusWindow",
+        "ghost": true,
+        "height": null,
+        "layout": "vbox",
+        "modal": true,
+        "padding": 20,
+        "scrollable": true,
+        "title": [
+            "{uploading}"
+        ],
+        "width": 400
+    },
+    "configAlternates": {
+        "title": "binding",
+        "scrollable": "boolean",
+        "container|align": "string",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "ghost": "object",
+        "height": "auto",
+        "layout": "string",
+        "modal": "boolean",
+        "padding": "auto",
+        "width": "auto"
+    },
+    "name": "MyWindow",
+    "designerId": "3c1d8dc9-e298-49c6-a22c-b2ced11c81dc",
+    "viewControllerInstanceId": "13eaa38e-180a-428f-bb57-801ddbc61c9d",
+    "viewModelInstanceId": "89d9e493-1ea8-4771-8ca9-5c2c31617adb",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "statuses",
+                "layout|flex": null,
+                "width": "100%"
+            },
+            "configAlternates": {
+                "itemId": "string",
+                "layout|flex": "number",
+                "width": "auto"
+            },
+            "name": "MyContainer19",
+            "designerId": "1df765c9-5107-489a-acf5-0cc85a21db02",
+            "cn": [
+                {
+                    "type": "Ext.XTemplate",
+                    "reference": {
+                        "name": "tpl",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "tpl",
+                        "implHandler": [
+                            "<tpl for='.'>",
+                            "    <div style=\"float:left;width:100%;margin-top:10px\">",
+                            "        <div style=\"float:left;width:100%\">{file.name}</div>",
+                            "        <div style=\"float:left;height:16px;width:100%\">",
+                            "            <div id=\"bar_{file.id}\" style=\"width:1%;height:100%;border 1px solid #cecece;background-color:#c3dff8;color:white;font-size:10px;text-align:center\"></div>",
+                            "        </div>",
+                            "    </div>",
+                            "</tpl>"
+                        ]
+                    },
+                    "configAlternates": {
+                        "designer|displayName": "string",
+                        "implHandler": "code"
+                    },
+                    "name": "tpl",
+                    "designerId": "95fc00b2-f029-41c1-9604-af7ec301484c"
+                }
+            ]
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "middle",
+                "container|pack": "center",
+                "layout": "hbox",
+                "layout|flex": null,
+                "layout|margins": null,
+                "margin": "20 0 0 0"
+            },
+            "configAlternates": {
+                "container|align": "string",
+                "container|pack": "string",
+                "layout": "string",
+                "layout|flex": "number",
+                "layout|margins": "string",
+                "margin": "auto"
+            },
+            "name": "MyContainer18",
+            "designerId": "e7904978-ea38-4a00-9aa1-4bbe202f97da",
+            "cn": [
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "glyph": "xf00d@FontAwesome",
+                        "itemId": "btnCancelUpload",
+                        "layout|flex": null,
+                        "text": [
+                            "{cancel}"
+                        ]
+                    },
+                    "configAlternates": {
+                        "text": "binding",
+                        "glyph": "auto",
+                        "itemId": "string",
+                        "layout|flex": "number"
+                    },
+                    "name": "MyButton9",
+                    "designerId": "b71a97e1-bc74-4ac3-bce2-e2357dfeca57"
+                }
+            ]
+        }
+    ]
+}

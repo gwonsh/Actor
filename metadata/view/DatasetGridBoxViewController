@@ -1,0 +1,18 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "datasetgridbox",
+        "designer|userClassName": "DatasetGridBoxViewController"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "name": "MyContainer11ViewController",
+    "designerId": "5ea50a43-0e9d-4297-bd6a-c2359fbd6c1d"
+}

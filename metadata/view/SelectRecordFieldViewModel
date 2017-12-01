@@ -1,0 +1,18 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "selectrecordfield",
+        "designer|userClassName": "SelectRecordFieldViewModel"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "name": "MyContainer1ViewModel",
+    "designerId": "b1db8657-5c04-4328-9865-42f314eee7d7"
+}

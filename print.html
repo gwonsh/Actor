@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+
+<html manifest="" lang="en-US">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <title>Actor</title>
+    <link rel="Stylesheet" type="text/css" href="resources/css/default.css"/>
+    <link rel="Stylesheet" type="text/css" href="resources/css/custom.css"/>
+    <link rel="Stylesheet" type="text/css" href="resources/css/viewer.css"/>
+    <link rel="Stylesheet" type="text/css" href="resources/.arch-internal-preview.css"/>
+	<script>
+	function  printIt(){
+		document.getElementById("prtBtn").style.display = 'none';
+		window.print();
+		window.close();
+	}
+	</script>
+	<script>
+	function  onLoad(){
+		var viewer = window.opener.document.getElementById('viewPanel').querySelector('.viewer');  
+		var prtit = window.opener.loc.main.printIt;
+		document.getElementById("prtBtn").childNodes[0].nodeValue = prtit;
+		document.getElementById("htmlCon").innerHTML = viewer.innerHTML;		
+	}
+	</script>	
+</head>
+<body onload="onLoad()">
+<div id="htmlCon" style="width:100%;height:100%;"></div>
+<button id="prtBtn" onclick="printIt()" style="width:100px;height:50px;position:fixed;top:20px;right:20px;z-index:100;cursor:pointer" >''</button>
+</body>
+</html>

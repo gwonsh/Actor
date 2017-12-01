@@ -1,0 +1,198 @@
+{
+    "type": "Ext.container.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "bd_idx": [
+            "{bdIdx}"
+        ],
+        "container|align": "stretch",
+        "designer|userAlias": "linkunit",
+        "designer|userClassName": "LinkUnit",
+        "height": null,
+        "layout": "vbox",
+        "margin": "0 0 0 5",
+        "style": "border: 1px solid #cecece",
+        "width": 80
+    },
+    "configAlternates": {
+        "style": "string",
+        "bd_idx": "binding",
+        "container|align": "string",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "layout": "string",
+        "margin": "auto",
+        "width": "auto"
+    },
+    "name": "MyContainer16",
+    "designerId": "e60aac9f-e612-4ff0-b342-5fd089878d2d",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "bd_idx",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "9f8ac276-a549-4024-ba67-15e16a780707",
+    "viewModelInstanceId": "6701f91c-a1fd-49e8-a132-0ea2d2bd02b1",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": 24,
+                "itemId": "header",
+                "layout|flex": null,
+                "style": "text-align:right;overFlow:hidden;"
+            },
+            "configAlternates": {
+                "style": "string",
+                "height": "auto",
+                "itemId": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyContainer16",
+            "designerId": "b77d08e9-1bb6-4629-a52a-081b71a8806e",
+            "cn": [
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|uiInterfaceName": "plain-toolbar-small",
+                        "glyph": "xf146@FontAwesome",
+                        "height": 24,
+                        "itemId": "delUnit",
+                        "margin": "2 0 0 0",
+                        "text": null,
+                        "ui": "plain-toolbar-small",
+                        "width": 24
+                    },
+                    "configAlternates": {
+                        "designer|uiInterfaceName": "string",
+                        "glyph": "auto",
+                        "height": "auto",
+                        "itemId": "string",
+                        "margin": "auto",
+                        "text": "string",
+                        "ui": "string",
+                        "width": "auto"
+                    },
+                    "name": "MyButton8",
+                    "designerId": "e850fac6-237b-4983-b0f6-2422dcf1242f",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onDelUnitClick",
+                                "implHandler": [
+                                    "var unit = button.up('container').up('container');",
+                                    "unit.destroy();"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string",
+                                "scope": "string"
+                            },
+                            "name": "onDelUnitClick",
+                            "designerId": "8789b97b-da53-4868-99cb-5aa51bdfaa38"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": 80,
+                "itemId": "image",
+                "layout|flex": 1,
+                "style": [
+                    "{",
+                    "    'background-repeat':'no-repeat',",
+                    "    'background-position': 'center',",
+                    "    'background-color': 'white'",
+                    "}"
+                ],
+                "width": 80
+            },
+            "configAlternates": {
+                "height": "auto",
+                "itemId": "string",
+                "layout|flex": "number",
+                "style": "object",
+                "width": "auto"
+            },
+            "name": "MyContainer17",
+            "designerId": "3538b08c-aabc-4b60-8827-f11452bcbea3"
+        },
+        {
+            "type": "Ext.form.Label",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|flex": null,
+                "style": "font-size:11px",
+                "text": [
+                    "{unitTitle}"
+                ]
+            },
+            "configAlternates": {
+                "text": "binding",
+                "style": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyLabel5",
+            "designerId": "09866c2f-be78-479c-aa52-f90234437c03"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "hideHeader",
+                "implHandler": [
+                    "this.down('#header').setHidden(true);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "hideHeader",
+            "designerId": "6f7820f6-b1e6-4b9d-bfc6-a1935c68274e"
+        }
+    ]
+}

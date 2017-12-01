@@ -1,0 +1,179 @@
+{
+   "name": "Actor",
+   "version": "1.0.0.0",
+   "framework": "ext",
+   "toolkit": "classic",
+   "theme": "theme-triton-ab570363-004d-451f-873c-8f54769905ab",
+   "requires": [
+      "font-awesome",
+      "ux",
+      "sencha-charts"
+   ],
+   "indexHtmlPath": "index.html",
+   "classpath": "${app.dir}/app,${app.dir}/resources/js/,${app.dir}/resources/js/forms/",
+   "overrides": [
+      "overrides"
+   ],
+   "fashion": {
+      "inliner": {
+         "enable": false
+      }
+   },
+   "sass": {
+      "namespace": "Actor",
+      "generated": {
+         "var": "sass/save.scss",
+         "src": "sass/save"
+      },
+      "etc": [
+         "sass/etc/all.scss"
+      ],
+      "var": [
+         "sass/var/all.scss",
+         "sass/var"
+      ],
+      "src": [
+         "sass/src"
+      ]
+   },
+   "js": [
+      {
+         "path": "${framework.dir}/build/ext-all-rtl-debug.js"
+      },
+      {
+         "path": "resources/js/globals.js",
+         "includeInBundle": true
+      },
+      {
+         "path": "resources/js/languageset.js",
+         "includeInBundle": true
+      },
+      {
+         "path": "resources/js/formLibrary.js",
+         "includeInBundle": true
+      },
+      {
+         "path": "resources/js/browser.js",
+         "includeInBundle": true
+      },
+      {
+         "path": "resources/js/chroma.min.js",
+         "includeInBundle": true
+      },
+      {
+         "path": "resources/js/canvas-to-blob.min.js",
+         "includeInBundle": true
+      },
+      {
+         "path": "resources/js/localforage.js",
+         "includeInBundle": true
+      },
+      {
+         "path": "resources/js/forms/CloneViewer.js",
+         "includeInBundle": true
+      },
+      {
+         "path": "app.js",
+         "bundle": true
+      }
+   ],
+   "css": [
+      {
+         "path": "${build.out.css.path}",
+         "bundle": true,
+         "exclude": [
+            "fashion"
+         ]
+      },
+      {
+         "path": "resources/css/default.css"
+      },
+      {
+         "path": "resources/css/custom.css"
+      },
+      {
+         "path": "resources/css/viewer.css"
+      }
+   ],
+   "loader": {
+      "cache": false,
+      "cacheParam": "_dc"
+   },
+   "production": {
+      "output": {
+         "appCache": {
+            "enable": true,
+            "path": "cache.appcache"
+         }
+      },
+      "loader": {
+         "cache": "${build.timestamp}"
+      },
+      "cache": {
+         "enable": true
+      },
+      "compressor": {
+         "type": "yui"
+      }
+   },
+   "testing": {},
+   "development": {
+      "watch": {
+         "delay": 250
+      }
+   },
+   "bootstrap": {
+      "base": "${app.dir}",
+      "microloader": "bootstrap.js",
+      "css": "bootstrap.css"
+   },
+   "output": {
+      "base": "${workspace.build.dir}/${build.environment}/${app.name}",
+      "appCache": {
+         "enable": false
+      }
+   },
+   "cache": {
+      "enable": false,
+      "deltas": true
+   },
+   "appCache": {
+      "cache": [
+         "index.html"
+      ],
+      "network": [
+         "*"
+      ],
+      "fallback": []
+   },
+   "resources": [
+      {
+         "path": "resources",
+         "output": "shared"
+      },
+      "resources/css/default.css",
+      "resources/css/custom.css",
+      "resources/css/viewer.css"
+   ],
+   "archivePath": "archive",
+   "slicer": {
+      "js": [
+         {
+            "path": "sass/example/custom.js",
+            "isWidgetManifest": true
+         }
+      ],
+      "output": {
+         "appCache": {
+            "enable": false
+         }
+      },
+      "cache": {
+         "enable": false
+      }
+   },
+   "ignore": [
+      "(^|/)CVS(/?$|/.*?$)"
+   ],
+   "id": "06df2b2f-afbe-43a9-a630-f13f52e4c53c"
+}

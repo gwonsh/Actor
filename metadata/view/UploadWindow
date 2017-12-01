@@ -1,0 +1,106 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "closeAction": "hide",
+        "container|align": "stretch",
+        "designer|userAlias": "uploadwindow",
+        "designer|userClassName": "UploadWindow",
+        "ghost": true,
+        "height": null,
+        "itemId": "uploadWindow",
+        "layout": "vbox",
+        "maxHeight": null,
+        "modal": true,
+        "scrollable": null,
+        "target": [
+            "`null`"
+        ],
+        "title": null,
+        "width": 700
+    },
+    "configAlternates": {
+        "resizable": "boolean",
+        "scrollable": "boolean",
+        "target": "object",
+        "bodyPadding": "auto",
+        "closeAction": "string",
+        "container|align": "string",
+        "container|padding": "auto",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "ghost": "object",
+        "height": "auto",
+        "itemId": "string",
+        "layout": "string",
+        "maxHeight": "number",
+        "modal": "boolean",
+        "title": "string",
+        "width": "auto"
+    },
+    "name": "MyWindow",
+    "designerId": "ed6f71b5-05a7-4bee-ad28-d5bc684840b2",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "target",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "341139c0-ae98-421c-a8f4-d9acb8408163",
+    "viewModelInstanceId": "ee15e9d0-c697-4a9d-b96d-8f51eee27f83",
+    "cn": [
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "grid"
+                ],
+                "fn": "setTarget",
+                "implHandler": [
+                    "this.target = grid;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setTarget",
+            "designerId": "d35b4def-a9d0-4d80-999a-78c548c393d3"
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onUploadWindowAfterLayout",
+                "implHandler": [
+                    "container.center();"
+                ],
+                "name": "afterlayout",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onUploadWindowAfterLayout",
+            "designerId": "6251a69b-9e03-4084-a027-3dbae67c26be"
+        }
+    ]
+}

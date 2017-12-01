@@ -1,0 +1,260 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Util"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string"
+    },
+    "name": "MyController",
+    "designerId": "be7ac83f-8764-4760-b241-70be2f47c538",
+    "cn": [
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "url"
+                ],
+                "fn": "copyToClipboard",
+                "implHandler": [
+                    "if(!getController('Main').hasUserPermission('download')){//check the download permission",
+                    "    Ext.toast(loc.error.lowerLevelToCopy);",
+                    "    return;",
+                    "}",
+                    "if(!detectIE()){",
+                    "    var temp = prompt(loc.viewer.copyToClipboard, url);",
+                    "}",
+                    "else {",
+                    "    window.clipboardData.setData(\"Text\", url);",
+                    "    Ext.toast(loc.main.copied);",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "copyToClipboard",
+            "designerId": "f80d9918-9a55-4fa3-9e28-404d3d38c99b"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "hexcode"
+                ],
+                "fn": "hexToRGB",
+                "implHandler": [
+                    "var result = /^#?([a-f\\d]{2})([a-f\\d]{2})([a-f\\d]{2})$/i.exec(hexcode);",
+                    "return result ? {",
+                    "    r: parseInt(result[1], 16),",
+                    "    g: parseInt(result[2], 16),",
+                    "    b: parseInt(result[3], 16)",
+                    "} : null;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "hexToRGB",
+            "designerId": "13085af5-83d0-45e3-acfb-59c6491931b3"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "value"
+                ],
+                "fn": "isHex",
+                "implHandler": [
+                    "var val = false;",
+                    "var isOk = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i.test(value);",
+                    "if(isOk) val = true;",
+                    "return val;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "isHex",
+            "designerId": "182d8d72-dade-40c9-94dd-7d47fe7ce029"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "event"
+                ],
+                "fn": "isNumber",
+                "implHandler": [
+                    "var key = event.keyCode;",
+                    "if(!(key==8 || key==9||key==13||key==46||key==144 ||(key>=48&&key<=57)||key==110||key==190)){",
+                    "    Ext.MessageBox.alert(loc.main.notice, loc.main.onlyNumber);",
+                    "    event.returnValue=false;",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "isNumber",
+            "designerId": "77629ab9-36fd-4a25-a43b-24fde5d330ad"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "str"
+                ],
+                "fn": "getOperator",
+                "implHandler": [
+                    "var sc = ['x', '-', '+', ')', '(', '/', '*'];",
+                    "var chars = [];",
+                    "var c = '';",
+                    "for (var i=0; i<str.length; i++){",
+                    "    if(sc.indexOf(str.charAt(i)) == -1){//필드 번호이면",
+                    "        c += str.charAt(i);",
+                    "        if(i == str.length - 1){//마지막 글자가 지정된 글자중 하나가 아니면",
+                    "            if(sc.indexOf(str.charAt(i)) == -1){",
+                    "                chars.push('data_' + c);",
+                    "            }",
+                    "        }",
+                    "    }",
+                    "    else{//연삭식이면",
+                    "        var sStr = str.charAt(i);",
+                    "        if(c !== '') chars.push('data_' + c);",
+                    "        if(sStr == 'x') sStr = '*';",
+                    "        chars.push(sStr);",
+                    "        c = '';",
+                    "    }",
+                    "}",
+                    "return chars;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getOperator",
+            "designerId": "79c3cff2-f1c3-4aa8-8156-a47346a0f70c"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "dt"
+                ],
+                "fn": "parseDate",
+                "implHandler": [
+                    "var val = (localLanguage == 'English')? Ext.Date.format(dt, 'm-d-Y') : Ext.Date.format(dt, 'Y-m-d');",
+                    "return val;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "parseDate",
+            "designerId": "b1924d36-02c7-47d6-b1f2-2e49a91e4c51"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "getUID",
+                "implHandler": [
+                    "return Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getUID",
+            "designerId": "37545a46-e310-4c00-9dab-970c50ef6c3c"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "obj"
+                ],
+                "fn": "copyObject",
+                "implHandler": [
+                    "if (obj === null || typeof(obj) !== 'object')",
+                    "    return obj;",
+                    "var copy = obj.constructor();",
+                    "if(copy === undefined){",
+                    "    copy = obj;",
+                    "}",
+                    "for (var attr in obj) {",
+                    "    if (obj.hasOwnProperty(attr)) {",
+                    "        copy[attr] = obj[attr];",
+                    "    }",
+                    "}",
+                    "return copy;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "copyObject",
+            "designerId": "e59572b0-c563-42a9-aed2-c65bd15e626f"
+        }
+    ]
+}

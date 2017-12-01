@@ -1,0 +1,303 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "mainview",
+        "designer|userClassName": "MainViewController"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "name": "undefinedViewController",
+    "designerId": "d8b632f4-61c9-440a-9404-b7307cd5f474",
+    "cn": [
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "getActiveTab",
+                "implHandler": [
+                    "return this.getView().down('#listTab').getActiveTab();"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getActiveTab",
+            "designerId": "4c1ed964-197e-4135-8b0b-718279fe4c6b"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "getSelected",
+                "implHandler": [
+                    "if(this.getView().down('#listTab').getActiveTab() === undefined) return undefined;",
+                    "var tab = this.getView().down('#listTab').getActiveTab().getGrid();",
+                    "return tab.getSelectionModel().getSelection();"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getSelected",
+            "designerId": "39914c43-2cb6-4cc7-86fd-ad0c8f0d36ca"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "targetId",
+                    "bdIdx",
+                    "title"
+                ],
+                "fn": "copyData",
+                "implHandler": [
+                    "var url = domain + '/binder/copy';",
+                    "var confirm = Ext.Msg.show({",
+                    "    title:loc.main.caution,",
+                    "    message: loc.main.copyMessage + '<br><spna style=\"font-size:15px\">Copy to:<strong>' + title + '</strong></span>',",
+                    "    buttons: Ext.Msg.YESNO,",
+                    "    icon: Ext.Msg.QUESTION,",
+                    "    fn: function(btn) {",
+                    "        if (btn === 'yes') {",
+                    "            Ext.data.JsonP.request({",
+                    "                url:url,",
+                    "                params:{",
+                    "                    ca_id:targetId,",
+                    "                    bd_idx:bdIdx",
+                    "                },",
+                    "                success:function(response){",
+                    "                    Ext.toast(loc.main.copied);",
+                    "                    if(Ext.getStore('dStore_' + targetId)){",
+                    "                        Ext.getStore('dStore_' + targetId).load();",
+                    "                    }",
+                    "                }",
+                    "            });",
+                    "        } else {",
+                    "",
+                    "        }",
+                    "    }",
+                    "});"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "copyData",
+            "designerId": "ce7c6b3e-0739-4db1-8ccd-c741dda18ce1"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "newComment",
+                "implHandler": [
+                    "var selected = getController('Main').getMainView().getController().getSelected();",
+                    "if(!selected){",
+                    "    Ext.toast(loc.upload.noneSelected);",
+                    "    return;",
+                    "}",
+                    "var viewer = Ext.getCmp('viewPanel').down('#viewer');",
+                    "if(!viewer){",
+                    "    Ext.toast(loc.upload.noneSelected);",
+                    "    return;",
+                    "}",
+                    "var me = this;",
+                    "var bdIdx = viewer.info.bd_idx;",
+                    "",
+                    "var cmtWin = Ext.create('Ext.window.Window', {",
+                    "    width:600,",
+                    "    height:320,",
+                    "    padding:10,",
+                    "    title:loc.main.newComment,",
+                    "    items:[",
+                    "        {",
+                    "            xtype: 'htmleditor',",
+                    "            height: 200,",
+                    "            itemId: 'commentNew',",
+                    "            style: 'background-color:#ffffff',",
+                    "            width: '100%',",
+                    "            hideLabel: true,",
+                    "            enableFont: false",
+                    "        },",
+                    "        {",
+                    "            xtype:'container',",
+                    "            layout:{",
+                    "                type:'hbox',",
+                    "                pack:'center'",
+                    "            },",
+                    "            margin:'30 0 0 0',",
+                    "            items:[",
+                    "                {",
+                    "                    xtype:'button',",
+                    "                    text:loc.main.ok,",
+                    "                    glyph:'xf05d@FontAwesome',",
+                    "                    width:90,",
+                    "                    handler:function(button){",
+                    "                        var value = button.up('window').down('htmleditor').getValue();",
+                    "                        me.submitComment(value, bdIdx);",
+                    "                        button.up('window').close();",
+                    "                    }",
+                    "                },",
+                    "                {",
+                    "                    xtype:'button',",
+                    "                    text:loc.upload.cancel,",
+                    "                    glyph:'xf00d@FontAwesome',",
+                    "                    width:90,",
+                    "                    margin:'0 0 0 10',",
+                    "                    handler:function(button){",
+                    "                        button.up('window').close();",
+                    "                    }",
+                    "                }",
+                    "            ]",
+                    "        }",
+                    "    ]",
+                    "});",
+                    "cmtWin.show();"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "newComment",
+            "designerId": "ff9806f7-773e-4685-8b2b-917fa02293d4"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "value",
+                    "idx"
+                ],
+                "fn": "submitComment",
+                "implHandler": [
+                    "var me = this;",
+                    "var cmtUrl = getCommentUpdateApi();",
+                    "if(value === ''){",
+                    "    Ext.toast(loc.main.noComment);",
+                    "    return;",
+                    "}",
+                    "",
+                    "Ext.data.JsonP.request({",
+                    "    url:cmtUrl,",
+                    "    params:{",
+                    "        bd_idx:idx,",
+                    "        cmt_content:value",
+                    "    },",
+                    "    success:function(response){",
+                    "        if(response.result){",
+                    "            Ext.toast(loc.upload.posted);",
+                    "            me.setCommentList(idx);",
+                    "        }",
+                    "        else{",
+                    "            alert(loc.main.networkProblem);",
+                    "        }",
+                    "    },",
+                    "    failure:function(response){",
+                    "        alert(loc.main.networkProblem);",
+                    "    }",
+                    "",
+                    "});"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "submitComment",
+            "designerId": "76ed2652-62ec-4b85-ab4f-64507bd12e49"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "idx"
+                ],
+                "fn": "setCommentList",
+                "implHandler": [
+                    "var viewer = Ext.getCmp('viewPanel').down('#viewer');",
+                    "if(!viewer) return;",
+                    "var cmtListUrl = getCommentListApi();",
+                    "Ext.data.JsonP.request({",
+                    "    url:cmtListUrl,",
+                    "    params:{",
+                    "        bd_idx:idx",
+                    "    },",
+                    "    success:function(response){",
+                    "        var cPan = Ext.getCmp('commentPanel');",
+                    "        if(!response.binderCList) return;",
+                    "        cPan.setData(response.binderCList);",
+                    "        if(response.binderCList.length === 0){",
+                    "            cPan.setCollapsed(true);",
+                    "        }",
+                    "        else{",
+                    "            if(!viewer.initialized){",
+                    "                cPan.setCollapsed(false);",
+                    "                viewer.initialized = true;",
+                    "            }",
+                    "            if(viewer.comments < response.binderCList.length){//when someone add comment",
+                    "                cPan.setCollapsed(false);",
+                    "                Ext.toast(loc.viewer.newCommentAdded);",
+                    "            }",
+                    "            if(viewer.comments > response.binderCList.length){//when someone removed comment",
+                    "                Ext.toast(loc.viewer.commentDeleted);",
+                    "            }",
+                    "            viewer.comments = response.binderCList.length;",
+                    "        }",
+                    "    },",
+                    "    failure:function(response){",
+                    "        //alert(locale.main.networkProblem);",
+                    "    }",
+                    "",
+                    "});"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setCommentList",
+            "designerId": "33cf88c3-fe87-4b65-857b-52804042fff3"
+        }
+    ]
+}

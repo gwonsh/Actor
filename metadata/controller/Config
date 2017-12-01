@@ -1,0 +1,791 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Config"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string"
+    },
+    "name": "MyController",
+    "designerId": "42901dc7-2979-4c51-995a-fd30125b602c",
+    "cn": [
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "cateSetWin",
+                "selector": "#cateSetWin"
+            },
+            "configAlternates": {
+                "ref": "string",
+                "selector": "string"
+            },
+            "name": "cateSetWin",
+            "designerId": "b21c13c4-a45c-42d2-9570-1a0dd4a54dcb"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "initialize",
+                "implHandler": [
+                    "var me = this,",
+                    "    i,",
+                    "    mainCtr = getController('Main'),",
+                    "    westPan = Ext.getCmp('westPanel'),",
+                    "    notices = [];",
+                    "",
+                    "if (localLanguage == 'Korean') setKoreanFormat();",
+                    "",
+                    "// override the sliding speed of Toast",
+                    "Ext.override(Ext.window.Toast, {",
+                    "    slideInDuration: 200",
+                    "});",
+                    "",
+                    "/* checking message  */",
+                    "var loadMessage = function(){",
+                    "    Ext.getStore('MessageInStore').load();",
+                    "};",
+                    "",
+                    "",
+                    "/* loading message store */",
+                    "loadMessage();",
+                    "// /* set checking message interval */",
+                    "// localforage.getItem('messageInterval', function(err, value){",
+                    "//     if(!value){",
+                    "//         localforage.setItem('messageInterval', 1800000);",
+                    "//     }",
+                    "// });",
+                    "// localforage.getItem('messageInterval', function(err, value){",
+                    "//     if(value == 'disable'){",
+                    "//         value = 86400000;",
+                    "//     }",
+                    "//     setInterval(loadMessage, value);",
+                    "// });",
+                    "",
+                    "// set formLib",
+                    "formLib = FormLibrary.FORMS;",
+                    "var formData = [];",
+                    "for(i=0; i<formLib.length; i++){",
+                    "    formData.push({",
+                    "        name:formLib[i].getName(),",
+                    "        formId:formLib[i].CLASSNAME,",
+                    "        index:i,",
+                    "        fileName:formLib[i].fileName",
+                    "    });",
+                    "}",
+                    "var fmStore = Ext.getStore('FormStore');",
+                    "fmStore.setData(formData);",
+                    "",
+                    "//set west panel",
+                    "var cateCon = Ext.getCmp('categoryContainer');",
+                    "cateCon.getViewModel().setData({notices:[]});",
+                    "",
+                    "cateCon.getController('categoryItems').setCategories();"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "initialize",
+            "designerId": "1346753c-6be3-4e21-b597-f6c14de76f19"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|commentHeader": [
+                    "Show category setting window"
+                ],
+                "fn": "settingCategory",
+                "implHandler": [
+                    "var me = this;",
+                    "",
+                    "// create new category store to avoid conflict with the store in main tree",
+                    "var sStore = Ext.create('Ext.data.TreeStore', {",
+                    "    storeId: 'CategoryStore',",
+                    "    model: 'Actor.model.CategoryModel',",
+                    "    autoLoad:true,",
+                    "    proxy: {",
+                    "        type: 'jsonp',",
+                    "        api: {",
+                    "            read: getCategoryListApi()",
+                    "        },",
+                    "        reader: {",
+                    "            type: 'json'",
+                    "        }",
+                    "    },",
+                    "    filters: {",
+                    "        filterFn: function(item) {",
+                    "            if(!item.get('isHidden') && !item.get('isBoard')) return true;",
+                    "        }",
+                    "    }",
+                    "});",
+                    "",
+                    "//show configuration window",
+                    "var caWin = Ext.create(appName + '.view.CategorySetWindow', {",
+                    "    modal:true,",
+                    "    ghost:false,",
+                    "    iconCls:'fa fa-cog',",
+                    "    listeners:{",
+                    "        close:function(component){",
+                    "            //initiallize main tree after close this window",
+                    "            var tree = Ext.getCmp('categoryTree');",
+                    "            var store = Ext.getStore('CategoryStore');",
+                    "            tree.reconfigure(store);",
+                    "        }",
+                    "    }",
+                    "}).show();",
+                    "//apply store",
+                    "caWin.down('#cTree').reconfigure(sStore);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "designer|commentHeader": "comment"
+            },
+            "name": "settingCategory",
+            "designerId": "d10d3f17-db89-4b87-a612-a8141040bcc5"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "rec",
+                    "action"
+                ],
+                "fn": "addDelShortcut",
+                "implHandler": [
+                    "var me = this;",
+                    "//workgroup 버튼에서 직접 record를 생성하고 icon을 지정한 경우 rec.get('icon')",
+                    "var option = Ext.getCmp('categoryTree').selectedOption;",
+                    "var icon = (rec.get('option') === undefined)? rec.get('icon') : option.icon;",
+                    "var dType = rec.get('layout');",
+                    "if(option.colorChip) dType = 4;",
+                    "if(option.schedule) dType = 3;",
+                    "var obj = {",
+                    "    caId:rec.get('id'),",
+                    "    caName:rec.get('title'),",
+                    "    displayType:dType,",
+                    "    icon:icon,",
+                    "    isWork:rec.get('isWork'),",
+                    "};",
+                    "if(action == 'add'){",
+                    "    shortcuts.push(obj);",
+                    "}",
+                    "if(action == 'del'){//delete the selected",
+                    "    var tmpArr = []; //Array after deleted",
+                    "    Ext.Array.each(shortcuts,function(entry, index){",
+                    "        if(entry.caId != obj.caId){",
+                    "            tmpArr.push(entry);",
+                    "        }",
+                    "    });",
+                    "    shortcuts = tmpArr;",
+                    "}",
+                    "if(action == 'edit'){//to check if shortcut info has been changed",
+                    "    for(var i=0; i<shortcuts.length; i++){",
+                    "        if(shortcuts[i].caId == rec.get('id')){",
+                    "            shortcuts[i].caName = rec.get('title');",
+                    "            shortcuts[i].displayType = dType;",
+                    "            shortcuts[i].icon = icon;",
+                    "            shortcuts[i].isWork =rec.get('isWork');",
+                    "        }",
+                    "    }",
+                    "}",
+                    "var scStr = JSON.stringify(shortcuts);",
+                    "userInfo.nv_9 = scStr;",
+                    "/* save shortcut setting to server */",
+                    "var fd = new FormData();",
+                    "Ext.Object.each(userInfo, function(key, value){",
+                    "    if(value === null)value = '';",
+                    "    fd.append(key, value);",
+                    "});",
+                    "var request = new XMLHttpRequest();",
+                    "request.open('POST', getMemberUpdateApi());",
+                    "request.onload = function(){",
+                    "    if(request.status == 200){",
+                    "        console.info('userinfo updated');",
+                    "    }",
+                    "    else{",
+                    "        alert('Error \" + oReq.status + \" occurred when trying to upload your file.<br \\/>');",
+                    "    }",
+                    "};",
+                    "request.send(fd);",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "addDelShortcut",
+            "designerId": "06d358a0-aa18-4605-82b2-2f3c0a69a71d"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "record",
+                    "key",
+                    "value"
+                ],
+                "fn": "editCategoryOption",
+                "implHandler": [
+                    "var opts = record.get('option').split('--');",
+                    "var option = '';",
+                    "var key = key;",
+                    "var falseOpts = ['actor', 'selectFirst'],",
+                    "    trueOpts = ['fieldOnly', 'schedule', 'displayApproval', 'colorTag', 'onlyOwner', 'cloneFile'];",
+                    "",
+                    "for(var i=0; i<opts.length; i++){",
+                    "    if(opts[i].trim() !== ''){",
+                    "        if(opts[i].indexOf(key + ':') == -1){",
+                    "            option += '--' + opts[i];",
+                    "        }",
+                    "    }",
+                    "}",
+                    "",
+                    "if(value === true || value == 'true') value = 1;",
+                    "if(value === false || value == 'false') value = 0;",
+                    "option += '--' + key + ':' + value;",
+                    "",
+                    "//remove option when it saved as a default",
+                    "if(key == 'categoryName'){",
+                    "    var deCname = decodeURIComponent(value);",
+                    "    if(record.get('text') == deCname){",
+                    "        option = option.replace('--categoryName:' + value, '');",
+                    "    }",
+                    "}",
+                    "if(key == 'cloneCategory'){",
+                    "    if(value.trim() === '' && option.cloneCategory !== undefined){",
+                    "        option = option.replace('--categoryName:' + option.cloneCategory, '');",
+                    "    }",
+                    "}",
+                    "// if(key == 'displayNameContent'){",
+                    "//     var deCTname = decodeURIComponent(value);",
+                    "//     if(record.get('displayNameContent') == deCname){",
+                    "//         option = option.replace('--categoryName:' + value, '');",
+                    "//     }",
+                    "// }",
+                    "if(key == 'formMode'){",
+                    "    if(value.trim() == defaultFormName){",
+                    "        option = option.replace('--formMode:' + value.trim(), '');",
+                    "    }",
+                    "}",
+                    "if(value === null){",
+                    "    var nullStr = '--' + key + ':' + value;",
+                    "    option = option.replace(nullStr, '');",
+                    "}",
+                    "",
+                    "if(falseOpts.indexOf(key) != -1){",
+                    "    if(value == 1){",
+                    "        var falseStr = '--' + key + ':' + value;",
+                    "        option = option.replace(falseStr, '');",
+                    "    }",
+                    "}",
+                    "",
+                    "//remove all if option is false",
+                    "if(trueOpts.indexOf(key) != -1){",
+                    "    if(value === 0){",
+                    "        var falseStr = '--' + key + ':' + value;",
+                    "        option = option.replace(falseStr, '');",
+                    "    }",
+                    "}",
+                    "",
+                    "//update new option to record before encoded",
+                    "record.set('option', decodeURIComponent(option));",
+                    "//send new option to server after encorded",
+                    "this.updateCategoryOption(record.get('id'), option);",
+                    "return option;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "editCategoryOption",
+            "designerId": "aec0ece5-0db3-4905-8e5e-75f4fd0c4652"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "record",
+                    "key",
+                    "value"
+                ],
+                "fn": "editFieldOption",
+                "implHandler": [
+                    "var opts = record.get('cols_option').split('--');",
+                    "var option = '';",
+                    "",
+                    "for(var i=0; i<opts.length; i++){",
+                    "    if(opts[i].trim() !== ''){",
+                    "        if(opts[i].indexOf(key + ':') == -1){",
+                    "            option += '--' + opts[i];",
+                    "        }",
+                    "    }",
+                    "}",
+                    "if(value === true || value == 'true') value = 1;",
+                    "if(value === false || value == 'false' || value === '') value = 0;",
+                    "option += '--' + key + ':' + value;",
+                    "if(",
+                    "    key == 'hidden' ||",
+                    "    key == 'render' ||",
+                    "    key == 'getRecord' ||",
+                    "    key == 'getValue' ||",
+                    "    key == 'autoNumberNameField' ||",
+                    "    key == 'needSum' ||",
+                    "    key == 'numberFormat'",
+                    "){//remove option if it has defalut value",
+                    "    if(value === 0){",
+                    "        option = option.replace('--' + key + ':' + value, '');",
+                    "    }",
+                    "}",
+                    "",
+                    "if(value === null){",
+                    "    var nullStr = '--' + key + ':' + value;",
+                    "    option = option.replace(nullStr, '');",
+                    "}",
+                    "if(option === null) option = '';",
+                    "record.set('cols_option', option);",
+                    "record.set('option', getOption(option));",
+                    "//send new option to serve",
+                    "Ext.data.JsonP.request({",
+                    "    url:getFieldOptionApi(),",
+                    "    params:{",
+                    "        cols_idx:record.get('cols_idx'),",
+                    "        cols_option:option",
+                    "    },",
+                    "    success:function(response){",
+                    "        Ext.toast(loc.upload.edited);",
+                    "    }",
+                    "});",
+                    "return option;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "editFieldOption",
+            "designerId": "e45fd066-2724-486e-9240-cedcec9fe3e7"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "cId",
+                    "option"
+                ],
+                "fn": "updateCategoryOption",
+                "implHandler": [
+                    "Ext.data.JsonP.request({",
+                    "    url:getCategoryOptionUpdateApi(cId, option),",
+                    "    success:function(response){",
+                    "        Ext.toast(loc.upload.edited);",
+                    "    }",
+                    "});"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "updateCategoryOption",
+            "designerId": "54c83703-7b3d-4c6a-8895-60b01d6c319a"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "language"
+                ],
+                "fn": "setLanguage",
+                "implHandler": [
+                    "if(language == 'english') language = 'English';",
+                    "if(language == 'korean') language = 'Korean';",
+                    "localLanguage = language;",
+                    "loc = languageSet[language];"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setLanguage",
+            "designerId": "188ef2fa-bbbe-428f-b1ce-b4a2ac0d775c"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "categoryRecord",
+                    "isAdmin"
+                ],
+                "fn": "changeForm",
+                "implHandler": [
+                    "var me = this;",
+                    "var frmWin = Ext.create('Ext.window.Window', {",
+                    "    width:907,",
+                    "    maxHeight:windowMaxHeight,",
+                    "    padding:'15 10 15 10',",
+                    "    ghost:false,",
+                    "    title:loc.menu.changeForm,",
+                    "    scrollable:true,",
+                    "    style:'background-color:#eeeeee',",
+                    "    bodyStyle:{'background-color':'#eeeeee'}",
+                    "});",
+                    "var activeTab = getController('Main').getListTab().getActiveTab();",
+                    "var defaultForm = activeTab.cateOption.formMode;",
+                    "// var formLib = Ext.doc.FormLibrary.FORMS;",
+                    "var record = Ext.getStore('FormStore').findRecord('formId', defaultForm);",
+                    "if(record === null) record = Ext.getStore('FormStore').findRecord('formId', 'Normal');",
+                    "var defaultName = record.get('fileName');",
+                    "// Ext.doc.FormLibrary.FORMS[record.get('index')].setHtml(itemInfo, viewer);",
+                    "",
+                    "for(var i=0; i<formLib.length; i++){",
+                    "    if(formLib[i].fileName){",
+                    "        var formDisable = (formLib[i].isForAnyCategory === false)? true : false;//check if form available",
+                    "        var form = Ext.create(appName + '.view.FormUnit', {",
+                    "            style:'float:left;margin:5px 0 0 5px',",
+                    "            disabled:formDisable,",
+                    "            index:i,",
+                    "            listeners:{",
+                    "                render:function(comp){",
+                    "                    comp.el.on('click', function(target){",
+                    "                        if(Ext.getCmp('eastPanel')){",
+                    "                            var viewer = Ext.getCmp('viewPanel').down('#viewer');",
+                    "                            if(!isAdmin){//in case of changing form temporary",
+                    "                                if(viewer){",
+                    "                                    getController('Main').getListTab().getActiveTab().instanceFormIndex  = comp.index;",
+                    "                                    viewer.on('formcomplete', function onformComplte(){",
+                    "                                        viewer.un('formcomplete', onformComplte);",
+                    "                                        /* to detect custom-filed at afterrender event in ViewerController */",
+                    "                                        viewer.fireEvent('afterrender', viewer);",
+                    "                                    });",
+                    "                                    var selectedForm = formLib[comp.index];",
+                    "                                    html = selectedForm.setHtml(viewer.info, viewer);",
+                    "                                    Ext.getCmp('eastPanel').setWidth(selectedForm.width);",
+                    "                                }",
+                    "                            }",
+                    "                        }",
+                    "                        if(isAdmin){//in case of changing from category setting",
+                    "                            me.editCategoryOption(categoryRecord, 'formMode', formLib[comp.index].CLASSNAME);",
+                    "                            me.getCateSetWin().getViewModel().setData({formMode:formLib[comp.index].CLASSNAME});",
+                    "                        }",
+                    "                        frmWin.close();",
+                    "                    });",
+                    "                }",
+                    "            }",
+                    "        });",
+                    "        form.down('#formImage').setStyle(",
+                    "            {",
+                    "                'background-image':'url(resources/forms/'+formLib[i].fileName+')',",
+                    "                'background-repeat':'no-repeat',",
+                    "                'background-size':'auto'",
+                    "            }",
+                    "        );",
+                    "        //show form parameter only to Administrator",
+                    "        if(userInfo.nv_level == 10){",
+                    "            var className = formLib[i].CLASSNAME;",
+                    "            form.down('#formClass').setText('--formMode:' + className);",
+                    "            form.down('#formClass').setHidden(false);",
+                    "        }",
+                    "        var title = form.down('#title');",
+                    "        title.setText(formLib[i].getName());",
+                    "        frmWin.add(form);",
+                    "",
+                    "        if(formLib[i].fileName == defaultName){",
+                    "            defaultForm = form.cloneConfig();",
+                    "            defaultForm.down('#formImage').setStyle(",
+                    "                {",
+                    "                    'background-image':'url(resources/forms/'+formLib[i].fileName+')',",
+                    "                    'background-repeat':'no-repeat',",
+                    "                    'background-size':'auto'",
+                    "                }",
+                    "            );",
+                    "            var style = 'position:absolute;width:70%;height:80px;background-color:black;color:white;font-size:19px;';",
+                    "            style += 'left:32px;top:110px;text-align:center;font-weight:bold;padding:30px 0 0;opacity:0.5;border-radius:6px';",
+                    "            var html = '<div style=\"'+style+'\">Default Form</div>';",
+                    "            defaultForm.setHtml(html);",
+                    "            defaultForm.down('#title').setText(formLib[i].getName());",
+                    "        }",
+                    "    }",
+                    "    if(i == formLib.length-1){frmWin.show();}",
+                    "}",
+                    "",
+                    "frmWin.insert(0, defaultForm);",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "changeForm",
+            "designerId": "8befeabf-f973-4509-9041-f76d962dc682"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "num"
+                ],
+                "fn": "getLayout",
+                "implHandler": [
+                    "var value;",
+                    "if(num === 0) value = 'normal';",
+                    "if(num === 1) value = 'gallery';",
+                    "if(num === 2) value = 'text';",
+                    "if(num === 3) value = 'schedule';",
+                    "if(num === 4) value = 'colorChip';",
+                    "return value;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getLayout",
+            "designerId": "eb33ba1d-8a81-4bb7-86f3-518009f895da"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "file"
+                ],
+                "fn": "isImage",
+                "implHandler": [
+                    "var fileName = file.file_name;",
+                    "var tmpArr = fileName.split('.');",
+                    "var value = false;",
+                    "if(tmpArr.length > 1){",
+                    "        var imagables = ['ai','bmp','eps','gif','jpg','jpeg','pdf','png','psd','tif', 'tiff'];",
+                    "    var ext = tmpArr[tmpArr.length - 1];",
+                    "    ext = ext.toLowerCase();",
+                    "    if(imagables.indexOf(ext) != -1){",
+                    "        value = true;",
+                    "        if(file.file_width === 0 || file.file_height === 0){",
+                    "            value = false;",
+                    "        }",
+                    "    }",
+                    "}",
+                    "return value;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "isImage",
+            "designerId": "b4542644-95d8-4cb1-acb1-8bbed4d4c480"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "setTopShortcuts",
+                "implHandler": [
+                    "var me = this;",
+                    "var shortcutCon = Ext.getCmp('shortcutBar');",
+                    "var i;",
+                    "var len = shortcuts.length;",
+                    "var mainCtr = getController('Main');",
+                    "for(i=len-1; i>=0; i--){",
+                    "    var sc = Ext.create('Ext.button.Button', {",
+                    "        xtype:'button',",
+                    "        ui:'plain-toolbar-small',",
+                    "        iconCls:'fa fa-' + shortcuts[i].icon,",
+                    "        displayType:shortcuts[i].displayType,",
+                    "        categoryId:shortcuts[i].caId,",
+                    "        categoryName:shortcuts[i].caName,",
+                    "        text:shortcuts[i].caName,",
+                    "        isWork:shortcuts[i].isWork,",
+                    "        height:25,",
+                    "        padding:'2 3',",
+                    "        handler:function(button){",
+                    "            var splash = Ext.getCmp('contentCover');",
+                    "            if(splash) splash.destroy();",
+                    "            if(button.isWork){",
+                    "                var workBtn = Ext.getCmp('westPanel').down('#work_' + button.categoryId);",
+                    "                workBtn.up('panel').expand();",
+                    "                workBtn.fireEvent('click', workBtn);",
+                    "            }",
+                    "            else{",
+                    "                currentPlugin = '';",
+                    "                if(mainCtr.getMainView().down('#workListPanel')){",
+                    "                    mainCtr.getMainView().down('#workListPanel').destroy();",
+                    "                    mainCtr.getMainView().down('#listTab').removeAll();",
+                    "                }",
+                    "                if(!mainCtr.getMainView().down('#southPanel').hidden){",
+                    "                    mainCtr.getMainView().down('#southPanel').setHidden(true);",
+                    "                    mainCtr.getMainView().down('#listTab').removeAll();",
+                    "                }",
+                    "                var tree = Ext.getCmp('categoryTree');",
+                    "                var displayType = getController('Config').getLayout(button.displayType);",
+                    "                var grid = getController('Main').getGrid(button.categoryId, displayType, button.categoryName);",
+                    "                if(Ext.getStore('dStore_' + button.categoryId) !== undefined){",
+                    "                    mainCtr.getController('Main').getListTab().setActiveTab(grid);",
+                    "                }",
+                    "                else{//add new grid to listTab",
+                    "                    grid.on('categoryoptionupdate', function(){",
+                    "                        getController('Main').displayGrid(grid);",
+                    "                        tree.expand();",
+                    "                    });",
+                    "                }",
+                    "            }",
+                    "        }",
+                    "    });",
+                    "    shortcutCon.insert(0, sc);",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setTopShortcuts",
+            "designerId": "341dcc2b-da7d-46da-ad10-c4f836f85e83"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "source",
+                    "target",
+                    "colors"
+                ],
+                "fn": "getColorChips",
+                "implHandler": [
+                    "if(source === undefined || source === '' || source === null) return '';",
+                    "if(!colors) colors = 10;",
+                    "var rgbs;",
+                    "var reVal;",
+                    "var html = '<div style=\"width:100%\">';",
+                    "if(Ext.isArray(source)){",
+                    "    rgbs = source;",
+                    "}",
+                    "else{",
+                    "    var ct = new ColorThief();",
+                    "    rgbs = ct.getPalette(source, colors);",
+                    "    reVal = rgbs;",
+                    "}",
+                    "for(var i=0; i<rgbs.length; i++){",
+                    "    var rgb = 'rgb(';",
+                    "    var rgbHex = chroma(rgbs[i]).hex();",
+                    "    for(var j=0; j<rgbs[i].length; j++){",
+                    "        rgb += rgbs[i][j];",
+                    "        if(j<2){",
+                    "            rgb += ',';",
+                    "        }",
+                    "    }",
+                    "    rgb += ')';",
+                    "    var chip = {",
+                    "        xtype:'component',",
+                    "        width:50,",
+                    "        height:50,",
+                    "        style:'background-color:' + rgb",
+                    "    };",
+                    "",
+                    "//     html += '<div style=\"float:left !important;width:35px;height:35px;background-color:'+rgb+'\"></div>';",
+                    "    html += '<div style=\"display:inline-block;width:35px;height:35px;background-color:'+rgb+'\" hex=\"'+rgbHex+'\" class=\"colorchip\"></div>';",
+                    "    if(target) target.add(chip);",
+                    "}",
+                    "html += '</div>';",
+                    "if(Ext.isArray(source)){",
+                    "    reVal = html;",
+                    "}",
+                    "",
+                    "if(reVal === undefined) reVal = '';",
+                    "return reVal;",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getColorChips",
+            "designerId": "6d14892d-b0fc-4af6-8039-a9a0b5001a14"
+        }
+    ]
+}

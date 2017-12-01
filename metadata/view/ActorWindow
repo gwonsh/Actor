@@ -1,0 +1,562 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "alwaysOnTop": true,
+        "bodyStyle": [
+            "{",
+            "    'background-color':'#ffffff'",
+            "}"
+        ],
+        "categoryId": "`''`",
+        "cls": [
+            "upload-form"
+        ],
+        "container|padding": 20,
+        "designer|userAlias": "actorwindow",
+        "designer|userClassName": "ActorWindow",
+        "ghost": false,
+        "height": 750,
+        "hidden": null,
+        "isSimple": true,
+        "layout": "border",
+        "maximizable": true,
+        "modal": true,
+        "openner": "`null`",
+        "style": null,
+        "width": 1000
+    },
+    "configAlternates": {
+        "isSimple": "boolean",
+        "bodyStyle": "object",
+        "categoryId": "string",
+        "cls": "typedarray",
+        "container|padding": "auto",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "ghost": "object",
+        "height": "auto",
+        "hidden": "boolean",
+        "layout": "string",
+        "maximizable": "boolean",
+        "modal": "boolean",
+        "openner": "string",
+        "style": "object",
+        "width": "auto",
+        "alwaysOnTop": "auto"
+    },
+    "name": "LinkingWindow1",
+    "designerId": "80005239-5440-487f-bdbe-82e1e388251d",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "categoryId",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "opener",
+            "type": false
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "openner",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "isSimple",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "7a734522-d59c-463d-aa14-e76fcc88e24f",
+    "viewModelInstanceId": "95e4d357-ad10-43cd-b620-20a7c6f711eb",
+    "cn": [
+        {
+            "type": "Ext.tree.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyBorder": false,
+                "hideHeaders": true,
+                "itemId": "tree",
+                "layout|region": "west",
+                "layout|split": true,
+                "rootVisible": false,
+                "style": null,
+                "title": [
+                    "{category}"
+                ],
+                "width": 230
+            },
+            "configAlternates": {
+                "title": "binding",
+                "bodyBorder": "boolean",
+                "hideHeaders": "boolean",
+                "itemId": "string",
+                "layout|region": "string",
+                "layout|split": "boolean",
+                "style": "object",
+                "width": "auto",
+                "rootVisible": "boolean"
+            },
+            "name": "MyTreePanel1",
+            "designerId": "96283bde-f200-4b25-b484-3fe92d18d673",
+            "cn": [
+                {
+                    "type": "Ext.tree.View",
+                    "reference": {
+                        "name": "viewConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "name": "MyTreeView1",
+                    "designerId": "f982d158-bad2-4806-883a-4c2220845986"
+                },
+                {
+                    "type": "viewcontrollereventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onTreeItemClick",
+                        "implHandler": [
+                            "if(record){",
+                            "    dataview.up('window').categoryId = record.get('id');",
+                            "}",
+                            ""
+                        ],
+                        "name": "itemclick",
+                        "scope": "me"
+                    },
+                    "configAlternates": {
+                        "fn": "string",
+                        "implHandler": "code",
+                        "name": "string",
+                        "scope": "string"
+                    },
+                    "name": "onTreeItemClick",
+                    "designerId": "6de5570a-0b79-4aee-93f9-67c8e16534f5"
+                }
+            ]
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "listContainer",
+                "layout": "fit",
+                "layout|region": "center",
+                "layout|split": true,
+                "style": "border:1px solid #cecece"
+            },
+            "configAlternates": {
+                "style": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|region": "string",
+                "layout|split": "boolean"
+            },
+            "name": "MyContainer14",
+            "designerId": "d3101368-1497-4b30-a0ef-ad13f277e3d9",
+            "cn": [
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "header": false,
+                        "itemId": "list",
+                        "numOfItem": "30",
+                        "title": "Data list"
+                    },
+                    "configAlternates": {
+                        "header": "boolean",
+                        "itemId": "string",
+                        "title": "string",
+                        "type": "string",
+                        "numOfItem": "string"
+                    },
+                    "name": "MyGridPanel",
+                    "designerId": "5b87d28e-0af2-4128-bd46-a82ab0137f86",
+                    "customConfigs": [
+                        {
+                            "group": "(Custom Properties)",
+                            "name": "type",
+                            "type": "string"
+                        },
+                        {
+                            "group": "(Custom Properties)",
+                            "name": "numOfItem",
+                            "type": "string"
+                        }
+                    ],
+                    "cn": [
+                        {
+                            "type": "Ext.view.Table",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyTable",
+                            "designerId": "82e273d6-2065-47d8-9148-8352daa0afd1"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|displayName": "String",
+                                "text": null
+                            },
+                            "configAlternates": {
+                                "designer|displayName": "string",
+                                "text": "string"
+                            },
+                            "name": "MyColumn1",
+                            "designerId": "f3d7c825-cd6f-4c4e-8c12-c52fdb3dccf7"
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayInfo": true,
+                                "dock": "bottom",
+                                "itemId": "pagingToolbar",
+                                "width": null
+                            },
+                            "configAlternates": {
+                                "displayInfo": "boolean",
+                                "dock": "string",
+                                "itemId": "string",
+                                "width": "auto"
+                            },
+                            "name": "MyPagingToolbar1",
+                            "designerId": "8a51c59b-cc97-4360-b9c1-3838659e0217",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "Label",
+                                        "hideLabel": true,
+                                        "itemId": "fdSearch",
+                                        "layout|flex": null,
+                                        "margin": "0 0 0 3",
+                                        "width": 100
+                                    },
+                                    "configAlternates": {
+                                        "fieldLabel": "string",
+                                        "hideLabel": "boolean",
+                                        "itemId": "string",
+                                        "layout|flex": "number",
+                                        "margin": "auto",
+                                        "width": "auto"
+                                    },
+                                    "name": "MyTextField1",
+                                    "designerId": "baebd3c5-7ede-47c2-81d9-82f5660b84d1"
+                                },
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "glyph": "xf002@FontAwesome",
+                                        "itemId": "btnFindIt",
+                                        "layout|flex": null,
+                                        "margin": "0 6 0 6",
+                                        "text": null
+                                    },
+                                    "configAlternates": {
+                                        "glyph": "auto",
+                                        "itemId": "string",
+                                        "layout|flex": "number",
+                                        "margin": "auto",
+                                        "text": "string"
+                                    },
+                                    "name": "MyButton4",
+                                    "designerId": "56939b07-5f24-406f-855b-47d1e56f0db3",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onBtnFindItClick",
+                                                "implHandler": [
+                                                    "var val = button.up('pagingtoolbar').down('#fdSearch').getValue();",
+                                                    "var ctrl = getController('Main');",
+                                                    "var query = \"se_all=\" + val;",
+                                                    "if(button.up('window').categoryId !== undefined) query += '&ca_id=' + button.up('window').categoryId;",
+                                                    "getController('Main').getServerData(button.up('window').categoryId, query, button.up('window').getGrid());"
+                                                ],
+                                                "name": "click",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onBtnFindItClick",
+                                            "designerId": "3e1c8441-5c0f-41b9-835b-8ead79b1b891"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "viewcontrollereventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onPagingToolbarAfterRender",
+                                        "implHandler": [
+                                            "component.up('window').fireEvent('pagingtoolbarcomplete', component, this.getView());"
+                                        ],
+                                        "name": "afterrender",
+                                        "scope": "me"
+                                    },
+                                    "configAlternates": {
+                                        "fn": "string",
+                                        "implHandler": "code",
+                                        "name": "string",
+                                        "scope": "string"
+                                    },
+                                    "name": "onPagingToolbarAfterRender",
+                                    "designerId": "0e2cce4f-25b1-40b4-a7d1-80aa54283e7a"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onWindowBeforeRender",
+                "implHandler": [
+                    "component.setMaxHeight(windowMaxHeight);",
+                    "var tree = component.down('#tree');",
+                    "tree.setTitle(loc.main.category);",
+                    "var tStore = Ext.create('Ext.data.TreeStore', {",
+                    "    //     model:'CateModel',",
+                    "    fields:[",
+                    "        {name:'title'},",
+                    "        {name:'lazy'},",
+                    "        /* category id to expand tree automactically when click expand icon */",
+                    "        /* cateList?node = 'id' */",
+                    "        {",
+                    "            name:'id',",
+                    "            mapping:'data.id'",
+                    "        },",
+                    "        {",
+                    "            name:'text',",
+                    "            mapping:'title'",
+                    "        },",
+                    "        /* check if need to show the expand icon  */",
+                    "        {",
+                    "            name:'leaf',",
+                    "            convert:function(v, record){",
+                    "                return (record.get('lazy') === false);",
+                    "            }",
+                    "        }",
+                    "    ],",
+                    "    proxy: {",
+                    "        type: 'jsonp',",
+                    "        reader: {",
+                    "            type: 'json'",
+                    "        },",
+                    "        api: {",
+                    "            read: getCategoryListApi()",
+                    "        }",
+                    "    }",
+                    "});",
+                    "tStore.load();",
+                    "tree.setStore(tStore);",
+                    "var ctrl = getController('Main');",
+                    "",
+                    "//when click one of tree node",
+                    "tree.onSelect = function(sm, node, index){",
+                    "    component.down('gridpanel').categoryId = node.id;",
+                    "    ctrl.getServerData(node.id, '&ca_id=' + node.id, component.down('gridpanel'));",
+                    "};",
+                    "tree.getSelectionModel().on('select', tree.onSelect);"
+                ],
+                "name": "beforerender",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onWindowBeforeRender",
+            "designerId": "a7f5cac5-47ef-42dd-acce-7ac3b60fcae8"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "getGrid",
+                "implHandler": [
+                    "var grid = this.down('#list');",
+                    "if(this.down('#galleryView') !== null) grid = this.down('#galleryView');",
+                    "return grid;"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getGrid",
+            "designerId": "a87222db-5842-4b7c-b1cb-20b3457f3019"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "disableEvent",
+                "implHandler": [
+                    "this.down('#tree').getSelectionModel().un('select', this.down('#tree').onSelect);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "disableEvent",
+            "designerId": "2819b289-6d96-4994-9cf2-8f4ba419cc82"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "setColorChipGrid",
+                "implHandler": [
+                    "this.down('#list').destroy();",
+                    "var tpl = '<table style=\"width:100%;cursor:pointer\">';",
+                    "tpl    += '\t<tr>';",
+                    "tpl    += '\t\t<td style=\"width:115px;height:65px;padding-left:10px\">';",
+                    "tpl    += '\t\t\t<span style=\"font-weight:bold;\">CODE</span> : {bd_subject}<br><span style=\"font-weight:bold\">HEX</span> : {idcolorHex}';",
+                    "tpl    += '\t\t</td>';",
+                    "tpl    += '\t\t<td style=\"background-color:{idcolorHex}\">';",
+                    "tpl    += '\t\t</td>';",
+                    "tpl    += '\t</tr>';",
+                    "tpl    += '</div>';",
+                    "var chipGrid = Ext.create(",
+                    "    {",
+                    "        xtype:'panel',",
+                    "        type:'colorChip',",
+                    "        itemId:'list',",
+                    "        scrollable:true,",
+                    "        items:[",
+                    "            {",
+                    "                xtype:'dataview',",
+                    "                itemId:'galleryView',",
+                    "                type:'colorChip',",
+                    "                itemTpl:tpl,",
+                    "                itemSelector:'table',",
+                    "            }",
+                    "        ],",
+                    "        dockedItems: [",
+                    "            {",
+                    "                xtype: 'pagingtoolbar',",
+                    "                dock: 'bottom',",
+                    "                itemId: 'pagingToolbar',",
+                    "                displayInfo: true,",
+                    "                items: [",
+                    "                    {",
+                    "                        xtype: 'textfield',",
+                    "                        itemId: 'fdSearch',",
+                    "                        margin: '0 0 0 3',",
+                    "                        width: 100,",
+                    "                        fieldLabel: 'Label',",
+                    "                        hideLabel: true",
+                    "                    },",
+                    "                    {",
+                    "                        xtype: 'button',",
+                    "                        itemId: 'btnFindIt',",
+                    "                        margin: '0 6 0 6',",
+                    "                        glyph: 'xf002@FontAwesome',",
+                    "                        listeners: {",
+                    "                            click: 'onBtnFindItClick'",
+                    "                        }",
+                    "                    }",
+                    "                ],",
+                    "                listeners: {",
+                    "                    afterrender: {",
+                    "                        fn: 'onPagingToolbarAfterRender',",
+                    "                        scope: 'controller'",
+                    "                    }",
+                    "                }",
+                    "            }",
+                    "        ]",
+                    "    });",
+                    "this.down('#listContainer').add(chipGrid);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setColorChipGrid",
+            "designerId": "86028599-e897-46e2-93ae-7ddec527b0d2"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "selectrecordfield",
+        "designer|userClassName": "SelectRecordFieldViewController"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "name": "MyContainer1ViewController",
+    "designerId": "0be5bf2b-3272-438e-8b3d-566fd02ae013"
+}

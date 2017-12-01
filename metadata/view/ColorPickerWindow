@@ -1,0 +1,122 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "colorpickerwindow",
+        "designer|userClassName": "ColorPickerWindow",
+        "height": 250,
+        "idx": -1,
+        "itemId": "colorPickerWin",
+        "record": [
+            "null"
+        ],
+        "title": "My Window",
+        "width": 400
+    },
+    "configAlternates": {
+        "record": "object",
+        "idx": "number",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "itemId": "string",
+        "title": "string",
+        "width": "auto"
+    },
+    "name": "MyWindow",
+    "designerId": "f566531f-7a0d-4849-97d2-c8560130dd55",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "record",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "idx",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "2d79edca-ade3-4c84-ad4d-e189446b8d0b",
+    "viewModelInstanceId": "22511482-5c2b-40bc-97a6-d03cee675884",
+    "cn": [
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onWindowBeforeRender",
+                "implHandler": [
+                    "var record=component.getRecord();",
+                    "var idx=component.getIdx();",
+                    "/*       var colorpicker=Ext.create(\"Ext.ux.colorpick.Selector\",{",
+                    "            value:record.get(\"color\"),",
+                    "            width:'100%',",
+                    "            height:'100%'",
+                    "        });*/",
+                    "",
+                    "component.add({",
+                    "    xtype:'colorselector',",
+                    "    width:'100%',",
+                    "    value:record.get(\"color\")[idx].color",
+                    "});",
+                    "component.add({",
+                    "    xtype:'buttongroup',",
+                    "    items:[",
+                    "        {",
+                    "            text:loc.config.apply,",
+                    "            listeners:{",
+                    "                click:function(button, e, eOpts ) {",
+                    "                    button.up('window').close();",
+                    "                }",
+                    "            }",
+                    "",
+                    "        },",
+                    "        {",
+                    "            text:loc.upload.cancel,",
+                    "            listeners:{",
+                    "                click:function(button, e, eOpts ) {",
+                    "                    var form=Ext.getCmp(\"color_window\").down(\"form\");",
+                    "                    var window=button.up('window');",
+                    "                    var idx=window.getIdx();",
+                    "                    var oriColors = window.originalColors[idx];",
+                    "                    var record=window.getRecord();",
+                    "                    var colors=record.get(\"color\");",
+                    "                    var ori_color=oriColors.color;",
+                    "                    colors[idx].color=ori_color;",
+                    "                    record.set('name', oriColors.name);",
+                    "                    record.set('color', colors);",
+                    "                    var dataview=Ext.getCmp(\"color_window\").down(\"dataview\");",
+                    "                    dataview.refresh();",
+                    "                    window.close();",
+                    "                    form.mask('취소 중입니다.');",
+                    "                    if(record.get('check')===true) setTimeout(form.setAllChangeColor, 300, form.originalColor.color, window.originalColors);",
+                    "                }",
+                    "            }",
+                    "",
+                    "        }",
+                    "    ]",
+                    "});",
+                    ""
+                ],
+                "name": "beforerender",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onWindowBeforeRender",
+            "designerId": "1454caca-8774-4247-8ef7-f2df337538f5"
+        }
+    ]
+}

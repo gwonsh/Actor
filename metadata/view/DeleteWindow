@@ -1,0 +1,203 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "bodyStyle": "padding:20px",
+        "container|align": "stretch",
+        "designer|userAlias": "deletewindow",
+        "designer|userClassName": "DeleteWindow",
+        "height": null,
+        "layout": "vbox",
+        "margin": null,
+        "modal": true,
+        "title": [
+            "{deleteData}"
+        ],
+        "width": null
+    },
+    "configAlternates": {
+        "bodyStyle": "string",
+        "title": "binding",
+        "container|align": "string",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "layout": "string",
+        "margin": "auto",
+        "modal": "boolean",
+        "width": "auto"
+    },
+    "name": "MyWindow",
+    "designerId": "455116c3-aabf-4a9e-b43a-57a38f735455",
+    "viewControllerInstanceId": "6025b763-4b6e-4c97-b8d0-f72d328d9309",
+    "viewModelInstanceId": "96556bd5-caec-42bd-9180-633c333a307d",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": 100,
+                "html": [
+                    "{html}"
+                ],
+                "itemId": "htmlCon",
+                "layout|flex": null,
+                "margin": "0 0 20 0",
+                "width": 400
+            },
+            "configAlternates": {
+                "html": "binding",
+                "height": "auto",
+                "itemId": "string",
+                "layout|flex": "number",
+                "margin": "auto",
+                "width": "auto"
+            },
+            "name": "MyContainer20",
+            "designerId": "ee7de249-085c-40cf-bf69-47e1201a5d47"
+        },
+        {
+            "type": "Ext.form.Label",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|flex": null,
+                "text": [
+                    "{delAlert}"
+                ]
+            },
+            "configAlternates": {
+                "text": "binding",
+                "layout|flex": "number"
+            },
+            "name": "MyLabel14",
+            "designerId": "88a3523a-3062-4e31-a0cb-d178efeda877"
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "stretch",
+                "container|pack": "center",
+                "itemId": "btnCon",
+                "layout": "hbox",
+                "layout|flex": null,
+                "margin": "10 0 10 0"
+            },
+            "configAlternates": {
+                "container|align": "string",
+                "container|pack": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number",
+                "margin": "auto"
+            },
+            "name": "MyContainer21",
+            "designerId": "506e778e-e0e7-4e7c-9368-57f1bdf0e85e",
+            "cn": [
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1,
+                        "text": "remove"
+                    },
+                    "configAlternates": {
+                        "layout|flex": "number",
+                        "text": "string"
+                    },
+                    "name": "MyButton13",
+                    "designerId": "0ba885f5-4bed-4401-b95a-7eb9c04fccd2",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonClick",
+                                "implHandler": [
+                                    "var url = getDeleteDataApi();",
+                                    "var delAll = button.up('window').down('#delAll').getValue();",
+                                    "if(delAll){",
+                                    "    var query = '';",
+                                    "    for(var i=0; i<bdIdxs.length; i++){",
+                                    "        var connecter = (i === 0)? '?' : '&';",
+                                    "        query += connecter + 'bd_idx=' + bdIdxs[i];",
+                                    "    }",
+                                    "    url += query;",
+                                    "}",
+                                    "else{",
+                                    "    url += '?bd_idx=' + record.get('bd_idx');",
+                                    "}",
+                                    "Ext.data.JsonP.request({",
+                                    "    url:url,",
+                                    "    success:function(response){",
+                                    "        if(response.result){",
+                                    "            var activeTab = mainCtr.getListTab().getActiveTab();",
+                                    "            Ext.getStore('dStore_' + activeTab.categoryId).load();",
+                                    "            if(delAll){",
+                                    "                activeTab.fireEvent('alldataremoved');",
+                                    "            }",
+                                    "            else{",
+                                    "                activeTab.fireEvent('dataremoved', record.get('bd_idx'));",
+                                    "            }",
+                                    "            button.up('window').destroy();",
+                                    "",
+                                    "        }",
+                                    "        /* delete connected category for taskgroup plugin */",
+                                    "        if(currentPlugin == 'taskGroup'){",
+                                    "            var referCa = record.get('bd_refer');",
+                                    "            Ext.data.JsonP.request({",
+                                    "                url:domain  + '/json/cateDelete?ca_id=' + referCa,",
+                                    "                method:'POST',",
+                                    "                success:function(response){",
+                                    "                    if(response.result){",
+                                    "                        Ext.toast(loc.main.deleteComplete);",
+                                    "                        mainCtr.getMainView().down('#southPanel').removeAll();",
+                                    "                    }",
+                                    "                }",
+                                    "            });",
+                                    "        }",
+                                    "    }",
+                                    "});"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string",
+                                "scope": "string"
+                            },
+                            "name": "onButtonClick",
+                            "designerId": "1913ff0b-08d2-4ef4-835f-72775adafc81"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

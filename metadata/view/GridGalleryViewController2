@@ -1,0 +1,18 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "gridschedule",
+        "designer|userClassName": "GridGalleryViewController2"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "name": "GridGalleryViewController2",
+    "designerId": "e3368718-19aa-4ead-bfef-e59a99de63fe"
+}

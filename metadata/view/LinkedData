@@ -1,0 +1,86 @@
+{
+    "type": "Ext.container.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "stretch",
+        "container|padding": "0 2 0 2",
+        "designer|userAlias": "linkeddata",
+        "designer|userClassName": "LinkedData",
+        "height": null,
+        "layout": "hbox",
+        "width": "100%"
+    },
+    "configAlternates": {
+        "container|align": "string",
+        "container|padding": "auto",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "layout": "string",
+        "width": "auto"
+    },
+    "name": "MyContainer11",
+    "designerId": "4667f0d8-a658-4697-ad62-129027508d93",
+    "viewControllerInstanceId": "f2b1d2e0-adb6-44e7-a18d-140dc6ba216f",
+    "viewModelInstanceId": "6bf9283b-10e9-49ef-ace6-237bd0ed6cbf",
+    "cn": [
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "cls": null,
+                "designer|uiInterfaceName": "plain-toolbar-small",
+                "glyph": "xf0fe@FontAwesome",
+                "height": 80,
+                "itemId": "addLink",
+                "layout|flex": null,
+                "style": null,
+                "text": null,
+                "ui": "plain-toolbar-small",
+                "width": 80
+            },
+            "configAlternates": {
+                "style": "string",
+                "cls": "string",
+                "designer|uiInterfaceName": "string",
+                "glyph": "auto",
+                "height": "auto",
+                "itemId": "string",
+                "layout|flex": "number",
+                "text": "string",
+                "ui": "string",
+                "width": "auto"
+            },
+            "name": "MyButton3",
+            "designerId": "f4c04eea-5e8f-42c1-a0b7-d6a4b14164e7"
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "stretch",
+                "layout": "vbox",
+                "layout|flex": null
+            },
+            "configAlternates": {
+                "container|align": "string",
+                "layout": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyContainer11",
+            "designerId": "5d24cfeb-1c8a-42fa-8d42-8a46091e0c14"
+        }
+    ]
+}

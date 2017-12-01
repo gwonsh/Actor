@@ -1,0 +1,276 @@
+.viewer-frame{
+    padding:25px 25px 0px 25px;
+    margin:0 auto;
+}
+.viewer-header{
+    width:100%;
+    height:65px;
+    background-color:white;
+}
+.viewer-logo{
+    float:left;
+    width:auto;
+    height:auto;
+    max-height:40px;
+}
+.viewer-addr{
+    max-width:200px;
+    font-size:11px;
+}
+.viewer-companyname{
+    margin-top:5px;
+    font-size:15px;
+    font-weight:bold;
+}
+.viewer-companyname-big{
+    margin-top:5px;
+    font-size:25px;
+    font-weight:bold;
+}
+.viewer-approval{
+    margin-left:30px;
+    float:right;
+    height:100%;
+}
+.viewer-title{
+    position:relative;
+    margin-top:5px;
+    height:30px;
+    width:100%;
+    background-color:#000000;
+}
+.viewer-title span{
+    color:white;
+    font-size:14px;
+    line-height:30px;
+}
+
+.label-left-space{
+    margin-left:10px;
+}
+.section-space{
+    margin-top:10px;
+}
+.viewer-table{
+    width:100%;
+    border-collapse: collapse;
+    font-size:13px;
+}
+.viewer-table td{
+    padding:3px;
+    text-align:left;
+}
+.viewer-table th{
+    text-align:left;
+    padding:3px;
+    background-color:#f9f9f9;
+}
+.viewer-link{
+    float:left;
+    width:100px;
+    height:100px;
+    background-position:center;
+    background-repeat:no-repeat;
+    border:1px solid #cecece;
+    margin-right:5px;
+}
+.viewer-link-noline{
+    float:left;
+    width:80px;
+    height:80px;
+    background-position:center;
+    background-repeat:no-repeat;
+    margin-right:5px;
+}
+.viewer-attach-unit{
+    width:120px;
+    float:left;
+    margin:0 5px 5px 0;
+    cursor:pointer;
+},
+.viewer-attach-unit-small{
+    width:100px;
+    float:left;
+    margin:0 5px 5px 0;
+    cursor:pointer;
+}
+.viewer-attach-unit-very-small{
+    width:80px;
+    height:40px;
+    display:table;
+    float:left;
+    margin:0 5px 5px 0;
+    cursor:pointer;
+}
+.viewer-attach-image{
+    width:100%;
+    height:120px;
+    background-position:center;
+    background-repeat:no-repeat;
+    border:1px solid #dee0e2;    
+}
+.viewer-attach-image-noline{
+    width:100%;
+    height:120px;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+.viewer-attach-image-small{
+    width:100%;
+    height:60px;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+.viewer-filename{
+    overflow:hidden;
+    font-size:11px;
+    text-align:center;
+}
+
+.dataset-table td{
+    padding-left:5px;
+    height:25px;
+    font-size:12px;
+}
+.datasetView{
+    border-collapse:collapse; 
+    border:1px #000 solid;
+    height:25px;
+    width:100%;
+    font-size:12px;
+}
+.datasetView td{
+    border-bottom:1px solid #000;
+    border-right:1px solid #000;
+    padding:3px 5px 3px 5px;
+    height:25px;
+}
+.datasetView th{
+    border-bottom:1px solid #000;
+    border-right:1px solid #000;
+    padding:3px 5px 3px 5px;
+}
+.information-table{
+    table-layout:fixed; 
+    word-break:break-all;
+    border:1px solid #cecece;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width:100%;
+}
+.information-table th, .information-table td, .clone-table th, .clone-table td{
+    text-align:left;
+    padding:3px 3px 3px 7px;
+    color:#545A6D;
+    vertical-align: top;
+    border:1px solid #cecece;
+}
+.information-table th, .clone-table th{
+    font: 600 12px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+    background-color:#fafafa;
+}
+.information-table .datasetView, .clone-table .datasetView{
+    border:1px solid #dee0e2;
+}
+.information-table .datasetView td, .clone-table .datasetView td{
+    border-bottom:1px solid #dee0e2;
+    border-right:1px solid #dee0e2;
+    padding:0;
+    height:auto;
+    word-break:break-all;
+    border-collapse: collapse;
+    width:100%;
+}
+.information-table .datasetView th, .clone-table .datasetView th{
+    border-bottom:1px solid #dee0e2;
+    border-right:1px solid #dee0e2;
+    padding:0;
+    font-weight:normal;   
+    float:left;
+    font-size:12px;
+}
+
+.clone-table td .value{
+    min-width:170px;
+    max-width:250px;
+}
+.clone-table th .value{
+    min-width:145px;
+}
+.information-table .viewer-attach-unit{
+    width:100px;
+    float:left;
+    margin:0 5px 5px 0;
+}
+
+.viewer-frame th.simpleList{
+    position:relative;
+    text-align:right;
+}
+.simpleList{
+    border-bottom:1px solid #333333;
+    font-size:13px;
+    color:#000;
+    height:20px;   
+}
+
+.simpleList .datasetView{
+    border-collapse:collapse; 
+    border:1px #333333 solid;
+    height:25px;
+    width:100%;
+    font-size:12px;
+}
+.simpleList .datasetView td{
+    border-bottom:1px solid #333333;
+    border-right:1px solid #333333;
+    padding:3px 5px 3px 5px;
+    height:25px;
+}
+.simpleList .datasetView th{
+    border-bottom:1px solid #333333;
+    border-right:1px solid #333333;
+    padding:3px 5px 3px 5px;
+}
+.html-field-title{
+    background-color:#232831;
+    font-size:13px;
+    color:white;
+    text-align:left;
+    min-width:125px;
+    padding:5px 15px 5px 15px;
+    border-radius:8px 8px 0px 0px;
+    margin-left:4px;
+}
+.html-field-title i{
+    margin-right:8px;
+}
+
+.imageList .field-table th{
+    padding:3px 10px 3px 0;
+    text-align: left;
+    background-color: #ffffff;
+}
+.imageList .section-space{
+    margin-top:30px;
+}
+
+.viewer-frame.form-gallery th{
+    text-align:left;
+}
+.div-image{
+    background-position:center;
+    background-repeat:no-repeat;
+}
+.approval-list{
+    border-collapse: collapse;
+    font-size:12px;
+}
+.color-info th{
+    vertical-align:top;
+    text-align:left;
+    padding-right:13px;
+}
+.color-info td{
+    padding-bottom:10px;
+}

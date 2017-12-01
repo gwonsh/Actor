@@ -1,0 +1,92 @@
+{
+    "type": "Ext.grid.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "closable": true,
+        "designer|userAlias": "gridnormal",
+        "designer|userClassName": "GridNormal",
+        "height": null,
+        "hidden": null,
+        "id": null,
+        "itemId": null,
+        "params": [
+            "`null`"
+        ],
+        "title": null,
+        "type": "normal",
+        "width": null
+    },
+    "configAlternates": {
+        "closable": "boolean",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "id": "string",
+        "itemId": "string",
+        "title": "string",
+        "type": "string",
+        "width": "auto",
+        "hidden": "boolean",
+        "params": "object"
+    },
+    "name": "MyGridPanel",
+    "designerId": "cc261e26-8420-4a55-ae62-81e6fa26932c",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "categoryId",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "type",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "params",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "a569c5a8-7a6a-4b86-b438-1742d7364fed",
+    "viewModelInstanceId": "2377ec06-50b2-4fca-89ff-f3e2b5393ec1",
+    "cn": [
+        {
+            "type": "Ext.grid.column.Column",
+            "reference": {
+                "name": "columns",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "dataIndex": "string",
+                "hidden": true,
+                "text": "String"
+            },
+            "configAlternates": {
+                "dataIndex": "datafield",
+                "hidden": "boolean",
+                "text": "string"
+            },
+            "name": "MyColumn1",
+            "designerId": "ee767680-3813-4522-a5b4-1414e404be0c"
+        },
+        {
+            "type": "Ext.selection.CheckboxModel",
+            "reference": {
+                "name": "selModel",
+                "type": "object"
+            },
+            "codeClass": null,
+            "configAlternates": {
+                "mode": "string"
+            },
+            "name": "MyCheckboxSelectionModel",
+            "designerId": "bea32452-8096-4792-bae2-92a42af913d2"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "actorwindow",
+        "designer|userClassName": "ActorWindowViewModel"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "name": "LinkingWindowViewModel1",
+    "designerId": "95e4d357-ad10-43cd-b620-20a7c6f711eb"
+}

@@ -1,0 +1,236 @@
+{
+    "type": "Ext.container.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "stretch",
+        "designer|userAlias": "shortcut",
+        "designer|userClassName": "Shortcut",
+        "height": null,
+        "layout": "vbox",
+        "style": "cursor:pointer",
+        "width": null
+    },
+    "configAlternates": {
+        "container|align": "string",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "layout": "string",
+        "width": "auto",
+        "style": "string"
+    },
+    "name": "MyContainer7",
+    "designerId": "c38745aa-0604-405c-9e8c-a885fa72dedc",
+    "viewControllerInstanceId": "d549e5ca-dab7-4325-97d3-9faa23513323",
+    "viewModelInstanceId": "009526ee-9755-4224-9cec-46322c67ef8b",
+    "cn": [
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|uiInterfaceName": "plain",
+                "flex": null,
+                "height": null,
+                "itemId": "shortcutButton",
+                "overCls": "shortcut-hover",
+                "style": null,
+                "text": null,
+                "width": null
+            },
+            "configAlternates": {
+                "designer|uiInterfaceName": "string",
+                "flex": "number",
+                "height": "auto",
+                "itemId": "string",
+                "overCls": "string",
+                "style": "object",
+                "text": "string",
+                "width": "auto"
+            },
+            "name": "MyButton4",
+            "designerId": "26c6a648-e319-4f78-9a3b-ead806e2b75f",
+            "cn": [
+                {
+                    "type": "viewcontrollereventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onShortcutButtonClick",
+                        "implHandler": [
+                            "button.up('container').fireEvent('click', button, button.up('container'));"
+                        ],
+                        "name": "click",
+                        "scope": "me"
+                    },
+                    "configAlternates": {
+                        "fn": "string",
+                        "implHandler": "code",
+                        "name": "string",
+                        "scope": "string"
+                    },
+                    "name": "onShortcutButtonClick",
+                    "designerId": "7151f219-82e1-487d-9ae7-66feba29fd4c"
+                }
+            ]
+        },
+        {
+            "type": "Ext.toolbar.Spacer",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|displayName": "spacer",
+                "height": 10,
+                "layout|flex": null
+            },
+            "configAlternates": {
+                "designer|displayName": "string",
+                "height": "auto",
+                "layout|flex": "number"
+            },
+            "name": "MySpacer5",
+            "designerId": "4fe0f8c2-0a35-4329-b5c8-dd74a8fd0e1b"
+        },
+        {
+            "type": "Ext.form.Label",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "shortcutTitle",
+                "layout|flex": null,
+                "style": "text-align:center;cursor:pointer",
+                "text": null,
+                "width": "100%"
+            },
+            "configAlternates": {
+                "style": "string",
+                "itemId": "string",
+                "layout|flex": "number",
+                "text": "string",
+                "width": "auto"
+            },
+            "name": "MyLabel5",
+            "designerId": "c843f8b0-105c-4e41-81b1-48ab4af3b915"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "style"
+                ],
+                "fn": "setButtonStyle",
+                "implHandler": [
+                    "var btn = this.down('button');",
+                    "btn.setUI('plain');",
+                    "btn.setStyle(style);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setButtonStyle",
+            "designerId": "fe9a8867-f4d9-4383-a740-297ab86f517b"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "ico"
+                ],
+                "fn": "setIcon",
+                "implHandler": [
+                    "this.down('button').setIconCls('fa fa-' + ico);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setIcon",
+            "designerId": "cd5cc638-5c8b-4b01-8d3f-54f5d97b3a4f"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "text"
+                ],
+                "fn": "setTitle",
+                "implHandler": [
+                    "var titleCon = this.down('#shortcutTitle');",
+                    "titleCon.setStyle('color', 'white');",
+                    "titleCon.setText(text);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "setTitle",
+            "designerId": "b1fa9685-1c21-4142-b885-09a84afb20cc"
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContainerAfterRender",
+                "implHandler": [
+                    "component.el.on('click', function(e){",
+                    "    if(e.target.tagName != 'SPAN'){",
+                    "        component.down('#shortcutButton').fireEvent('click', component.down('#shortcutButton'));",
+                    "    }",
+                    "});"
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onContainerAfterRender",
+            "designerId": "b852892a-272f-486f-a599-ffdd0dbe8a00"
+        }
+    ]
+}

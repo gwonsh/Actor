@@ -1,0 +1,20 @@
+{
+    "type": "jsonresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAliasPrefix": "widget",
+        "designer|userClassName": "json_hgxxorlg",
+        "url": "actor.json"
+    },
+    "configAlternates": {
+        "designer|userAliasPrefix": "string",
+        "designer|userClassName": "string",
+        "url": "uri"
+    },
+    "name": "json",
+    "designerId": "005fb1f5-441b-4457-a1ea-8be446765da1"
+}

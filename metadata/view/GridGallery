@@ -1,0 +1,293 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "bodyPadding": 25,
+        "bodyStyle": "border-top:1px solid #cecece !important",
+        "closable": true,
+        "designer|userAlias": "gridgallery",
+        "designer|userClassName": "GridGallery",
+        "height": null,
+        "scrollable": true,
+        "title": null,
+        "type": "gallery",
+        "width": null
+    },
+    "configAlternates": {
+        "scrollable": "boolean",
+        "bodyPadding": "auto",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "title": "string",
+        "type": "string",
+        "width": "auto",
+        "closable": "boolean",
+        "bodyStyle": "string"
+    },
+    "name": "MyPanel7",
+    "designerId": "952bf221-6be3-4c53-aeed-5fcc8983c2be",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "type",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "b2697f16-1cab-41ca-be6c-10d88407bce1",
+    "viewModelInstanceId": "550d1e65-eb10-4fbf-85e1-18d6b1fd5628",
+    "cn": [
+        {
+            "type": "Ext.view.View",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "galleryView",
+                "itemSelector": "div.gunit"
+            },
+            "configAlternates": {
+                "itemSelector": "string",
+                "itemId": "string"
+            },
+            "name": "MyView1",
+            "designerId": "6bac96d2-ae5d-4fbe-9043-0813f9017154",
+            "cn": [
+                {
+                    "type": "Ext.XTemplate",
+                    "reference": {
+                        "name": "tpl",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "tpl",
+                        "implHandler": [
+                            "<tpl for=\".\">",
+                            "    <div class=\"gallery-unit gunit\">",
+                            "        <div class=\"gallery-unit-wrap\">",
+                            "            <div class=\"gallery-unit-image\" style=\"background-image:url({[this.checkIfImage(values)]})\">",
+                            "            </div>",
+                            "            <div style=\"width:100%;font-size:12px;padding:5px\">",
+                            "                <tpl if=\"values.bd_file.length &gt; 1\">",
+                            "                    <div id=\"viewAttached_{bd_idx}\" style=\"cursor:pointer;display:inline-box;float:left;height:16px;padding:0 2px 0 2px;margin-top:1px;background-color:black;color:white\">{bd_file.length}</div>",
+                            "                </tpl>",
+                            "                <div style=\"float:left;font-weight:bold;width:190px;padding:1px 0 0 5px;height:17px;overflow:hidden;display:{[this.checkHideTitle()]}\">{bd_subject}</div>",
+                            "                <div style=\"float:left;width:100%;padding:3px 0 3px 0;border-bottom:1px solid #eeeeee\"></div>",
+                            "                <div style=\"float:left;width:100%;margin-top:5px\">",
+                            "                    <img style=\"float:left;margin-top:2px\" src=\"{[this.getFileIcon(values)]}\" onerror=\"this.class='fa fa-exclamation-triangle'\">",
+                            "                    <span style=\"margin-left:5px;color:#666666;\">{bd_regdate}</span><br>",
+                            "                    <span style=\"margin-left:5px;color:#666666;\">{bd_name}</span>",
+                            "                </div>",
+                            "                <div class=\"describe\" style=\"float:left;width:100%;height:16px;margin-top:10px;font-size:12px;overflow:hidden\">{bd_content}</div>",
+                            "            </div>        ",
+                            "        </div>",
+                            "    </div>",
+                            "</tpl>   "
+                        ]
+                    },
+                    "configAlternates": {
+                        "designer|displayName": "string",
+                        "implHandler": "code"
+                    },
+                    "name": "tpl",
+                    "designerId": "93f2877d-861f-46c0-985e-b922e40688af",
+                    "cn": [
+                        {
+                            "type": "templatefunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "xcount"
+                                ],
+                                "fn": "getTplLength",
+                                "implHandler": [
+                                    "return xcount;"
+                                ]
+                            },
+                            "configAlternates": {
+                                "designer|params": "typedarray",
+                                "fn": "string",
+                                "implHandler": "code"
+                            },
+                            "name": "getTplLength",
+                            "designerId": "bc445b7c-27cb-4ff8-8da5-288f70d52516"
+                        },
+                        {
+                            "type": "templatefunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "value"
+                                ],
+                                "fn": "getThumbnail",
+                                "implHandler": [
+                                    "var val = '';",
+                                    "if(values.bd_file[0] === undefined){",
+                                    "    val = 'resources/images/ico_noimage.gif';",
+                                    "}",
+                                    "else{",
+                                    "    val = values.bd_file[0].thumb_path + '/T';",
+                                    "}",
+                                    "return val;",
+                                    ""
+                                ]
+                            },
+                            "configAlternates": {
+                                "designer|params": "typedarray",
+                                "fn": "string",
+                                "implHandler": "code"
+                            },
+                            "name": "getThumbnail",
+                            "designerId": "a1b19a61-40be-450d-818f-8ead923137fe"
+                        },
+                        {
+                            "type": "templatefunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "value"
+                                ],
+                                "fn": "getFileLength",
+                                "implHandler": [
+                                    "var val = '';",
+                                    "if(!values.bd_file){",
+                                    "    val = 0;",
+                                    "}",
+                                    "else{",
+                                    "    val = values.bd_file.length;",
+                                    "}",
+                                    "return val;"
+                                ]
+                            },
+                            "configAlternates": {
+                                "designer|params": "typedarray",
+                                "fn": "string",
+                                "implHandler": "code"
+                            },
+                            "name": "getFileLength",
+                            "designerId": "944405bd-2870-4391-a403-e048b7699dc7"
+                        },
+                        {
+                            "type": "templatefunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "values"
+                                ],
+                                "fn": "checkIfImage",
+                                "implHandler": [
+                                    "var files = values.bd_file;",
+                                    "if(files.length === 0) return;",
+                                    "",
+                                    "var val = 'resources/images/ico_noimage.gif';",
+                                    "var isImage = getController('Config').isImage(files[0]);",
+                                    "if(isImage){",
+                                    "    val = files[0].thumb_path;",
+                                    "}",
+                                    "return val;"
+                                ]
+                            },
+                            "configAlternates": {
+                                "designer|params": "typedarray",
+                                "fn": "string",
+                                "implHandler": "code"
+                            },
+                            "name": "checkIfImage",
+                            "designerId": "14a05e8d-249d-46a8-a9a4-389b74f0c926"
+                        },
+                        {
+                            "type": "templatefunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "values"
+                                ],
+                                "fn": "getFileIcon",
+                                "implHandler": [
+                                    "var files = values.bd_file;",
+                                    "var val = '../images/share/ico_ext/ext_no.png';",
+                                    "if(files && files[0]){",
+                                    "    var fileName = files[0].file_name;",
+                                    "    var tmpArr = fileName.split('.');",
+                                    "    var ext = '';",
+                                    "    if(tmpArr.length > 1){",
+                                    "        if(window.location.hostname == 'localhost'){",
+                                    "            val = 'resources/images/ico_noimage.gif';",
+                                    "        }",
+                                    "        else{",
+                                    "            ext = tmpArr[tmpArr.length - 1];",
+                                    "            if(ext.trim() == 'tiff') ext = 'tif';",
+                                    "            if(ext.trim() == 'jpeg') ext = 'jpg';",
+                                    "            val = '../images/share/ico_ext/ext_'+ext+'.png';",
+                                    "        }",
+                                    "    }",
+                                    "}",
+                                    "return val;"
+                                ]
+                            },
+                            "configAlternates": {
+                                "designer|params": "typedarray",
+                                "fn": "string",
+                                "implHandler": "code"
+                            },
+                            "name": "getFileIcon",
+                            "designerId": "3357f93a-f705-44be-9282-52e29a906d7b"
+                        },
+                        {
+                            "type": "templatefunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "checkHideTitle",
+                                "implHandler": [
+                                    "var val = 'inline';",
+                                    "if(config.option.title == '0' || config.option.title == 'false'){",
+                                    "    val = 'none';",
+                                    "}",
+                                    "return val;"
+                                ]
+                            },
+                            "configAlternates": {
+                                "designer|params": "typedarray",
+                                "fn": "string",
+                                "implHandler": "code"
+                            },
+                            "name": "checkHideTitle",
+                            "designerId": "6a9635af-b291-4448-ac24-87da02e13b52"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
