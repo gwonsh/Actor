@@ -1,0 +1,66 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "historywindow",
+        "designer|userClassName": "HistoryWindowViewController"
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string"
+    },
+    "designerId": "48a6d8f2-1f29-4a90-9bff-ca4b72ef2469",
+    "cn": [
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "store",
+                    "gridView",
+                    "show"
+                ],
+                "fn": "showChanged",
+                "implHandler": [
+                    "var bgColor = (show)? '#ffe3cd': '#ffffff';",
+                    "store.each(function(record, index){",
+                    "    var preRec = store.getRange(index + 1, index + 1);",
+                    "    if(preRec.length > 0){",
+                    "        if(record.get('bd_subject') != preRec[0].get('bd_subject')){",
+                    "            Ext.get(gridView.getNodes(index, index)[0]).el.select('.gsubject').elements[0].style.backgroundColor = bgColor;",
+                    "        }",
+                    "        if(record.get('bd_content') != preRec[0].get('bd_content')){",
+                    "            Ext.get(gridView.getNodes(index, index)[0]).el.select('.gcontent').elements[0].style.backgroundColor = bgColor;",
+                    "        }",
+                    "        if(record.get('idx') != preRec[0].get('idx')){",
+                    "            Ext.get(gridView.getNodes(index, index)[0]).el.select('.gidx').elements[0].style.backgroundColor = bgColor;",
+                    "        }",
+                    "        Ext.Array.each(preRec[0].data.bd_data, function(entry, i){",
+                    "            if(record.get('bd_data')[i].data_val != entry.data_val){//exclude 'auto numbering field'",
+                    "                var idx = '.id' + record.get('bd_data')[i].cols_idx;",
+                    "                if(Ext.get(gridView.getNodes(index, index)[0]).el.select(idx).elements[0])",
+                    "                    Ext.get(gridView.getNodes(index, index)[0]).el.select(idx).elements[0].parentElement.style.backgroundColor = bgColor;",
+                    "            }",
+                    "        });",
+                    "    }",
+                    "});"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "showChanged",
+            "designerId": "44a63398-171b-4b95-84ee-a5cec44446c3"
+        }
+    ]
+}

@@ -895,6 +895,22 @@ Ext.define('Actor.view.MainView', {
                                     listeners: {
                                         click: 'onMainBtnChartClick'
                                     }
+                                },
+                                {
+                                    xtype: 'button',
+                                    itemId: 'mainBtnHistory',
+                                    ui: 'plain-toolbar-medium',
+                                    width: 70,
+                                    glyph: 'xf1da@FontAwesome',
+                                    iconAlign: 'top',
+                                    scale: 'medium',
+                                    bind: {
+                                        text: '{history}',
+                                        tooltip: '{historyList}'
+                                    },
+                                    listeners: {
+                                        click: 'onMainBtnHistoryClick'
+                                    }
                                 }
                             ]
                         },

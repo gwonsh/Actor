@@ -69,7 +69,8 @@
             "ColorPickerWindow",
             "ExtendHtmlEditor",
             "DataGroupWindow",
-            "LinkUnit"
+            "LinkUnit",
+            "HistoryWindow"
         ]
     },
     "configAlternates": {

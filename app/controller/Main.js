@@ -1079,7 +1079,7 @@ Ext.define('Actor.controller.Main', {
         //                     var query = '?bd_idx='+r.get('bd_idx')+'&cols_idx='+colsIdx+'&data_val=' + rgb_b;
         //                     update(query, count);
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+                            store.fields = flds;
                             /* do not excute by LinkingWindow, dataGroupWindow or so on */
                             if(grid.getItemId() == 'mainGrid_' + cId){
                                 /* preload the upload window */
@@ -1554,7 +1554,7 @@ Ext.define('Actor.controller.Main', {
                     var dtFormat = (localLanguage == 'English')? 'm-d-Y' : 'Y-m-d';
                     var regDate = Ext.Date.format(dt, dtFormat);
                     var percentVal = record.get('idpercent');
-                    var userId = (grid.usedBy == 'work')? record.get('mb_id') : record.get('bd_name');
+                    var userId = (grid.usedBy == 'work')? record.get('mb_id') : record.get('bd_name') || record.get('mb_id');
                     var html = '';
                         html += '<div style="width:100%;overflow:hidden;float:left">';
                     if(gridType =='text'){
@@ -2174,6 +2174,7 @@ Ext.define('Actor.controller.Main', {
                     itemInfo.approvalList = null;
                 }
                 itemInfo.hasFile = false;
+                itemInfo.bd_last_modify_id = record.get('bd_last_modify_id') || record.get('mb_id');
                 Ext.Object.each(itemInfo, function(key, value){
                     if(key == 'bd_file'){
                         if(value.length !== 0){
@@ -3088,7 +3089,10 @@ Ext.define('Actor.controller.Main', {
         Ext.data.JsonP.request({
             url:domain + '/json/member?nvm_id=' + uId,
             success:function(response){
-                if(response.memberList.length === 0) return;
+                if(response.memberList.length === 0){
+                    Ext.toast(loc.error.notUser);
+                    return;
+                }
                 var html = '';
                 if(response.memberList[0].nvm_file.trim() !== ''){
                     var potoCss = 'width:150px;height:175px;background-image:url('+response.memberList[0].nvm_file+');margin-bottom:10px;';
@@ -3115,7 +3119,9 @@ Ext.define('Actor.controller.Main', {
                     width:450,
                     padding:10,
                     ghost:false,
-                    html:html
+                    html:html,
+                    title:loc.config.userInfo,
+                    cls:'dataset-table'
                 }).show();
             }
         });

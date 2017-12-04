@@ -3378,6 +3378,72 @@
                                             "designerId": "1bb7efa8-2ddb-4831-a4e9-68b51126f67e"
                                         }
                                     ]
+                                },
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "plain-toolbar-medium",
+                                        "glyph": "xf1da@FontAwesome",
+                                        "iconAlign": "top",
+                                        "itemId": "mainBtnHistory",
+                                        "scale": "medium",
+                                        "text": [
+                                            "{history}"
+                                        ],
+                                        "tooltip": [
+                                            "{historyList}"
+                                        ],
+                                        "ui": "plain-toolbar-medium",
+                                        "width": 70
+                                    },
+                                    "configAlternates": {
+                                        "tooltip": "binding",
+                                        "text": "binding",
+                                        "designer|uiInterfaceName": "string",
+                                        "glyph": "auto",
+                                        "iconAlign": "string",
+                                        "itemId": "string",
+                                        "scale": "string",
+                                        "ui": "string",
+                                        "width": "auto"
+                                    },
+                                    "name": "MyButton39",
+                                    "designerId": "75784287-68e4-409d-ba1e-325b22af5fd2",
+                                    "cn": [
+                                        {
+                                            "type": "viewcontrollereventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onMainBtnHistoryClick",
+                                                "implHandler": [
+                                                    "if(this.getSelected().length === 0){",
+                                                    "    Ext.toast(loc.upload.noneSelected);",
+                                                    "    return;",
+                                                    "}",
+                                                    "this.showHistory();"
+                                                ],
+                                                "name": "click",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onMainBtnHistoryClick",
+                                            "designerId": "2e23ff6d-47c4-458b-93b4-cbe3b81f8028"
+                                        }
+                                    ]
                                 }
                             ]
                         },
