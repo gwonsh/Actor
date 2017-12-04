@@ -47,7 +47,7 @@ Ext.define('resources.js.forms.Information', {
 		html += '		<th style="font-weight:600 12px;" width="112">'+values.subjectTitle+'</th><td '+subjectAttr+'>'+subject+'</td>';
 		html += '	</tr>';
 		html += '	<tr>';
-		html += '		<th style="font-weight:600 12px;" width="112">'+loc.main.user+'</th><td>'+values.bd_name+'</td>';
+		html += '		<th style="font-weight:600 12px;" width="112">'+loc.main.user+'</th><td><a href="#" uId="'+values.bd_last_modify_id+'" onclick="getController(\'Main\').showUserInfo(this)" style="cursor:pointer">' + values.bd_name + '</a></td>';
 		html += '	</tr>';
 		html += '	<tr>';
 		html += '		<th style="font-weight:600 12px;" width="112">'+loc.main.regDate+'</th><td>'+values.bd_regdate+'</td>';
