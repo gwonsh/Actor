@@ -307,7 +307,7 @@ Ext.define('Actor.view.MainViewController', {
             },
             {
                 xtype:'label',
-                text:'Actor vertion : 4.171201'
+                text:'Actor vertion : 4.171209'
             }
             ]
         }).show();

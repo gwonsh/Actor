@@ -38,6 +38,7 @@ Ext.define('Actor.view.CategorySetWindow', {
     viewModel: {
         type: 'categorysetwindow'
     },
+    id: 'cateSetWindow',
     itemId: 'cateSetWin',
     width: 830,
 
@@ -227,6 +228,314 @@ Ext.define('Actor.view.CategorySetWindow', {
                                     listeners: {
                                         render: 'ondNameContentRender'
                                     }
+                                },
+                                {
+                                    xtype: 'tbspacer',
+                                    style: ' float:left',
+                                    width: 30
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'label',
+                            cls: 'form-title-label',
+                            itemId: 'filteringLabel',
+                            listeners: {
+                                afterrender: 'onfilteringLabel'
+                            }
+                        },
+                        {
+                            xtype: 'container',
+                            cls: 'form-section',
+                            itemId: 'filteringCon',
+                            items: [
+                                {
+                                    xtype: 'label',
+                                    style: ' float:left',
+                                    width: '100%',
+                                    bind: {
+                                        text: '{filteringInfo}'
+                                    }
+                                },
+                                {
+                                    xtype: 'container',
+                                    width: '100%',
+                                    layout: {
+                                        type: 'hbox',
+                                        align: 'stretch'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'textfield',
+                                            itemId: 'fdFilterValue',
+                                            width: 350,
+                                            fieldLabel: 'Label',
+                                            hideLabel: true,
+                                            readOnly: true,
+                                            bind: {
+                                                disabled: '{!isSelected}',
+                                                value: '{filter}'
+                                            }
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            handler: function(button, e) {
+                                                var tree = button.up('window').down('#cTree');
+                                                var me =this;
+                                                //original record
+                                                var inputField = button.up('container').down('#fdFilterValue');
+                                                //save the original record into inputField to use when the configuration saved
+                                                inputField.selectedRecord = tree.getSelectionModel().getSelection()[0];
+                                                var setWin = button.up('window');
+                                                var fStore = Ext.getStore('fStore_' + inputField.selectedRecord.get('id'));
+                                                var fWin = Ext.create('Ext.window.Window', {
+                                                    modal:true,
+                                                    minHeight:650,
+                                                    title:loc.categorySet.selectField,
+                                                    layout:'hbox',
+                                                    padding:20,
+                                                    items:[
+                                                    {
+                                                        xtype: 'gridpanel',
+                                                        itemId: 'fields',
+                                                        scrollable:'y',
+                                                        width: 300,
+                                                        height:'100%',
+                                                        bind: {
+                                                            title: '{selectField}'
+                                                        },
+                                                        store:fStore,
+                                                        columns: [
+                                                        {
+                                                            xtype: 'gridcolumn',
+                                                            renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                                                                var opt = record.get('cols_option');
+                                                                if(record.get('cols_share')){//fore shared(공유) field
+                                                                    value = '<i class="fa fa-share-alt-square" aria-hidden="true"></i> ' + value;
+                                                                }
+                                                                return '<a title="'+opt+'">' + value + '</div>';
+                                                            },
+                                                            width: 150,
+                                                            dataIndex: 'cols_name',
+                                                            text: 'Field Name'
+                                                        },
+                                                        {
+                                                            xtype: 'gridcolumn',
+                                                            dataIndex: 'cols_type',
+                                                            text: 'Type'
+                                                        }
+                                                        ],
+                                                        listeners: {
+                                                            itemclick: function(grid, record){
+                                                                grid.up('window').down('#rightPan').setDisabled(false);
+                                                                grid.up('window').down('#fdFieldId').setValue(record.get('cols_idx'));
+                                                                grid.up('window').down('#fdFieldValue').setValue('');
+                                                                grid.up('window').down('#rg').reset();
+                                                                var filter = setWin.getViewModel().data.filters.filter;
+                                                                for(var i=0; i<filter.length; i++){
+                                                                    var cIdx = filter[i].split('=')[0];
+                                                                    if(cIdx == record.get('cols_idx')){
+                                                                        //필터링 조건 값 초기화
+                                                                        grid.up('window').down('#fdFieldValue').setValue(filter[i].split('=')[1]);
+                                                                        var notFilter = setWin.getViewModel().data.filters.notFilter;
+                                                                        if(notFilter === undefined) notFilter = [];
+                                                                        if(notFilter.indexOf(cIdx) == -1){
+                                                                            grid.up('window').down('#equalVal').setValue(true);
+                                                                        }
+                                                                        else{
+                                                                            grid.up('window').down('#notEqualVal').setValue(true);
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        xtype:'panel',
+                                                        layout:{
+                                                            type:'vbox',
+                                                            align:'left'
+                                                        },
+                                                        flex:1,
+                                                        height:'100%',
+                                                        disabled:true,
+                                                        itemId:'rightPan',
+                                                        style:'border-left:1px solid #cecece',
+                                                        padding:'100, 0 0 15',
+                                                        items:[
+                                                        {
+                                                            xtype:'textfield',
+                                                            fieldLabel:loc.categorySet.fieldId,
+                                                            allowBlank:false,
+                                                            labelWidth:55,
+                                                            itemId:'fdFieldId'
+                                                        },
+                                                        {
+                                                            xtype:'textfield',
+                                                            fieldLabel:loc.categorySet.value,
+                                                            allowBlank:false,
+                                                            labelWidth:55,
+                                                            itemId:'fdFieldValue'
+                                                        },
+                                                        {
+                                                            xtype:'radiogroup',
+                                                            itemId:'rg',
+                                                            fieldLabel:loc.search.searchOption,
+                                                            columns:1,
+                                                            labelWidth:60,
+                                                            items:[
+                                                            {
+                                                                boxLabel:loc.categorySet.showAtSame,
+                                                                name:'rb',
+                                                                itemId:'equalVal',
+                                                                inputValue: '1'
+                                                            },
+                                                            {
+                                                                boxLabel:loc.categorySet.showAtNotSame,
+                                                                name:'rb',
+                                                                itemId:'notEqualVal',
+                                                                inputValue: '2'
+                                                            }
+                                                            ]
+                                                        },
+                                                        {
+                                                            xtype:'button',
+                                                            margin:'30 0 0 0',
+                                                            text:loc.config.apply,
+                                                            dock:'bottom',
+                                                            width:90,
+                                                            handler:function(button){
+                                                                var win = button.up('window');
+                                                                var val = (win.down('#rg').getValue());
+                                                                var inputVal = inputField.getValue();
+                                                                //check field option
+                                                                if(val.rb === undefined){
+                                                                    Ext.toast(loc.categorySet.selectOption);
+                                                                }
+                                                                //check field value
+                                                                else if(win.down('#fdFieldValue').getValue().trim() === ''){
+                                                                    win.down('#fdFieldValue').focus();
+                                                                    Ext.toast(loc.categorySet.requireValue);
+                                                                }
+                                                                //check 필드 ID
+                                                                else if(win.down('#fdFieldId').getValue().trim() === ''){
+                                                                    win.down('#fdFieldId').focus();
+                                                                    Ext.toast(loc.categorySet.requireFieldId);
+                                                                }
+                                                                else{
+                                                                    var setModel = Ext.getCmp('cateSetWindow').getViewModel();
+                                                                    var newVal = button.up('container').down('#fdFieldValue').getValue();
+                                                                    var filter = setModel.data.filters.filter;
+                                                                    var notFilter = setModel.data.filters.notFilter || [];
+                                                                    var colsIdx = getController('Search').getSearchIdx(win.down('#fdFieldId').getValue());
+                                                                    var i;
+                                                                    if(filter.length === 0){//처음부터 서버에 필터가 설정 돼 있지 않으면
+                                                                        filter.push(colsIdx + '=' + newVal);
+                                                                        if(val.rb == 2){//필드값이 포함되지 않은 검색 결과
+                                                                            notFilter.push(colsIdx);
+                                                                        }
+                                                                    }
+                                                                    else{//서버에 설정 값이 있었으면
+                                                                        if(filter.indexOf(colsIdx + '=' + newVal) == -1){//query에 colsIdx="xxxxx"와 같이 같은 값이 없으면
+                                                                            var isExist = false;
+                                                                            for(i=0; i<filter.length; i++){
+                                                                                if(filter[i].indexOf(colsIdx) != -1 && filter[i].indexOf(newVal) == -1){
+                                                                                    //colsIdx는 같지만 검색값은 틀릴경우 새로 업데이트
+                                                                                    filter[i] = colsIdx + '=' + newVal;
+                                                                                }
+                                                                                if(filter[i].indexOf(colsIdx) != -1){
+                                                                                    isExist = true;
+                                                                                }
+                                                                            }
+                                                                            if(!isExist){
+                                                                                filter.push(colsIdx + '=' + newVal);
+                                                                            }
+                                                                            if(val.rb == 2){//queryNot 값 준비
+                                                                                if(notFilter.indexOf(colsIdx) == -1){
+                                                                                    notFilter.push(colsIdx);
+                                                                                }
+                                                                            }
+                                                                            if(val.rb == 1){//queryNot 삭제
+                                                                                if(notFilter.indexOf(colsIdx) != -1){
+                                                                                    notFilter.splice(notFilter.indexOf(colsIdx), 1);
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        else{//query설정에 이미 같은 값이 있으면 not값만 체크
+                                                                            if(val.rb == 2){//queryNot 값 준비
+                                                                                if(notFilter.indexOf(colsIdx) == -1){
+                                                                                    notFilter.push(colsIdx);
+                                                                                }
+                                                                            }
+                                                                            if(val.rb == 1){//queryNot 삭제
+                                                                                if(notFilter.indexOf(colsIdx) != -1){
+                                                                                    var dddd= notFilter.splice(notFilter.indexOf(colsIdx), 1);
+                                                                                }
+                                                                            }
+                                                                        }
+
+                                                                    }
+
+                                                                    var delVal = '--query:'+filter.join();
+                                                                    if(notFilter.length > 0){
+                                                                        delVal += '--queryNot:' + notFilter.join();
+                                                                    }
+                                                                    inputField.setValue(delVal);//just shows option value to inputfield
+                                                                    var values = {
+                                                                        query:filter.join()
+                                                                    };
+                                                                    if(notFilter.length !== 0){
+                                                                        values.queryNot = notFilter.join();
+                                                                    }
+                                                                    getController('Config').editCategoryOption(inputField.selectedRecord, 'query', values);
+
+                                                                    //                             var seData = getController('Search').getSearchIdx(win.down('#fdFieldId').getValue());
+                                                                    //                             var queryValue = 'se_data_' + seData + '=' + win.down('#fdFieldValue').getValue();
+                                                                    //                             var q = '--query:' + queryValue;
+                                                                    //                             var queryNotValue;
+                                                                    //                             if(val.rb == 2){
+                                                                    //                                 q += '--queryNot:se_data_' + seData + '_method=notequal';
+                                                                    //                                 queryNotValue = 'se_data_' + seData + '_method=notequal';
+                                                                    //                             }
+
+                                                                    //                             inputField.setValue(q);
+
+                                                                    //                             var values = {//글자를 포함한 자료로 필터링
+                                                                    //                                 query:queryValue
+                                                                    //                             };
+                                                                    //                             if(queryNotValue !== undefined){//글자를 포함하지 않은 자료로 필터링
+                                                                    //                                 values.queryNot = queryNotValue;
+                                                                    //                             }
+                                                                    //                             getController('Config').editCategoryOption(inputField.selectedRecord, 'query', values);
+                                                                    //                             win.close();
+                                                                }
+                                                            }
+                                                        }
+                                                        ]
+                                                    }
+                                                    ]
+                                                }).show();
+                                            },
+                                            itemId: 'btnSelect',
+                                            iconCls: 'fa fa-folder-o',
+                                            bind: {
+                                                disabled: '{!isSelected}'
+                                            }
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            itemId: 'fdRemove',
+                                            style: 'float:left',
+                                            ui: 'default-toolbar-small',
+                                            bind: {
+                                                disabled: '{!isSelected}',
+                                                text: '{remove}'
+                                            },
+                                            listeners: {
+                                                click: 'onButtonClick1'
+                                            }
+                                        }
+                                    ]
                                 },
                                 {
                                     xtype: 'tbspacer',
@@ -511,9 +820,6 @@ Ext.define('Actor.view.CategorySetWindow', {
                                     bind: {
                                         disabled: '{!isSelected}',
                                         value: '{formMode}'
-                                    },
-                                    listeners: {
-                                        render: 'onTextfieldRender1'
                                     }
                                 },
                                 {

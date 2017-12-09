@@ -132,6 +132,7 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
             selectFirstItem,
             dpContentName = loc.main.description,
             cloneFile,
+            filter,
             formName = defaultFormName;
         if(opt.categoryName !== undefined){
             if(opt.categoryName.trim() === ''){
@@ -189,6 +190,24 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
         else{
             selectFirstItem = false;
         }
+        var filter;
+        var filters = {
+            filter:[], notFilter:[]
+        };
+        if(opt.query !== undefined){
+            filter = '--query:' + opt.query;
+            filters = {filter:opt.query.split(',')};
+            if(opt.queryNot !== undefined){
+                filter += '--queryNot:' + opt.queryNot;
+                filters.notFilter = opt.queryNot.split(',');
+            }
+            else{
+                filters.notFitler = [];
+            }
+        }
+        else{
+            filter = '';
+        }
         if(record.get('data').type == 4){
 
         }
@@ -216,6 +235,8 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
             dpContentName:dpContentName,
             cloneCategoryId:cloneCategoryId,
             isCloneFile:cloneFile ,
+            filter:filter,
+            filters:filters,
             autoSelectFirst:selectFirstItem
             //     isDataset:true
         };
@@ -295,6 +316,35 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
         });
     },
 
+    onfilteringLabel: function(component, eOpts) {
+        component.setText(loc.categorySet.filteringTitle);
+    },
+
+    onButtonClick1: function(button, e, eOpts) {
+        var me = this;
+        var tree = button.up('window').down('#cTree');
+        /* removing filtering option from server */
+        Ext.Msg.confirm(loc.main.caution, loc.categorySet.deleteFilter, function(confirm){
+            if(confirm == 'yes'){
+                var record = tree.getSelectionModel().getSelection()[0];
+                var opts = record.get('option').split('--');
+                var option = '';
+                for(var i=0; i<opts.length; i++){
+                    if(opts[i].trim() !== ''){
+                        if(opts[i].indexOf('query:') == -1 && opts[i].indexOf('queryNot:') == -1){//rearrange option string only after except the query and queryNot key
+                            option += '--' + opts[i];
+                        }
+                    }
+                }
+                //update new option to record before encoded
+                record.set('option', decodeURIComponent(option));
+                //send new option to server after encorded
+                getController('Config').updateCategoryOption(record.get('id'), option);
+                button.up('container').down('#fdFilterValue').setValue('');
+            }
+        });
+    },
+
     onfdCloneRender: function(component, eOpts) {
         //preparing for bind to set disable at first time
         var tree = component.up('window').down('#cTree');
@@ -321,24 +371,6 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
 
     onUseColorTagRender: function(component, eOpts) {
         component.setText(loc.config.useColorTag);
-    },
-
-    onTextfieldRender1: function(component, eOpts) {
-        //preparing for bind to set disable at first time
-        component.up('window').getViewModel().setData({isSelected:false});
-        var tree = component.up('window').down('#cTree');
-        component.el.on('keyup', function(e){
-            if(e.keyCode == 13){
-                var ctrl = getController('Config');
-                var tRec = tree.getSelectionModel().getSelection()[0];
-                ctrl.editCategoryOption(tRec, 'categoryName', encodeURIComponent(component.getValue()));
-                //to simulate the changed directly
-                var selEl = tree.el.select('.x-grid-item-selected .x-tree-node-text .tree-title').elements[0];
-                selEl.textContent = component.getValue();
-                //not to change when click the expanding node icon
-                tRec.set('title', component.getValue());
-            }
-        });
     },
 
     onLbShowApprovalAfterRender: function(component, eOpts) {
@@ -681,7 +713,19 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
             changeContentName:'Change the displayed name instead of "Content" that one of the basic information',
             cloneCategory:'Clone category',
             cloneFile:'Clone files as well',
-            hideCategory:'Hide category'
+            deleteFilter:'Filter setting will be initialized. Are you sure',
+            fieldId:'Field ID',
+            filteringInfo:'Filtering options of items to be showed in the list ',
+            filteringTitle:'Data filtering',
+            hideCategory:'Hide category',
+            nothingToSave:'There are nothing to apply',
+            requireFieldId:'Field ID required',
+            requireValue:'Field value required',
+            selectField:'Select a field',
+            selectOption:'The one of search option must be selected',
+            showAtSame:'Show only when the field value is included',
+            showAtNotSame:'Show only when the field value is not included',
+            value:'Value'
 
         };
         languageSet.Korean.categorySet = {
@@ -692,8 +736,20 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
             changeCategoryName:'목록에 보여질 카테고리 이름 변경',
             changeContentName:'기본정보중 "내용"을 다른 말로 변경',
             cloneCategory:'카테고리 복제',
+            deleteFilter:'필터설정이 초기화 됩니다. 진행하시겠습까?',
+            fieldId:'필드 ID',
+            filteringInfo:'카테고리에 표시될 목록을 필터링합니다.',
+            filteringTitle:'데이터 필터링',
             cloneFile:'파일도 함께 복제',
-            hideCategory:'일반 사용자들에게 카테고리 숨김'
+            hideCategory:'일반 사용자들에게 카테고리 숨김',
+            nothingToSave:'적용할 내용이 없습니다.',
+            requireFieldId:'필드 ID를 반드시 입력 해야 합니다.',
+            requireValue:'필드 값을 반드시 입력 해야 합니다.',
+            selectField:'필드선택',
+            selectOption:'검색조건 중 하나를 반드시 선택 해야 합니다.',
+            showAtSame:'필드의 값이 위와 같을 경우에만 표시',
+            showAtNotSame:'필드의 값이 위의 값이 아닐 경우에만 표시',
+            value:'필드값'
         };
 
         this.getViewModel().setData({
@@ -702,7 +758,8 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
             changeCategoryName:loc.categorySet.changeCategoryName,
             cloneCategory:loc.categorySet.cloneCategory,
             hideCategory:loc.categorySet.hideCategory,
-            cloneFile:loc.categorySet.cloneFile
+            cloneFile:loc.categorySet.cloneFile,
+            filteringInfo:loc.categorySet.filteringInfo
         });
     },
 

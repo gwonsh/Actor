@@ -138,7 +138,10 @@ Ext.define('Actor.controller.Main', {
                 Ext.getCmp('mainIconPanel').down('#mainBtnGroup').setDisabled(true);
                 Ext.getCmp('mainIconPanel').down('#mainBtnComapre').setHidden(false);
                 if(newCard.parentName !== undefined){
-                    Ext.toast(grid.parentName + loc.main.connectedCategory);
+                    Ext.toast({
+                        html: grid.parentName + loc.main.connectedCategory,
+                        align:'br'
+                    });
                 }
             }
             else{
@@ -368,7 +371,11 @@ Ext.define('Actor.controller.Main', {
                         success:function(response){
                             grid.parentOption = getOption(response.ca_option);
                             grid.parentName = (grid.parentOption.categoryName !== undefined)? grid.parentOption.categoryName : response.ca_name;
-                            Ext.toast(grid.parentName + loc.main.connectedCategory);
+                            Ext.toast({
+                                html: grid.parentName + loc.main.connectedCategory,
+                                align: 'br'
+                            });
+
                         }
                     });
                 }
@@ -693,6 +700,14 @@ Ext.define('Actor.controller.Main', {
         var params = '&ca_id=' + cId;
         //설정에 자기 올린 자료만 보기가 설정 된 경우
         var optOnlyOwner = grid.cateOption.onlyOwner;
+        var optQuery = grid.cateOption.query;
+        var optQueryNot = grid.cateOption.queryNot;
+        if(optQuery !== undefined){
+            params += '&se_data_'+getController('Search').getSearchIdx(optQuery.split('=')[0]) +'='+encodeURIComponent(optQuery.split('=')[1]);
+            if(optQueryNot !== undefined){
+                params += '&se_data_'+getController('Search').getSearchIdx(optQueryNot) + '_method=notequal';
+            }
+        }
         if(optOnlyOwner){
             //보안상 sessionId가 혹시 문제 있으면  얼른 return
             if(sessionId === undefined || sessionId === null || sessionId === '') return;

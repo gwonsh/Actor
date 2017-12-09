@@ -181,27 +181,38 @@ Ext.define('Actor.controller.Config', {
     editCategoryOption: function(record, key, value) {
         var opts = record.get('option').split('--');
         var option = '';
-        var key = key;
         var falseOpts = ['actor', 'selectFirst'],
             trueOpts = ['fieldOnly', 'schedule', 'displayApproval', 'colorTag', 'onlyOwner', 'cloneFile'];
 
         for(var i=0; i<opts.length; i++){
             if(opts[i].trim() !== ''){
-                if(opts[i].indexOf(key + ':') == -1){
+                if(opts[i].indexOf(key + ':') == -1 && opts[i].indexOf('queryNot:') == -1){//rearrange option string only after except the current key
                     option += '--' + opts[i];
                 }
             }
         }
-
         if(value === true || value == 'true') value = 1;
         if(value === false || value == 'false') value = 0;
-        option += '--' + key + ':' + value;
+
+
+        if(key == 'query'){
+            option += '--' + key + ':' + value.query;
+            if(value.queryNot !== undefined && value.queryNot !== '' && value.queryNot !== null){
+                option += '--queryNot:' + value.queryNot;
+            }
+        }
+        else{
+            option += '--' + key + ':' + value;
+        }
 
         //remove option when it saved as a default
         if(key == 'categoryName'){
             var deCname = decodeURIComponent(value);
             if(record.get('text') == deCname){
                 option = option.replace('--categoryName:' + value, '');
+            }
+            else{
+
             }
         }
         if(key == 'cloneCategory'){
@@ -239,12 +250,20 @@ Ext.define('Actor.controller.Config', {
                 option = option.replace(falseStr, '');
             }
         }
-
         //update new option to record before encoded
         record.set('option', decodeURIComponent(option));
         //send new option to server after encorded
         this.updateCategoryOption(record.get('id'), option);
         return option;
+    },
+
+    updateCategoryOption: function(cId, option) {
+        Ext.data.JsonP.request({
+            url:getCategoryOptionUpdateApi(cId, option),
+            success:function(response){
+                Ext.toast(loc.upload.edited);
+            }
+        });
     },
 
     editFieldOption: function(record, key, value) {
@@ -296,15 +315,6 @@ Ext.define('Actor.controller.Config', {
         return option;
     },
 
-    updateCategoryOption: function(cId, option) {
-        Ext.data.JsonP.request({
-            url:getCategoryOptionUpdateApi(cId, option),
-            success:function(response){
-                Ext.toast(loc.upload.edited);
-            }
-        });
-    },
-
     setLanguage: function(language) {
         if(language == 'english') language = 'English';
         if(language == 'korean') language = 'Korean';
@@ -324,8 +334,7 @@ Ext.define('Actor.controller.Config', {
             style:'background-color:#eeeeee',
             bodyStyle:{'background-color':'#eeeeee'}
         });
-        var activeTab = getController('Main').getListTab().getActiveTab();
-        var defaultForm = activeTab.cateOption.formMode;
+        var defaultForm = getOption(categoryRecord.get('option')).formMode;
         // var formLib = Ext.doc.FormLibrary.FORMS;
         var record = Ext.getStore('FormStore').findRecord('formId', defaultForm);
         if(record === null) record = Ext.getStore('FormStore').findRecord('formId', 'Normal');
