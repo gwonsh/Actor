@@ -21,6 +21,7 @@ Ext.define('Actor.view.SelectRecordFieldViewController', {
         var me = this;
         var rId = button.connectCategory;
         var grpWin = Ext.create(appName + '.view.DataGroupWindow', {
+            title:loc.upload.selectData,
             scrollable:true,
             cls:'upload-form',
             modal:true,

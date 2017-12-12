@@ -180,6 +180,7 @@ Ext.define('Actor.controller.Config', {
 
     editCategoryOption: function(record, key, value) {
         var opts = record.get('option').split('--');
+        var cId = record.get('id');
         var option = '';
         var falseOpts = ['actor', 'selectFirst'],
             trueOpts = ['fieldOnly', 'schedule', 'displayApproval', 'colorTag', 'onlyOwner', 'cloneFile'];
@@ -216,10 +217,11 @@ Ext.define('Actor.controller.Config', {
             }
         }
         if(key == 'cloneCategory'){
-            if(value.trim() === '' && option.cloneCategory !== undefined){
-                option = option.replace('--categoryName:' + option.cloneCategory, '');
+            if(value.trim() === ''){
+                option = option.replace('--cloneCategory:', '');
             }
         }
+
         // if(key == 'displayNameContent'){
         //     var deCTname = decodeURIComponent(value);
         //     if(record.get('displayNameContent') == deCname){
@@ -253,7 +255,7 @@ Ext.define('Actor.controller.Config', {
         //update new option to record before encoded
         record.set('option', decodeURIComponent(option));
         //send new option to server after encorded
-        this.updateCategoryOption(record.get('id'), option);
+        this.updateCategoryOption(cId, option);
         return option;
     },
 

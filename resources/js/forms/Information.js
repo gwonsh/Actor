@@ -61,7 +61,7 @@ Ext.define('resources.js.forms.Information', {
 		
 		if(values.bd_data.length > 0) {
 			Ext.Array.each(values.bd_data, function(entry, index){
-				var fldOpt = getOption(viewer.colsList[index].cols_option);
+				var fldOpt = getOption(viewer.colsList[index].cols_option);				
                 if(fldOpt.render == 'image') entry.cols_code = 'image';
 				if(ctlr.getHideField(fldOpt)) return;
 				var cUnit = entry.cols_unit;

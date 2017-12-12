@@ -10,6 +10,7 @@
         "container|padding": 15,
         "designer|userAlias": "categorysetwindow",
         "designer|userClassName": "CategorySetWindow",
+        "id": "cateSetWindow",
         "itemId": "cateSetWin",
         "layout": "hbox",
         "style": null,
@@ -28,7 +29,8 @@
         "itemId": "string",
         "layout": "string",
         "width": "auto",
-        "container|padding": "auto"
+        "container|padding": "auto",
+        "id": "string"
     },
     "name": "MyWindow",
     "designerId": "c02f954d-3895-4f12-a127-19ff1f819fa3",
@@ -201,12 +203,16 @@
                             "userConfig": {
                                 "fn": "onCTreeItemClick",
                                 "implHandler": [
+                                    "if(record.get('disableItemclick')){",
+                                    "   return;",
+                                    "}",
+                                    "record.set('disableItemclick', false);",
                                     "if(Ext.getCmp('categoryFirst')){//필드설정을 위한 카테고리 선택 일 경우(by getRecord or getValue)",
                                     "    var fstWin = Ext.getCmp('categoryFirst');//왼쪽 카테고리를 선택해 주세요 창이 떠있는 여부로 왜 클릭 했는지 판단",
                                     "    var cId = record.get('id');",
                                     "    var info = {};//선택한 카테고리의 필드 정보들",
                                     "    var srcConf  = {};//기본 정보외에 필요한 정보들",
-                                    "    Ext.getCmp('categoryFirst').down('label').setText(loc.config.selectField);",
+                                    "    fstWin.down('label').setText(loc.categorySet.selectFieldAlert);",
                                     "    Ext.data.JsonP.request({",
                                     "        url:getDataListByIdApi('ca_id=' + cId),",
                                     "        success:function(response){",
@@ -225,6 +231,11 @@
                                     "            srcConf.bd_ip = {",
                                     "                displayName:'IP address',",
                                     "                idx:'bd_ip'",
+                                    "            };",
+                                    "            info.bd_idx = 'bd_idx';",
+                                    "            srcConf.bd_idx = {",
+                                    "                displayName:'Data ID',",
+                                    "                idx:'bd_idx'",
                                     "            };",
                                     "            info.bd_regdate = 'bd_regdate';",
                                     "            srcConf.bd_regdate = {",
@@ -258,7 +269,7 @@
                                     "                listeners:{",
                                     "                    itemclick:function(grid, record, item, index, e, eOpts){",
                                     "                        var conf = srcConf[record.get('name')];",
-                                    "                        if(fstWin.target.colsType == 'datagrp' || fstWin.target.colsType == 'dataset' || fstWin.target.colsType == 'link'){",
+                                    "                        if(fstWin.target.colsType == 'datagrp' || fstWin.target.colsType == 'dataset'){",
                                     "                            if(fstWin.target.colsType != conf.colsType){",
                                     "                                Ext.Msg.alert('Caution', loc.error.typeNotMatch);",
                                     "                            }",
@@ -267,7 +278,6 @@
                                     "                            var value = cId + '>' + conf.idx;",
                                     "                            fstWin.target.setValue(value);",
                                     "                            pgWin.close();",
-                                    "                            fstWin.close();",
                                     "                        }",
                                     "                    },",
                                     "                    beforeedit:function(){//disable editing",
@@ -278,6 +288,7 @@
                                     "            var pgWin = Ext.create('Ext.window.Window', {",
                                     "                scrollable:'vertical',",
                                     "                maxHeight:windowMaxHeight,",
+                                    "                title:loc.categorySet.selectField,",
                                     "                padding:20,",
                                     "                items:[",
                                     "                    pg",
@@ -285,6 +296,10 @@
                                     "                listeners:{",
                                     "                    afterlayout:function(comp){",
                                     "                        comp.center();",
+                                    "                        fstWin.setX(comp.getX() +  comp.getWidth());",
+                                    "                    },",
+                                    "                    close:function(){",
+                                    "                        fstWin.close();",
                                     "                    }",
                                     "                }",
                                     "            }).show();",
@@ -315,6 +330,7 @@
                                     "    selectFirstItem,",
                                     "    dpContentName = loc.main.description,",
                                     "    cloneFile,",
+                                    "    filter,",
                                     "    formName = defaultFormName;",
                                     "if(opt.categoryName !== undefined){",
                                     "    if(opt.categoryName.trim() === ''){",
@@ -372,6 +388,24 @@
                                     "else{",
                                     "    selectFirstItem = false;",
                                     "}",
+                                    "var filter;",
+                                    "var filters = {",
+                                    "    filter:[], notFilter:[]",
+                                    "};",
+                                    "if(opt.query !== undefined){",
+                                    "    filter = '--query:' + opt.query;",
+                                    "    filters = {filter:opt.query.split(',')};",
+                                    "    if(opt.queryNot !== undefined){",
+                                    "        filter += '--queryNot:' + opt.queryNot;",
+                                    "        filters.notFilter = opt.queryNot.split(',');",
+                                    "    }",
+                                    "    else{",
+                                    "        filters.notFitler = [];",
+                                    "    }",
+                                    "}",
+                                    "else{",
+                                    "    filter = '';",
+                                    "}",
                                     "if(record.get('data').type == 4){",
                                     "",
                                     "}",
@@ -391,6 +425,7 @@
                                     "    isSimpleList:isSimpleList,",
                                     "    formMode:formName,",
                                     "    selectedCategory:record.get('id'),",
+                                    "    lastCategory:this.getViewModel().data.selectedCategory,",
                                     "    isTextField:false,",
                                     "    isNumberField:false,",
                                     "    isImageField:false,",
@@ -399,10 +434,19 @@
                                     "    dpContentName:dpContentName,",
                                     "    cloneCategoryId:cloneCategoryId,",
                                     "    isCloneFile:cloneFile ,",
+                                    "    filter:filter,",
+                                    "    filters:filters,",
                                     "    autoSelectFirst:selectFirstItem",
                                     "//     isDataset:true",
                                     "};",
+                                    "",
+                                    "//write directly instead of binding",
+                                    "dataview.up('window').down('#cbOpt').suspendEvent('change');",
+                                    "dataview.up('window').down('#cbOpt').setValue(cloneFile);",
+                                    "dataview.up('window').down('#cbOpt').resumeEvent('change');",
+                                    "",
                                     "dataview.up('window').getViewModel().setData(obj);",
+                                    "",
                                     "//initialize hiding option checkbox",
                                     "var ht = dataview.up('window').down('#hideToggle');",
                                     "if(!opt.actor){",
@@ -411,6 +455,7 @@
                                     "if(opt.actor || opt.actor === undefined){",
                                     "    ht.setValue(false);",
                                     "}",
+                                    "",
                                     "var ast = dataview.up('window').down('#autoSelectToggle');",
                                     "ast.value = (selectFirstItem)? true : false;",
                                     "",
@@ -454,6 +499,39 @@
                             },
                             "name": "onCTreeItemClick",
                             "designerId": "a4e160b8-fc51-4270-8cd5-c7fc845f6a2f"
+                        },
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onCTreeBeforeSelect",
+                                "implHandler": [
+                                    "var fstWin = Ext.getCmp('categoryFirst');//왼쪽 카테고리를 선택해 주세요 창이 떠있는 여부로 왜 클릭 했는지 판단",
+                                    "var cId = record.get('id');",
+                                    "if(fstWin){",
+                                    "    if(fstWin.use == 'clone'){//클론용으로 카테고리가 선택될 경우에는 카테고리 ID만 뽑아내고 땡",
+                                    "        record.set('disableItemclick', true);",
+                                    "        fstWin.cloneField.setValue(cId);",
+                                    "        fstWin.close();",
+                                    "    }",
+                                    "    return false;",
+                                    "}"
+                                ],
+                                "name": "beforeselect",
+                                "scope": "me"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string",
+                                "scope": "string"
+                            },
+                            "name": "onCTreeBeforeSelect",
+                            "designerId": "21dc19d4-da26-4b01-a23a-9a0ecf25d9a8"
                         }
                     ]
                 }
@@ -1008,6 +1086,562 @@
                                 "cls": [
                                     "form-title-label"
                                 ],
+                                "itemId": "filteringLabel",
+                                "layout|flex": null,
+                                "style": null
+                            },
+                            "configAlternates": {
+                                "style": "string",
+                                "cls": "typedarray",
+                                "layout|flex": "number",
+                                "itemId": "string"
+                            },
+                            "name": "MyLabel28",
+                            "designerId": "c668a1c6-4594-4cec-b508-6be50b654aa2",
+                            "cn": [
+                                {
+                                    "type": "viewcontrollereventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onfilteringLabel",
+                                        "implHandler": [
+                                            "component.setText(loc.categorySet.filteringTitle);"
+                                        ],
+                                        "name": "afterrender",
+                                        "scope": "me"
+                                    },
+                                    "configAlternates": {
+                                        "fn": "string",
+                                        "implHandler": "code",
+                                        "name": "string",
+                                        "scope": "string"
+                                    },
+                                    "name": "onfilteringLabel",
+                                    "designerId": "b3ef1733-6769-4099-afa4-6b2058bf8b7e"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.container.Container",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "cls": [
+                                    "form-section"
+                                ],
+                                "itemId": "filteringCon",
+                                "layout|flex": null
+                            },
+                            "configAlternates": {
+                                "cls": "typedarray",
+                                "itemId": "string",
+                                "layout|flex": "number"
+                            },
+                            "name": "MyContainer33",
+                            "designerId": "715bd169-cb06-4b23-b800-916691d55c9b",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.Label",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "style": " float:left",
+                                        "text": [
+                                            "{filteringInfo}"
+                                        ],
+                                        "width": "100%"
+                                    },
+                                    "configAlternates": {
+                                        "text": "binding",
+                                        "style": "string",
+                                        "cls": "typedarray",
+                                        "layout|flex": "number",
+                                        "width": "auto"
+                                    },
+                                    "name": "MyLabel26",
+                                    "designerId": "6e4f34ee-b344-4bb8-9eae-e889b6eda661"
+                                },
+                                {
+                                    "type": "Ext.container.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "container|align": "stretch",
+                                        "itemId": "valCon",
+                                        "layout": "hbox",
+                                        "width": "100%"
+                                    },
+                                    "configAlternates": {
+                                        "container|align": "string",
+                                        "layout": "string",
+                                        "width": "auto",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyContainer34",
+                                    "designerId": "c025b934-8c00-42b9-807e-788659cbe344",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.form.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "disabled": [
+                                                    "{!isSelected}"
+                                                ],
+                                                "fieldLabel": "Label",
+                                                "hideLabel": true,
+                                                "itemId": "fdFilterValue",
+                                                "readOnly": true,
+                                                "value": [
+                                                    "{filter}"
+                                                ],
+                                                "width": 350
+                                            },
+                                            "configAlternates": {
+                                                "value": "binding",
+                                                "fieldLabel": "string",
+                                                "hideLabel": "boolean",
+                                                "itemId": "string",
+                                                "layout|flex": "number",
+                                                "disabled": "binding",
+                                                "readOnly": "boolean",
+                                                "width": "auto"
+                                            },
+                                            "name": "MyTextField1",
+                                            "designerId": "7a571ec4-d7f6-490b-8158-1580cbf90545"
+                                        },
+                                        {
+                                            "type": "Ext.button.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "disabled": [
+                                                    "{!isSelected}"
+                                                ],
+                                                "iconCls": "fa fa-folder-o",
+                                                "itemId": "btnSelect",
+                                                "layout|flex": null,
+                                                "text": null
+                                            },
+                                            "configAlternates": {
+                                                "iconCls": "string",
+                                                "itemId": "string",
+                                                "layout|flex": "number",
+                                                "text": "string",
+                                                "disabled": "binding"
+                                            },
+                                            "name": "MyButton",
+                                            "designerId": "737a4ac3-5e9a-4ad8-933c-a894af1dfd65",
+                                            "cn": [
+                                                {
+                                                    "type": "fixedfunction",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "designer|params": [
+                                                            "button",
+                                                            "e"
+                                                        ],
+                                                        "fn": "handler",
+                                                        "implHandler": [
+                                                            "var tree = button.up('window').down('#cTree');",
+                                                            "var me =this;",
+                                                            "//original record",
+                                                            "var inputField = button.up('container').down('#fdFilterValue');",
+                                                            "//save the original record into inputField to use when the configuration saved",
+                                                            "inputField.selectedRecord = tree.getSelectionModel().getSelection()[0];",
+                                                            "var setWin = button.up('window');",
+                                                            "var fStore = Ext.getStore('fStore_' + inputField.selectedRecord.get('id'));",
+                                                            "var fWin = Ext.create('Ext.window.Window', {",
+                                                            "    modal:true,",
+                                                            "    minHeight:650,",
+                                                            "    title:loc.categorySet.selectField,",
+                                                            "    layout:'hbox',",
+                                                            "    padding:20,",
+                                                            "    items:[",
+                                                            "        {",
+                                                            "            xtype: 'gridpanel',",
+                                                            "            itemId: 'fields',",
+                                                            "            scrollable:'y',",
+                                                            "            width: 300,",
+                                                            "            height:'100%',",
+                                                            "            bind: {",
+                                                            "                title: '{selectField}'",
+                                                            "            },",
+                                                            "            store:fStore,",
+                                                            "            columns: [",
+                                                            "                {",
+                                                            "                    xtype: 'gridcolumn',",
+                                                            "                    renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {",
+                                                            "                        var opt = record.get('cols_option');",
+                                                            "                        if(record.get('cols_share')){//fore shared(공유) field",
+                                                            "                            value = '<i class=\"fa fa-share-alt-square\" aria-hidden=\"true\"></i> ' + value;",
+                                                            "                        }",
+                                                            "                        return '<a title=\"'+opt+'\">' + value + '</div>';",
+                                                            "                    },",
+                                                            "                    width: 150,",
+                                                            "                    dataIndex: 'cols_name',",
+                                                            "                    text: 'Field Name'",
+                                                            "                },",
+                                                            "                {",
+                                                            "                    xtype: 'gridcolumn',",
+                                                            "                    dataIndex: 'cols_type',",
+                                                            "                    text: 'Type'",
+                                                            "                }",
+                                                            "            ],",
+                                                            "            listeners: {",
+                                                            "                itemclick: function(grid, record){",
+                                                            "                    var selectFlds = ['select', 'radio', 'check'];",
+                                                            "                    grid.up('window').down('#fdFieldValue').destroy();",
+                                                            "                    var fld = {",
+                                                            "                        xtype:'textfield',",
+                                                            "                        fieldLabel:loc.categorySet.value,",
+                                                            "                        allowBlank:false,",
+                                                            "                        labelWidth:55,",
+                                                            "                        itemId:'fdFieldValue'",
+                                                            "                    };",
+                                                            "                    if(selectFlds.indexOf(record.get('cols_type')) != -1){",
+                                                            "                        fld.xtype = 'combo';",
+                                                            "                        var colsData = record.get('cols_data');",
+                                                            "                        fld.store = colsData;",
+                                                            "",
+                                                            "                    }",
+                                                            "                    grid.up('window').down('#rightPan').insert(1, fld);",
+                                                            "                    grid.up('window').down('#rightPan').setDisabled(false);",
+                                                            "                    grid.up('window').down('#fdFieldId').setValue(record.get('cols_idx'));",
+                                                            "//                     grid.up('window').down('#fdFieldValue').setValue('');",
+                                                            "                    grid.up('window').down('#rg').reset();",
+                                                            "                    var filter = setWin.getViewModel().data.filters.filter;",
+                                                            "                    for(var i=0; i<filter.length; i++){",
+                                                            "                        var cIdx = filter[i].split('=')[0];",
+                                                            "                        if(cIdx == record.get('cols_idx')){",
+                                                            "                            //필터링 조건 값 초기화",
+                                                            "                            grid.up('window').down('#fdFieldValue').setValue(filter[i].split('=')[1]);",
+                                                            "                            var notFilter = setWin.getViewModel().data.filters.notFilter;",
+                                                            "                            if(notFilter === undefined) notFilter = [];",
+                                                            "                            if(notFilter.indexOf(cIdx) == -1){",
+                                                            "                                grid.up('window').down('#equalVal').setValue(true);",
+                                                            "                            }",
+                                                            "                            else{",
+                                                            "                                grid.up('window').down('#notEqualVal').setValue(true);",
+                                                            "                            }",
+                                                            "                        }",
+                                                            "                    }",
+                                                            "                }",
+                                                            "            }",
+                                                            "        },",
+                                                            "        {",
+                                                            "            xtype:'panel',",
+                                                            "            layout:{",
+                                                            "                type:'vbox',",
+                                                            "                align:'left'",
+                                                            "            },",
+                                                            "            flex:1,",
+                                                            "            height:'100%',",
+                                                            "            disabled:true,",
+                                                            "            itemId:'rightPan',",
+                                                            "            style:'border-left:1px solid #cecece',",
+                                                            "            padding:'100, 0 0 15',",
+                                                            "            items:[",
+                                                            "                {",
+                                                            "                    xtype:'textfield',",
+                                                            "                    fieldLabel:loc.categorySet.fieldId,",
+                                                            "                    allowBlank:false,",
+                                                            "                    labelWidth:55,",
+                                                            "                    itemId:'fdFieldId'",
+                                                            "                },",
+                                                            "                {",
+                                                            "                    xtype:'textfield',",
+                                                            "                    fieldLabel:loc.categorySet.value,",
+                                                            "                    allowBlank:false,",
+                                                            "                    labelWidth:55,",
+                                                            "                    itemId:'fdFieldValue'",
+                                                            "                },",
+                                                            "                {",
+                                                            "                    xtype:'radiogroup',",
+                                                            "                    itemId:'rg',",
+                                                            "                    fieldLabel:loc.categorySet.option,",
+                                                            "                    columns:1,",
+                                                            "                    labelWidth:60,",
+                                                            "                    items:[",
+                                                            "                        {",
+                                                            "                            boxLabel:loc.categorySet.showAtSame,",
+                                                            "                            name:'rb',",
+                                                            "                            itemId:'equalVal',",
+                                                            "                            inputValue: '1'",
+                                                            "                        },",
+                                                            "                        {",
+                                                            "                            boxLabel:loc.categorySet.showAtNotSame,",
+                                                            "                            name:'rb',",
+                                                            "                            itemId:'notEqualVal',",
+                                                            "                            inputValue: '2'",
+                                                            "                        }",
+                                                            "                    ]",
+                                                            "                },",
+                                                            "                {",
+                                                            "                    xtype:'button',",
+                                                            "                    margin:'30 0 0 0',",
+                                                            "                    text:loc.config.apply,",
+                                                            "                    dock:'bottom',",
+                                                            "                    width:90,",
+                                                            "                    handler:function(button){",
+                                                            "                        var win = button.up('window');",
+                                                            "                        var val = (win.down('#rg').getValue());",
+                                                            "                        var inputVal = inputField.getValue();",
+                                                            "                        //check field option",
+                                                            "                        if(val.rb === undefined){",
+                                                            "                            Ext.toast(loc.categorySet.selectOption);",
+                                                            "                        }",
+                                                            "                        //check field value",
+                                                            "                        else if(win.down('#fdFieldValue').getValue().trim() === ''){",
+                                                            "                            win.down('#fdFieldValue').focus();",
+                                                            "                            Ext.toast(loc.categorySet.requireValue);",
+                                                            "                        }",
+                                                            "                        //check 필드 ID",
+                                                            "                        else if(win.down('#fdFieldId').getValue().trim() === ''){",
+                                                            "                            win.down('#fdFieldId').focus();",
+                                                            "                            Ext.toast(loc.categorySet.requireFieldId);",
+                                                            "                        }",
+                                                            "                        else{",
+                                                            "                            var setModel = Ext.getCmp('cateSetWindow').getViewModel();",
+                                                            "                            var newVal = button.up('container').down('#fdFieldValue').getValue();",
+                                                            "                            var filter = setModel.data.filters.filter;",
+                                                            "                            var notFilter = setModel.data.filters.notFilter || [];",
+                                                            "                            var colsIdx = getController('Search').getSearchIdx(win.down('#fdFieldId').getValue());",
+                                                            "                            var i;",
+                                                            "                            if(filter.length === 0){//처음부터 서버에 필터가 설정 돼 있지 않으면",
+                                                            "                                filter.push(colsIdx + '=' + newVal);",
+                                                            "                                if(val.rb == 2){//필드값이 포함되지 않은 검색 결과",
+                                                            "                                    notFilter.push(colsIdx);",
+                                                            "                                }",
+                                                            "                            }",
+                                                            "                            else{//서버에 설정 값이 있었으면",
+                                                            "                                if(filter.indexOf(colsIdx + '=' + newVal) == -1){//query에 colsIdx=\"xxxxx\"와 같이 같은 값이 없으면",
+                                                            "                                    var isExist = false;",
+                                                            "                                    for(i=0; i<filter.length; i++){",
+                                                            "                                        if(filter[i].indexOf(colsIdx) != -1 && filter[i].indexOf(newVal) == -1){",
+                                                            "                                            //colsIdx는 같지만 검색값은 틀릴경우 새로 업데이트",
+                                                            "                                            filter[i] = colsIdx + '=' + newVal;",
+                                                            "                                        }",
+                                                            "                                        if(filter[i].indexOf(colsIdx) != -1){",
+                                                            "                                            isExist = true;",
+                                                            "                                        }",
+                                                            "                                    }",
+                                                            "                                    if(!isExist){",
+                                                            "                                        filter.push(colsIdx + '=' + newVal);",
+                                                            "                                    }",
+                                                            "                                    if(val.rb == 2){//queryNot 값 준비",
+                                                            "                                        if(notFilter.indexOf(colsIdx) == -1){",
+                                                            "                                            notFilter.push(colsIdx);",
+                                                            "                                        }",
+                                                            "                                    }",
+                                                            "                                    if(val.rb == 1){//queryNot 삭제",
+                                                            "                                        if(notFilter.indexOf(colsIdx) != -1){",
+                                                            "                                            notFilter.splice(notFilter.indexOf(colsIdx), 1);",
+                                                            "                                        }",
+                                                            "                                    }",
+                                                            "                                }",
+                                                            "                                else{//query설정에 이미 같은 값이 있으면 not값만 체크",
+                                                            "                                    if(val.rb == 2){//queryNot 값 준비",
+                                                            "                                        if(notFilter.indexOf(colsIdx) == -1){",
+                                                            "                                            notFilter.push(colsIdx);",
+                                                            "                                        }",
+                                                            "                                    }",
+                                                            "                                    if(val.rb == 1){//queryNot 삭제",
+                                                            "                                        if(notFilter.indexOf(colsIdx) != -1){",
+                                                            "                                          var dddd= notFilter.splice(notFilter.indexOf(colsIdx), 1);",
+                                                            "                                        }",
+                                                            "                                    }",
+                                                            "                                }",
+                                                            "",
+                                                            "                            }",
+                                                            "",
+                                                            "                            var delVal = '--query:'+filter.join();",
+                                                            "                            if(notFilter.length > 0){",
+                                                            "                                delVal += '--queryNot:' + notFilter.join();",
+                                                            "                            }",
+                                                            "                            inputField.setValue(delVal);//just shows option value to inputfield",
+                                                            "                            var values = {",
+                                                            "                                query:filter.join()",
+                                                            "                            };",
+                                                            "                            if(notFilter.length !== 0){",
+                                                            "                                values.queryNot = notFilter.join();",
+                                                            "                            }",
+                                                            "                            getController('Config').editCategoryOption(inputField.selectedRecord, 'query', values);",
+                                                            "",
+                                                            "",
+                                                            "                        }",
+                                                            "                    }",
+                                                            "                }",
+                                                            "            ]",
+                                                            "        }",
+                                                            "    ]",
+                                                            "}).show();"
+                                                        ]
+                                                    },
+                                                    "configAlternates": {
+                                                        "designer|params": "typedarray",
+                                                        "fn": "string",
+                                                        "implHandler": "code"
+                                                    },
+                                                    "name": "handler",
+                                                    "designerId": "155285d5-1aca-4fa6-8f5b-4d830a17416e"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.button.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "default-toolbar-small",
+                                                "disabled": [
+                                                    "{!isSelected}"
+                                                ],
+                                                "itemId": "fdRemove",
+                                                "layout|flex": null,
+                                                "record": null,
+                                                "style": "float:left",
+                                                "text": [
+                                                    "{remove}"
+                                                ],
+                                                "ui": "default-toolbar-small"
+                                            },
+                                            "configAlternates": {
+                                                "text": "binding",
+                                                "style": "string",
+                                                "designer|uiInterfaceName": "string",
+                                                "ui": "string",
+                                                "record": "binding",
+                                                "itemId": "string",
+                                                "disabled": "binding",
+                                                "layout|flex": "number"
+                                            },
+                                            "name": "MyButton1",
+                                            "designerId": "c15e3c35-c701-4ffd-9b5a-8f3a384f1e6a",
+                                            "customConfigs": [
+                                                {
+                                                    "group": "(Custom Properties)",
+                                                    "name": "record",
+                                                    "type": "string"
+                                                }
+                                            ],
+                                            "cn": [
+                                                {
+                                                    "type": "viewcontrollereventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onFdRemoveClick",
+                                                        "implHandler": [
+                                                            "var me = this;",
+                                                            "var tree = button.up('window').down('#cTree');",
+                                                            "/* removing filtering option from server */",
+                                                            "Ext.Msg.confirm(loc.main.caution, loc.categorySet.deleteFilter, function(confirm){",
+                                                            "    if(confirm == 'yes'){",
+                                                            "        var record = tree.getSelectionModel().getSelection()[0];",
+                                                            "        var opts = record.get('option').split('--');",
+                                                            "        var option = '';",
+                                                            "        for(var i=0; i<opts.length; i++){",
+                                                            "            if(opts[i].trim() !== ''){",
+                                                            "                if(opts[i].indexOf('query:') == -1 && opts[i].indexOf('queryNot:') == -1){//rearrange option string only after except the query and queryNot key",
+                                                            "                    option += '--' + opts[i];",
+                                                            "                }",
+                                                            "            }",
+                                                            "        }",
+                                                            "        //update new option to record before encoded",
+                                                            "        record.set('option', decodeURIComponent(option));",
+                                                            "        //send new option to server after encorded",
+                                                            "        getController('Config').updateCategoryOption(record.get('id'), option);",
+                                                            "        button.up('container').down('#fdFilterValue').setValue('');",
+                                                            "        me.getViewModel().data.filters = {",
+                                                            "            filter:[],",
+                                                            "            notFilter:[]",
+                                                            "        };",
+                                                            "",
+                                                            "    }",
+                                                            "});"
+                                                        ],
+                                                        "name": "click",
+                                                        "scope": "me"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string",
+                                                        "scope": "string"
+                                                    },
+                                                    "name": "onFdRemoveClick",
+                                                    "designerId": "284a4208-cff3-463d-90ae-c396fac85c74"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.toolbar.Spacer",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|displayName": "spacer",
+                                        "height": null,
+                                        "style": " float:left",
+                                        "width": 30
+                                    },
+                                    "configAlternates": {
+                                        "height": "auto",
+                                        "designer|displayName": "string",
+                                        "layout|flex": "number",
+                                        "width": "auto",
+                                        "style": "string"
+                                    },
+                                    "name": "MySpacer10",
+                                    "designerId": "36b980a4-c0d1-4877-bb15-b56ab1f1b2fd"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "cls": [
+                                    "form-title-label"
+                                ],
                                 "layout|flex": null,
                                 "style": null,
                                 "text": [
@@ -1068,30 +1702,6 @@
                             "designerId": "fd436a18-fd23-470a-8307-91d553922708",
                             "cn": [
                                 {
-                                    "type": "Ext.form.Label",
-                                    "reference": {
-                                        "name": "items",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "style": " float:left",
-                                        "text": [
-                                            "{cellEditTip}"
-                                        ],
-                                        "width": "100%"
-                                    },
-                                    "configAlternates": {
-                                        "text": "binding",
-                                        "style": "string",
-                                        "cls": "typedarray",
-                                        "layout|flex": "number",
-                                        "width": "auto"
-                                    },
-                                    "name": "MyLabel27",
-                                    "designerId": "e3ba8a5b-2a1c-4846-bb3e-556a7ea663ec"
-                                },
-                                {
                                     "type": "Ext.container.Container",
                                     "reference": {
                                         "name": "items",
@@ -1099,19 +1709,19 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "container|align": "middle",
-                                        "itemId": "cloneCon",
+                                        "container|align": "stretch",
+                                        "itemId": "valCon",
                                         "layout": "hbox",
                                         "width": "100%"
                                     },
                                     "configAlternates": {
                                         "container|align": "string",
-                                        "itemId": "string",
                                         "layout": "string",
-                                        "width": "auto"
+                                        "width": "auto",
+                                        "itemId": "string"
                                     },
-                                    "name": "MyContainer31",
-                                    "designerId": "0a62f2e1-6192-4682-806a-eb35fbebef36",
+                                    "name": "MyContainer35",
+                                    "designerId": "7d560aa0-8836-4a39-870e-37d5baa35710",
                                     "cn": [
                                         {
                                             "type": "Ext.form.field.Text",
@@ -1124,33 +1734,136 @@
                                                 "disabled": [
                                                     "{!isSelected}"
                                                 ],
-                                                "fieldLabel": [
-                                                    "{categoryId}"
-                                                ],
                                                 "hideLabel": true,
-                                                "itemId": "fdClone",
-                                                "labelWidth": 122,
-                                                "margin": null,
-                                                "style": " float:left",
+                                                "itemId": "cloneId",
                                                 "value": [
                                                     "{cloneCategoryId}"
-                                                ],
-                                                "width": 250
+                                                ]
                                             },
                                             "configAlternates": {
-                                                "disabled": "binding",
-                                                "fieldLabel": "binding",
+                                                "value": "binding",
+                                                "fieldLabel": "string",
                                                 "hideLabel": "boolean",
                                                 "itemId": "string",
-                                                "margin": "auto",
-                                                "reference": "string",
-                                                "width": "auto",
-                                                "style": "string",
-                                                "value": "binding",
-                                                "labelWidth": "number"
+                                                "layout|flex": "number",
+                                                "disabled": "binding",
+                                                "readOnly": "boolean",
+                                                "width": "auto"
                                             },
-                                            "name": "MyTextField3",
-                                            "designerId": "13897fa5-151b-4e83-8208-ceba8af2b46d",
+                                            "name": "MyTextField1",
+                                            "designerId": "a6b5b918-cebd-4806-a8e3-dd41b0f5aba4"
+                                        },
+                                        {
+                                            "type": "Ext.button.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "disabled": [
+                                                    "{!isSelected}"
+                                                ],
+                                                "iconCls": "fa fa-folder-o",
+                                                "itemId": "btnSelect",
+                                                "layout|flex": null,
+                                                "text": null
+                                            },
+                                            "configAlternates": {
+                                                "iconCls": "string",
+                                                "itemId": "string",
+                                                "layout|flex": "number",
+                                                "text": "string",
+                                                "disabled": "binding"
+                                            },
+                                            "name": "MyButton",
+                                            "designerId": "1a1398a3-4784-491f-8847-3228d3a400a1",
+                                            "cn": [
+                                                {
+                                                    "type": "fixedfunction",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "designer|params": [
+                                                            "button",
+                                                            "e"
+                                                        ],
+                                                        "fn": "handler",
+                                                        "implHandler": [
+                                                            "Ext.create('Ext.window.Window', {",
+                                                            "    id:'categoryFirst',",
+                                                            "    padding:30,",
+                                                            "    alwaysOnTop:true,",
+                                                            "    title:loc.upload.selectCategory,",
+                                                            "    cloneField:button.up('#valCon').down('#cloneId'),",
+                                                            "    use:'clone',",
+                                                            "    items:[",
+                                                            "        {",
+                                                            "            xtype:'label',",
+                                                            "            text:loc.categorySet.selectCategory",
+                                                            "        }",
+                                                            "    ],",
+                                                            "    listeners:{",
+                                                            "        afterlayout:function(comp){",
+                                                            "            comp.center();",
+                                                            "        }",
+                                                            "    }",
+                                                            "}).show();"
+                                                        ]
+                                                    },
+                                                    "configAlternates": {
+                                                        "designer|params": "typedarray",
+                                                        "fn": "string",
+                                                        "implHandler": "code"
+                                                    },
+                                                    "name": "handler",
+                                                    "designerId": "2572ca18-80eb-4026-82c9-184644e655f4"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.button.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "default-toolbar-small",
+                                                "disabled": [
+                                                    "{!isSelected}"
+                                                ],
+                                                "itemId": "fdSave",
+                                                "layout|flex": null,
+                                                "record": null,
+                                                "style": "float:left",
+                                                "text": [
+                                                    "{save}"
+                                                ],
+                                                "ui": "default-toolbar-small"
+                                            },
+                                            "configAlternates": {
+                                                "text": "binding",
+                                                "style": "string",
+                                                "designer|uiInterfaceName": "string",
+                                                "ui": "string",
+                                                "itemId": "string",
+                                                "disabled": "binding",
+                                                "layout|flex": "number",
+                                                "record": "string"
+                                            },
+                                            "name": "MyButton1",
+                                            "designerId": "eb107b16-bc75-435b-b759-c23e5eb7f290",
+                                            "customConfigs": [
+                                                {
+                                                    "group": "(Custom Properties)",
+                                                    "name": "record",
+                                                    "type": "string"
+                                                }
+                                            ],
                                             "cn": [
                                                 {
                                                     "type": "viewcontrollereventbinding",
@@ -1160,19 +1873,23 @@
                                                     },
                                                     "codeClass": null,
                                                     "userConfig": {
-                                                        "fn": "onfdCloneRender",
+                                                        "fn": "onFdSaveClick",
                                                         "implHandler": [
-                                                            "//preparing for bind to set disable at first time",
-                                                            "var tree = component.up('window').down('#cTree');",
-                                                            "component.el.on('keyup', function(e){",
-                                                            "    if(e.keyCode == 13){",
-                                                            "        var ctrl = getController('Config');",
-                                                            "        var tRec = tree.getSelectionModel().getSelection()[0];",
-                                                            "        ctrl.editCategoryOption(tRec, 'cloneCategory', component.getValue());",
+                                                            "var tree = button.up('window').down('#cTree');",
+                                                            "var ctrl = getController('Config');",
+                                                            "var tRec = tree.getSelectionModel().getSelection()[0];",
+                                                            "var inputField = button.up('container').down('#cloneId');",
+                                                            "ctrl.editCategoryOption(tRec, 'cloneCategory', inputField.getValue());",
+                                                            "if(inputField.getValue().trim() === ''){//클론하지 않으면 cloneFile도 자동 삭제",
+                                                            "    var cbOpt = button.up('#valCon').down('#cbOpt');",
+                                                            "    if(cbOpt.getValue() == 1){",
+                                                            "        cbOpt.fireEvent('change',  cbOpt, 0);",
+                                                            "        cbOpt.setValue(0);",
                                                             "    }",
-                                                            "});"
+                                                            "}",
+                                                            ""
                                                         ],
-                                                        "name": "render",
+                                                        "name": "click",
                                                         "scope": "me"
                                                     },
                                                     "configAlternates": {
@@ -1181,8 +1898,8 @@
                                                         "name": "string",
                                                         "scope": "string"
                                                     },
-                                                    "name": "onfdCloneRender",
-                                                    "designerId": "0fad6993-0b62-4d2c-8151-4e5f51445e66"
+                                                    "name": "onFdSaveClick",
+                                                    "designerId": "1af21f6a-9819-45f2-bc4a-b0db1c114f65"
                                                 }
                                             ]
                                         },
@@ -1200,16 +1917,16 @@
                                                 "disabled": [
                                                     "{!isSelected}"
                                                 ],
-                                                "margin": "0 0 0 10",
-                                                "value": [
-                                                    "{isCloneFile}"
-                                                ]
+                                                "itemId": "cbOpt",
+                                                "layout|flex": 1,
+                                                "margin": "0 0 0 10"
                                             },
                                             "configAlternates": {
                                                 "boxLabel": "binding",
                                                 "disabled": "binding",
-                                                "value": "binding",
-                                                "margin": "auto"
+                                                "margin": "auto",
+                                                "itemId": "string",
+                                                "layout|flex": "number"
                                             },
                                             "name": "MyCheckbox2",
                                             "designerId": "63458a84-50bb-4f1d-869c-c9c3dbbf1088",
@@ -1228,7 +1945,9 @@
                                                             "var ctrl = getController('Config');",
                                                             "var tRec = tree.getSelectionModel().getSelection()[0];",
                                                             "var val = (newValue)? 1:0;",
-                                                            "ctrl.editCategoryOption(tRec, 'cloneFile', val);"
+                                                            "var dt = this.getViewModel().data;",
+                                                            "ctrl.editCategoryOption(tRec, 'cloneFile', val);",
+                                                            ""
                                                         ],
                                                         "name": "change",
                                                         "scope": "me"
@@ -2023,47 +2742,7 @@
                                         "style": "string"
                                     },
                                     "name": "MyTextField2",
-                                    "designerId": "4b7769da-f6b8-4e05-8b1b-768187be7ea0",
-                                    "cn": [
-                                        {
-                                            "type": "viewcontrollereventbinding",
-                                            "reference": {
-                                                "name": "listeners",
-                                                "type": "array"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "fn": "onTextfieldRender1",
-                                                "implHandler": [
-                                                    "//preparing for bind to set disable at first time",
-                                                    "component.up('window').getViewModel().setData({isSelected:false});",
-                                                    "var tree = component.up('window').down('#cTree');",
-                                                    "component.el.on('keyup', function(e){",
-                                                    "    if(e.keyCode == 13){",
-                                                    "        var ctrl = getController('Config');",
-                                                    "        var tRec = tree.getSelectionModel().getSelection()[0];",
-                                                    "        ctrl.editCategoryOption(tRec, 'categoryName', encodeURIComponent(component.getValue()));",
-                                                    "        //to simulate the changed directly",
-                                                    "        var selEl = tree.el.select('.x-grid-item-selected .x-tree-node-text .tree-title').elements[0];",
-                                                    "        selEl.textContent = component.getValue();",
-                                                    "        //not to change when click the expanding node icon",
-                                                    "        tRec.set('title', component.getValue());",
-                                                    "    }",
-                                                    "});"
-                                                ],
-                                                "name": "render",
-                                                "scope": "me"
-                                            },
-                                            "configAlternates": {
-                                                "fn": "string",
-                                                "implHandler": "code",
-                                                "name": "string",
-                                                "scope": "string"
-                                            },
-                                            "name": "onTextfieldRender1",
-                                            "designerId": "3d799609-a0ba-43cf-bbdf-07a5c712c60e"
-                                        }
-                                    ]
+                                    "designerId": "4b7769da-f6b8-4e05-8b1b-768187be7ea0"
                                 },
                                 {
                                     "type": "Ext.button.Button",
@@ -2509,7 +3188,7 @@
                                                             "    items:[",
                                                             "        {",
                                                             "            xtype:'label',",
-                                                            "            text:loc.config.selectCategory",
+                                                            "            text:loc.categorySet.selectCategory",
                                                             "        }",
                                                             "    ],",
                                                             "    listeners:{",
@@ -5353,10 +6032,11 @@
                                                                     "    alwaysOnTop:true,",
                                                                     "    scrollable:true,",
                                                                     "    target:inputField,",
+                                                                    "    header:false,",
                                                                     "    items:[",
                                                                     "        {",
                                                                     "            xtype:'label',",
-                                                                    "            text:loc.config.selectCategory",
+                                                                    "            text:loc.categorySet.selectCategory",
                                                                     "        }",
                                                                     "    ],",
                                                                     "    listeners:{",
@@ -5607,7 +6287,7 @@
                                                                     "    items:[",
                                                                     "        {",
                                                                     "            xtype:'label',",
-                                                                    "            text:loc.config.selectCategory",
+                                                                    "            text:loc.categorySet.selectCategory",
                                                                     "        }",
                                                                     "    ],",
                                                                     "    listeners:{",
@@ -5616,7 +6296,7 @@
                                                                     "        },",
                                                                     "        close:function(){",
                                                                     "            button.up('#fieldConfigContainer').setDisabled(false);",
-                                                                    "        }        ",
+                                                                    "        }",
                                                                     "    }",
                                                                     "}).show();"
                                                                 ]
@@ -5735,7 +6415,22 @@
                     "    changeContentName:'Change the displayed name instead of \"Content\" that one of the basic information',",
                     "    cloneCategory:'Clone category',",
                     "    cloneFile:'Clone files as well',",
-                    "    hideCategory:'Hide category'",
+                    "    deleteFilter:'Filter setting will be initialized. Are you sure',",
+                    "    fieldId:'Field ID',",
+                    "    filteringInfo:'Filtering options of items to be showed in the list ',",
+                    "    filteringTitle:'Data filtering',",
+                    "    hideCategory:'Hide category',",
+                    "    nothingToSave:'There are nothing to apply',",
+                    "    option:'Option',",
+                    "    requireFieldId:'Field ID required',",
+                    "    requireValue:'Field value required',",
+                    "    selectCategory:'Do not close this window and select a category from the tree left.',",
+                    "    selectField:'Select a field',",
+                    "    selectFieldAlert:'Do not close this window and select a field that you want set up',",
+                    "    selectOption:'The one of filtering option must be selected',",
+                    "    showAtSame:'Show only when the field value is included',",
+                    "    showAtNotSame:'Show only when the field value is not included',",
+                    "    value:'Value'",
                     "",
                     "};",
                     "languageSet.Korean.categorySet = {",
@@ -5746,8 +6441,23 @@
                     "    changeCategoryName:'목록에 보여질 카테고리 이름 변경',",
                     "    changeContentName:'기본정보중 \"내용\"을 다른 말로 변경',",
                     "    cloneCategory:'카테고리 복제',",
+                    "    deleteFilter:'필터설정이 초기화 됩니다. 진행하시겠습까?',",
+                    "    fieldId:'필드 ID',",
+                    "    filteringInfo:'카테고리에 표시될 목록을 필터링합니다.',",
+                    "    filteringTitle:'데이터 필터링',",
                     "    cloneFile:'파일도 함께 복제',",
-                    "    hideCategory:'일반 사용자들에게 카테고리 숨김'",
+                    "    hideCategory:'일반 사용자들에게 카테고리 숨김',",
+                    "    nothingToSave:'적용할 내용이 없습니다.',",
+                    "    option:'조건',",
+                    "    requireFieldId:'필드 ID를 반드시 입력 해야 합니다.',",
+                    "    requireValue:'필드 값을 반드시 입력 해야 합니다.',",
+                    "    selectCategory:'이 창을 닫지 말고, 왼쪽에서 카테고리를 먼저 선택 해 주세요',",
+                    "    selectField:'필드선택',",
+                    "    selectFieldAlert:'이 창을 닫지 말고, 설정하려는 필드를 선택 해 주세요.',    ",
+                    "    selectOption:'핕터링 조건 중 하나를 반드시 선택 해야 합니다.',",
+                    "    showAtSame:'필드의 값이 위와 같을 경우에만 표시',",
+                    "    showAtNotSame:'필드의 값이 위의 값이 아닐 경우에만 표시',",
+                    "    value:'필드값'",
                     "};",
                     "",
                     "this.getViewModel().setData({",
@@ -5756,7 +6466,8 @@
                     "    changeCategoryName:loc.categorySet.changeCategoryName,",
                     "    cloneCategory:loc.categorySet.cloneCategory,",
                     "    hideCategory:loc.categorySet.hideCategory,",
-                    "    cloneFile:loc.categorySet.cloneFile",
+                    "    cloneFile:loc.categorySet.cloneFile,",
+                    "    filteringInfo:loc.categorySet.filteringInfo",
                     "});"
                 ],
                 "name": "beforerender",

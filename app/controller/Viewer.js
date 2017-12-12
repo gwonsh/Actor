@@ -1057,11 +1057,12 @@ Ext.define('Actor.controller.Viewer', {
             success:function(response){
                 var lnkData = response.binderView;
                 lnkData.companyInfo = companyInfo;
+                console.log(response);
                 var html = me.generateHtml(lnkData, 'Default', false);
                 var win = Ext.create('Ext.window.Window',{
                     modal:true,
                     ghost:false,
-                    title:colsName,
+                    title:loc.viewer.detailView + ' - ' + lnkData.ca_name,
                     width:700,
                     bodyStyle:'padding:20px',
                     items:[
@@ -1070,7 +1071,13 @@ Ext.define('Actor.controller.Viewer', {
                             html:html,
                             width:'100%',
                             maxHeight:800,
-                            scrollable:true
+                            scrollable:true,
+                            listeners:{
+                                afterrender:function(comp){
+                                    var attachFile = comp.el.select('.viewer-attach-image');
+                                    getController('Viewer').viewAttachedFile(attachFile.elements);
+                                }
+                            }
                         }
                     ]
                 }).show();

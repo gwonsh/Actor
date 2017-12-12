@@ -18,12 +18,16 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
     alias: 'controller.categorysetwindow',
 
     onCTreeItemClick: function(dataview, record, item, index, e, eOpts) {
+        if(record.get('disableItemclick')){
+            return;
+        }
+        record.set('disableItemclick', false);
         if(Ext.getCmp('categoryFirst')){//필드설정을 위한 카테고리 선택 일 경우(by getRecord or getValue)
             var fstWin = Ext.getCmp('categoryFirst');//왼쪽 카테고리를 선택해 주세요 창이 떠있는 여부로 왜 클릭 했는지 판단
             var cId = record.get('id');
             var info = {};//선택한 카테고리의 필드 정보들
             var srcConf  = {};//기본 정보외에 필요한 정보들
-            Ext.getCmp('categoryFirst').down('label').setText(loc.config.selectField);
+            fstWin.down('label').setText(loc.categorySet.selectFieldAlert);
             Ext.data.JsonP.request({
                 url:getDataListByIdApi('ca_id=' + cId),
                 success:function(response){
@@ -42,6 +46,11 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
                     srcConf.bd_ip = {
                         displayName:'IP address',
                         idx:'bd_ip'
+                    };
+                    info.bd_idx = 'bd_idx';
+                    srcConf.bd_idx = {
+                        displayName:'Data ID',
+                        idx:'bd_idx'
                     };
                     info.bd_regdate = 'bd_regdate';
                     srcConf.bd_regdate = {
@@ -75,7 +84,7 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
                         listeners:{
                             itemclick:function(grid, record, item, index, e, eOpts){
                                 var conf = srcConf[record.get('name')];
-                                if(fstWin.target.colsType == 'datagrp' || fstWin.target.colsType == 'dataset' || fstWin.target.colsType == 'link'){
+                                if(fstWin.target.colsType == 'datagrp' || fstWin.target.colsType == 'dataset'){
                                     if(fstWin.target.colsType != conf.colsType){
                                         Ext.Msg.alert('Caution', loc.error.typeNotMatch);
                                     }
@@ -84,7 +93,6 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
                                     var value = cId + '>' + conf.idx;
                                     fstWin.target.setValue(value);
                                     pgWin.close();
-                                    fstWin.close();
                                 }
                             },
                             beforeedit:function(){//disable editing
@@ -95,6 +103,7 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
                     var pgWin = Ext.create('Ext.window.Window', {
                         scrollable:'vertical',
                         maxHeight:windowMaxHeight,
+                        title:loc.categorySet.selectField,
                         padding:20,
                         items:[
                         pg
@@ -102,6 +111,10 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
                         listeners:{
                             afterlayout:function(comp){
                                 comp.center();
+                                fstWin.setX(comp.getX() +  comp.getWidth());
+                            },
+                            close:function(){
+                                fstWin.close();
                             }
                         }
                     }).show();
@@ -227,6 +240,7 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
             isSimpleList:isSimpleList,
             formMode:formName,
             selectedCategory:record.get('id'),
+            lastCategory:this.getViewModel().data.selectedCategory,
             isTextField:false,
             isNumberField:false,
             isImageField:false,
@@ -240,7 +254,14 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
             autoSelectFirst:selectFirstItem
             //     isDataset:true
         };
+
+        //write directly instead of binding
+        dataview.up('window').down('#cbOpt').suspendEvent('change');
+        dataview.up('window').down('#cbOpt').setValue(cloneFile);
+        dataview.up('window').down('#cbOpt').resumeEvent('change');
+
         dataview.up('window').getViewModel().setData(obj);
+
         //initialize hiding option checkbox
         var ht = dataview.up('window').down('#hideToggle');
         if(!opt.actor){
@@ -249,6 +270,7 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
         if(opt.actor || opt.actor === undefined){
             ht.setValue(false);
         }
+
         var ast = dataview.up('window').down('#autoSelectToggle');
         ast.value = (selectFirstItem)? true : false;
 
@@ -280,6 +302,19 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
             me.getViewModel().setData({fStore:fStore});
         }
 
+    },
+
+    onCTreeBeforeSelect: function(rowmodel, record, index, eOpts) {
+        var fstWin = Ext.getCmp('categoryFirst');//왼쪽 카테고리를 선택해 주세요 창이 떠있는 여부로 왜 클릭 했는지 판단
+        var cId = record.get('id');
+        if(fstWin){
+            if(fstWin.use == 'clone'){//클론용으로 카테고리가 선택될 경우에는 카테고리 ID만 뽑아내고 땡
+                record.set('disableItemclick', true);
+                fstWin.cloneField.setValue(cId);
+                fstWin.close();
+            }
+            return false;
+        }
     },
 
     onTextfieldRender: function(component, eOpts) {
@@ -320,7 +355,7 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
         component.setText(loc.categorySet.filteringTitle);
     },
 
-    onButtonClick1: function(button, e, eOpts) {
+    onFdRemoveClick: function(button, e, eOpts) {
         var me = this;
         var tree = button.up('window').down('#cTree');
         /* removing filtering option from server */
@@ -341,20 +376,29 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
                 //send new option to server after encorded
                 getController('Config').updateCategoryOption(record.get('id'), option);
                 button.up('container').down('#fdFilterValue').setValue('');
+                me.getViewModel().data.filters = {
+                    filter:[],
+                    notFilter:[]
+                };
+
             }
         });
     },
 
-    onfdCloneRender: function(component, eOpts) {
-        //preparing for bind to set disable at first time
-        var tree = component.up('window').down('#cTree');
-        component.el.on('keyup', function(e){
-            if(e.keyCode == 13){
-                var ctrl = getController('Config');
-                var tRec = tree.getSelectionModel().getSelection()[0];
-                ctrl.editCategoryOption(tRec, 'cloneCategory', component.getValue());
+    onFdSaveClick: function(button, e, eOpts) {
+        var tree = button.up('window').down('#cTree');
+        var ctrl = getController('Config');
+        var tRec = tree.getSelectionModel().getSelection()[0];
+        var inputField = button.up('container').down('#cloneId');
+        ctrl.editCategoryOption(tRec, 'cloneCategory', inputField.getValue());
+        if(inputField.getValue().trim() === ''){//클론하지 않으면 cloneFile도 자동 삭제
+            var cbOpt = button.up('#valCon').down('#cbOpt');
+            if(cbOpt.getValue() == 1){
+                cbOpt.fireEvent('change',  cbOpt, 0);
+                cbOpt.setValue(0);
             }
-        });
+        }
+
     },
 
     onCheckboxfieldChange: function(field, newValue, oldValue, eOpts) {
@@ -362,7 +406,9 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
         var ctrl = getController('Config');
         var tRec = tree.getSelectionModel().getSelection()[0];
         var val = (newValue)? 1:0;
+        var dt = this.getViewModel().data;
         ctrl.editCategoryOption(tRec, 'cloneFile', val);
+
     },
 
     onSelectFirstDataRender: function(component, eOpts) {
@@ -719,10 +765,13 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
             filteringTitle:'Data filtering',
             hideCategory:'Hide category',
             nothingToSave:'There are nothing to apply',
+            option:'Option',
             requireFieldId:'Field ID required',
             requireValue:'Field value required',
+            selectCategory:'Do not close this window and select a category from the tree left.',
             selectField:'Select a field',
-            selectOption:'The one of search option must be selected',
+            selectFieldAlert:'Do not close this window and select a field that you want set up',
+            selectOption:'The one of filtering option must be selected',
             showAtSame:'Show only when the field value is included',
             showAtNotSame:'Show only when the field value is not included',
             value:'Value'
@@ -743,10 +792,13 @@ Ext.define('Actor.view.CategorySetWindowViewController', {
             cloneFile:'파일도 함께 복제',
             hideCategory:'일반 사용자들에게 카테고리 숨김',
             nothingToSave:'적용할 내용이 없습니다.',
+            option:'조건',
             requireFieldId:'필드 ID를 반드시 입력 해야 합니다.',
             requireValue:'필드 값을 반드시 입력 해야 합니다.',
+            selectCategory:'이 창을 닫지 말고, 왼쪽에서 카테고리를 먼저 선택 해 주세요',
             selectField:'필드선택',
-            selectOption:'검색조건 중 하나를 반드시 선택 해야 합니다.',
+            selectFieldAlert:'이 창을 닫지 말고, 설정하려는 필드를 선택 해 주세요.',
+            selectOption:'핕터링 조건 중 하나를 반드시 선택 해야 합니다.',
             showAtSame:'필드의 값이 위와 같을 경우에만 표시',
             showAtNotSame:'필드의 값이 위의 값이 아닐 경우에만 표시',
             value:'필드값'

@@ -99,7 +99,8 @@ Ext.define('Actor.view.CategorySetWindow', {
                         }
                     ],
                     listeners: {
-                        itemclick: 'onCTreeItemClick'
+                        itemclick: 'onCTreeItemClick',
+                        beforeselect: 'onCTreeBeforeSelect'
                     }
                 }
             ]
@@ -259,6 +260,7 @@ Ext.define('Actor.view.CategorySetWindow', {
                                 },
                                 {
                                     xtype: 'container',
+                                    itemId: 'valCon',
                                     width: '100%',
                                     layout: {
                                         type: 'hbox',
@@ -327,9 +329,25 @@ Ext.define('Actor.view.CategorySetWindow', {
                                                         ],
                                                         listeners: {
                                                             itemclick: function(grid, record){
+                                                                var selectFlds = ['select', 'radio', 'check'];
+                                                                grid.up('window').down('#fdFieldValue').destroy();
+                                                                var fld = {
+                                                                    xtype:'textfield',
+                                                                    fieldLabel:loc.categorySet.value,
+                                                                    allowBlank:false,
+                                                                    labelWidth:55,
+                                                                    itemId:'fdFieldValue'
+                                                                };
+                                                                if(selectFlds.indexOf(record.get('cols_type')) != -1){
+                                                                    fld.xtype = 'combo';
+                                                                    var colsData = record.get('cols_data');
+                                                                    fld.store = colsData;
+
+                                                                }
+                                                                grid.up('window').down('#rightPan').insert(1, fld);
                                                                 grid.up('window').down('#rightPan').setDisabled(false);
                                                                 grid.up('window').down('#fdFieldId').setValue(record.get('cols_idx'));
-                                                                grid.up('window').down('#fdFieldValue').setValue('');
+                                                                //                     grid.up('window').down('#fdFieldValue').setValue('');
                                                                 grid.up('window').down('#rg').reset();
                                                                 var filter = setWin.getViewModel().data.filters.filter;
                                                                 for(var i=0; i<filter.length; i++){
@@ -380,7 +398,7 @@ Ext.define('Actor.view.CategorySetWindow', {
                                                         {
                                                             xtype:'radiogroup',
                                                             itemId:'rg',
-                                                            fieldLabel:loc.search.searchOption,
+                                                            fieldLabel:loc.categorySet.option,
                                                             columns:1,
                                                             labelWidth:60,
                                                             items:[
@@ -489,25 +507,7 @@ Ext.define('Actor.view.CategorySetWindow', {
                                                                     }
                                                                     getController('Config').editCategoryOption(inputField.selectedRecord, 'query', values);
 
-                                                                    //                             var seData = getController('Search').getSearchIdx(win.down('#fdFieldId').getValue());
-                                                                    //                             var queryValue = 'se_data_' + seData + '=' + win.down('#fdFieldValue').getValue();
-                                                                    //                             var q = '--query:' + queryValue;
-                                                                    //                             var queryNotValue;
-                                                                    //                             if(val.rb == 2){
-                                                                    //                                 q += '--queryNot:se_data_' + seData + '_method=notequal';
-                                                                    //                                 queryNotValue = 'se_data_' + seData + '_method=notequal';
-                                                                    //                             }
 
-                                                                    //                             inputField.setValue(q);
-
-                                                                    //                             var values = {//글자를 포함한 자료로 필터링
-                                                                    //                                 query:queryValue
-                                                                    //                             };
-                                                                    //                             if(queryNotValue !== undefined){//글자를 포함하지 않은 자료로 필터링
-                                                                    //                                 values.queryNot = queryNotValue;
-                                                                    //                             }
-                                                                    //                             getController('Config').editCategoryOption(inputField.selectedRecord, 'query', values);
-                                                                    //                             win.close();
                                                                 }
                                                             }
                                                         }
@@ -532,7 +532,7 @@ Ext.define('Actor.view.CategorySetWindow', {
                                                 text: '{remove}'
                                             },
                                             listeners: {
-                                                click: 'onButtonClick1'
+                                                click: 'onFdRemoveClick'
                                             }
                                         }
                                     ]
@@ -562,44 +562,72 @@ Ext.define('Actor.view.CategorySetWindow', {
                             width: '100%',
                             items: [
                                 {
-                                    xtype: 'label',
-                                    style: ' float:left',
-                                    width: '100%',
-                                    bind: {
-                                        text: '{cellEditTip}'
-                                    }
-                                },
-                                {
                                     xtype: 'container',
-                                    itemId: 'cloneCon',
+                                    itemId: 'valCon',
                                     width: '100%',
                                     layout: {
                                         type: 'hbox',
-                                        align: 'middle'
+                                        align: 'stretch'
                                     },
                                     items: [
                                         {
                                             xtype: 'textfield',
-                                            itemId: 'fdClone',
-                                            style: ' float:left',
-                                            width: 250,
+                                            itemId: 'cloneId',
                                             hideLabel: true,
-                                            labelWidth: 122,
                                             bind: {
                                                 disabled: '{!isSelected}',
-                                                fieldLabel: '{categoryId}',
                                                 value: '{cloneCategoryId}'
+                                            }
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            handler: function(button, e) {
+                                                Ext.create('Ext.window.Window', {
+                                                    id:'categoryFirst',
+                                                    padding:30,
+                                                    alwaysOnTop:true,
+                                                    title:loc.upload.selectCategory,
+                                                    cloneField:button.up('#valCon').down('#cloneId'),
+                                                    use:'clone',
+                                                    items:[
+                                                    {
+                                                        xtype:'label',
+                                                        text:loc.categorySet.selectCategory
+                                                    }
+                                                    ],
+                                                    listeners:{
+                                                        afterlayout:function(comp){
+                                                            comp.center();
+                                                        }
+                                                    }
+                                                }).show();
+                                            },
+                                            itemId: 'btnSelect',
+                                            iconCls: 'fa fa-folder-o',
+                                            bind: {
+                                                disabled: '{!isSelected}'
+                                            }
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            itemId: 'fdSave',
+                                            style: 'float:left',
+                                            ui: 'default-toolbar-small',
+                                            bind: {
+                                                disabled: '{!isSelected}',
+                                                text: '{save}'
                                             },
                                             listeners: {
-                                                render: 'onfdCloneRender'
+                                                click: 'onFdSaveClick'
                                             }
                                         },
                                         {
                                             xtype: 'checkboxfield',
+                                            flex: 1,
+                                            itemId: 'cbOpt',
                                             margin: '0 0 0 10',
                                             bind: {
                                                 disabled: '{!isSelected}',
-                                                value: '{isCloneFile}',
                                                 boxLabel: '{cloneFile}'
                                             },
                                             listeners: {
@@ -950,7 +978,7 @@ Ext.define('Actor.view.CategorySetWindow', {
                                                     items:[
                                                     {
                                                         xtype:'label',
-                                                        text:loc.config.selectCategory
+                                                        text:loc.categorySet.selectCategory
                                                     }
                                                     ],
                                                     listeners:{
@@ -1654,10 +1682,11 @@ Ext.define('Actor.view.CategorySetWindow', {
                                                             alwaysOnTop:true,
                                                             scrollable:true,
                                                             target:inputField,
+                                                            header:false,
                                                             items:[
                                                             {
                                                                 xtype:'label',
-                                                                text:loc.config.selectCategory
+                                                                text:loc.categorySet.selectCategory
                                                             }
                                                             ],
                                                             listeners:{
@@ -1739,7 +1768,7 @@ Ext.define('Actor.view.CategorySetWindow', {
                                                             items:[
                                                             {
                                                                 xtype:'label',
-                                                                text:loc.config.selectCategory
+                                                                text:loc.categorySet.selectCategory
                                                             }
                                                             ],
                                                             listeners:{

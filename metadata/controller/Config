@@ -262,22 +262,31 @@
                 "fn": "editCategoryOption",
                 "implHandler": [
                     "var opts = record.get('option').split('--');",
+                    "var cId = record.get('id');",
                     "var option = '';",
-                    "var key = key;",
                     "var falseOpts = ['actor', 'selectFirst'],",
                     "    trueOpts = ['fieldOnly', 'schedule', 'displayApproval', 'colorTag', 'onlyOwner', 'cloneFile'];",
                     "",
                     "for(var i=0; i<opts.length; i++){",
                     "    if(opts[i].trim() !== ''){",
-                    "        if(opts[i].indexOf(key + ':') == -1){",
+                    "        if(opts[i].indexOf(key + ':') == -1 && opts[i].indexOf('queryNot:') == -1){//rearrange option string only after except the current key",
                     "            option += '--' + opts[i];",
                     "        }",
                     "    }",
                     "}",
-                    "",
                     "if(value === true || value == 'true') value = 1;",
                     "if(value === false || value == 'false') value = 0;",
-                    "option += '--' + key + ':' + value;",
+                    "",
+                    "",
+                    "if(key == 'query'){",
+                    "    option += '--' + key + ':' + value.query;",
+                    "    if(value.queryNot !== undefined && value.queryNot !== '' && value.queryNot !== null){",
+                    "        option += '--queryNot:' + value.queryNot;",
+                    "    }",
+                    "}",
+                    "else{",
+                    "    option += '--' + key + ':' + value;",
+                    "}",
                     "",
                     "//remove option when it saved as a default",
                     "if(key == 'categoryName'){",
@@ -285,12 +294,16 @@
                     "    if(record.get('text') == deCname){",
                     "        option = option.replace('--categoryName:' + value, '');",
                     "    }",
-                    "}",
-                    "if(key == 'cloneCategory'){",
-                    "    if(value.trim() === '' && option.cloneCategory !== undefined){",
-                    "        option = option.replace('--categoryName:' + option.cloneCategory, '');",
+                    "    else{",
+                    "",
                     "    }",
                     "}",
+                    "if(key == 'cloneCategory'){",
+                    "    if(value.trim() === ''){",
+                    "        option = option.replace('--cloneCategory:', '');",
+                    "    }",
+                    "}",
+                    "",
                     "// if(key == 'displayNameContent'){",
                     "//     var deCTname = decodeURIComponent(value);",
                     "//     if(record.get('displayNameContent') == deCname){",
@@ -321,11 +334,10 @@
                     "        option = option.replace(falseStr, '');",
                     "    }",
                     "}",
-                    "",
                     "//update new option to record before encoded",
                     "record.set('option', decodeURIComponent(option));",
                     "//send new option to server after encorded",
-                    "this.updateCategoryOption(record.get('id'), option);",
+                    "this.updateCategoryOption(cId, option);",
                     "return option;"
                 ]
             },
@@ -336,6 +348,36 @@
             },
             "name": "editCategoryOption",
             "designerId": "aec0ece5-0db3-4905-8e5e-75f4fd0c4652"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "cId",
+                    "option"
+                ],
+                "fn": "updateCategoryOption",
+                "implHandler": [
+                    "Ext.data.JsonP.request({",
+                    "    url:getCategoryOptionUpdateApi(cId, option),",
+                    "    success:function(response){",
+                    "        Ext.toast(loc.upload.edited);",
+                    "    }",
+                    "});"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "updateCategoryOption",
+            "designerId": "54c83703-7b3d-4c6a-8895-60b01d6c319a"
         },
         {
             "type": "basicfunction",
@@ -417,36 +459,6 @@
             "codeClass": null,
             "userConfig": {
                 "designer|params": [
-                    "cId",
-                    "option"
-                ],
-                "fn": "updateCategoryOption",
-                "implHandler": [
-                    "Ext.data.JsonP.request({",
-                    "    url:getCategoryOptionUpdateApi(cId, option),",
-                    "    success:function(response){",
-                    "        Ext.toast(loc.upload.edited);",
-                    "    }",
-                    "});"
-                ]
-            },
-            "configAlternates": {
-                "designer|params": "typedarray",
-                "fn": "string",
-                "implHandler": "code"
-            },
-            "name": "updateCategoryOption",
-            "designerId": "54c83703-7b3d-4c6a-8895-60b01d6c319a"
-        },
-        {
-            "type": "basicfunction",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "designer|params": [
                     "language"
                 ],
                 "fn": "setLanguage",
@@ -490,8 +502,7 @@
                     "    style:'background-color:#eeeeee',",
                     "    bodyStyle:{'background-color':'#eeeeee'}",
                     "});",
-                    "var activeTab = getController('Main').getListTab().getActiveTab();",
-                    "var defaultForm = activeTab.cateOption.formMode;",
+                    "var defaultForm = getOption(categoryRecord.get('option')).formMode;",
                     "// var formLib = Ext.doc.FormLibrary.FORMS;",
                     "var record = Ext.getStore('FormStore').findRecord('formId', defaultForm);",
                     "if(record === null) record = Ext.getStore('FormStore').findRecord('formId', 'Normal');",

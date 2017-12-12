@@ -37,7 +37,7 @@ var basicSetting = {
     numOfViewed:30,
     numOfPrinted:30
 };
-var basicItems = ['bd_subject', 'bd_file', 'bd_regdate', 'bd_colortag', 'bd_ip', 'bd_content', 'bd_name'];
+var basicItems = ['bd_subject', 'bd_file', 'bd_regdate', 'bd_colortag', 'bd_ip', 'bd_content', 'bd_name', 'bd_idx'];
 var pluginName = '';
 ///////////////////////////////////////////////////////////
 /* golobal methods */

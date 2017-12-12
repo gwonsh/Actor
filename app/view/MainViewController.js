@@ -307,7 +307,7 @@ Ext.define('Actor.view.MainViewController', {
             },
             {
                 xtype:'label',
-                text:'Actor vertion : 4.171209'
+                text:'Actor vertion : 4.171212'
             }
             ]
         }).show();
@@ -1178,7 +1178,7 @@ Ext.define('Actor.view.MainViewController', {
         else{
             return;
         }
-        var url =' http://smartdb.kr/json/binderCloneList?ca_id='+clCaId+'&bd_idx=' + bdIdx;
+        var url = domain + '/json/binderCloneList?ca_id='+clCaId+'&bd_idx=' + bdIdx;
         Ext.data.JsonP.request({
             url:url,
             success:function(response){

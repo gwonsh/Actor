@@ -445,6 +445,7 @@ Ext.define('Actor.controller.Main', {
         var itemIndex = grid.itemIndex;
         if(doAdd === undefined) doAdd = true;
         var existGrid = Ext.getCmp('mainGrid_' + cId);
+        var i;
 
         /* same grid already exists just set active tab */
         if(me.getListTab().items.items.indexOf(grid) != -1){
@@ -545,7 +546,6 @@ Ext.define('Actor.controller.Main', {
             me.viewDocument(record, grid.title, grid.formMode, index);
             /* load linked categories */
             if(currentPlugin !== '' && !grid.isLinked){
-                var i;
                 var tabs = me.getListTab().items.items;
                 var len = tabs.length;
                 var entries = [];
@@ -703,11 +703,19 @@ Ext.define('Actor.controller.Main', {
         var optQuery = grid.cateOption.query;
         var optQueryNot = grid.cateOption.queryNot;
         if(optQuery !== undefined){
-            params += '&se_data_'+getController('Search').getSearchIdx(optQuery.split('=')[0]) +'='+encodeURIComponent(optQuery.split('=')[1]);
-            if(optQueryNot !== undefined){
-                params += '&se_data_'+getController('Search').getSearchIdx(optQueryNot) + '_method=notequal';
+            var qs = optQuery.split(',');
+            for(i=0; i<qs.length; i++){
+                var qVal = qs[i].split('=');
+                params += '&se_data_'+getController('Search').getSearchIdx(qVal[0])+'='+encodeURIComponent(qVal[1]);
             }
         }
+        if(optQueryNot !== undefined){
+            var qNots = optQueryNot.split(',');
+            for(i=0; i<qNots.length; i++){
+                params += '&se_data_'+getController('Search').getSearchIdx(qNots[i]) + '_method=notequal';
+            }
+        }
+
         if(optOnlyOwner){
             //보안상 sessionId가 혹시 문제 있으면  얼른 return
             if(sessionId === undefined || sessionId === null || sessionId === '') return;
@@ -2117,7 +2125,7 @@ Ext.define('Actor.controller.Main', {
         var url, params = {};
         params.bd_idx = bdIdx;
         if(activeTab.cloneCategory !== undefined){
-            url = 'http://smartdb.kr/json/binderCloneList';
+            url = domain + '/json/binderCloneList';
             params.ca_id = activeTab.cloneCategory;
         }
         else{
@@ -2128,9 +2136,11 @@ Ext.define('Actor.controller.Main', {
             url:url,
             params:params,
             success:function(response){
-
                 var binderBean;
                 if(activeTab.cloneCategory !== undefined){//for clone category that responsed by another url
+                ///////////////////////
+                // for clone category//
+                ///////////////////////
                     binderBean = response.binderList[0];//for nothing edited
                     binderBean.bd_refer = response.binderList[0].bd_refer;//for nothing edited
                     response.categoryColsList = response.binderList[0].bd_data;//for nothing edited

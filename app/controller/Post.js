@@ -1084,71 +1084,73 @@ Ext.define('Actor.controller.Post', {
                 }
                 /* field for link */
                 if(colsType == 'link'){
-                    fldCon = null;
-                    var linkLabel = {
-                        xtype:'label',
-                        text:fName,
-                        hidden:isHidden,
-                        disabled:isDisable,
-                        cls:'x-form-item-label-default'
-                    };
-                    var links = Ext.create(appName + '.view.LinkedData', {
-                        cls:'requestform-space',
-                        style:'padding:5px;border:1px solid #cecece',
-                        hidden:isHidden,
-                        disabled:isDisable,
-                        itemId:fIdx
-                    });
-                    /* container for each thumbnail and title of linked data */
-                    var linkUnitCon = Ext.create('Ext.container.Container', {
-                        flex: 1,
-                        itemId: fIdx + '_unitCon',
-                        scrollable: true,
-                        hidden:isHidden,
-                        disabled:isDisable,
-                        layout: 'hbox'
-                    });
-                    links.add(linkUnitCon);
-                    var addLnkBtn = links.down('#addLink');
-                    var hdnLnkFld = Ext.create('Ext.form.field.Hidden', {
-                        name:fIdx,
-                        itemId:fIdx + '_hidden'
-                    });
-                    links.add(hdnLnkFld);
-                    addLnkBtn.on('click', function(){
-                        var lnkWin = Ext.create(appName + '.view.LinkingWindow', {
-                            itemId:fIdx,
-                            maxHeight:windowMaxHeight,
-                            openner:target.up('window')
-                        }).show();
-                    });
-                    target.add(linkLabel);
-                    target.add(links);
-                    if(isEditMode){
-                        /* bd_idx Array */
-                        var lnkData = entry.data_val.split(',');
-                        for(i=0; i<lnkData.length; i++){
-                            /* get information of each data in link from server */
-                            Ext.data.JsonP.request({
-                                url:getDataWriteApi() + '?bd_idx=' + lnkData[i].trim(),
-                                success:function(response){
-                                    if(response.binderBean.bd_file === undefined) return;
-                                    var unit = Ext.create(appName + '.view.LinkUnit', {
-                                        bd_idx:response.binderBean.bd_idx,
-                                        itemId:'unit_' + response.binderBean.bd_idx
-                                    });
-                                    var path = 'resources/images/ico_noimage.gif';
-                                    if(response.binderBean.bd_file.length > 0){
-                                        path = response.binderBean.bd_file[0].thumb_path;
+                    if(geRecOpt === undefined && geValOpt === undefined){//getRecord 설정이 있으면 그냥 일반 필드로
+                        fldCon = null;
+                        var linkLabel = {
+                            xtype:'label',
+                            text:fName,
+                            hidden:isHidden,
+                            disabled:isDisable,
+                            cls:'x-form-item-label-default'
+                        };
+                        var links = Ext.create(appName + '.view.LinkedData', {
+                            cls:'requestform-space',
+                            style:'padding:5px;border:1px solid #cecece',
+                            hidden:isHidden,
+                            disabled:isDisable,
+                            itemId:fIdx
+                        });
+                        /* container for each thumbnail and title of linked data */
+                        var linkUnitCon = Ext.create('Ext.container.Container', {
+                            flex: 1,
+                            itemId: fIdx + '_unitCon',
+                            scrollable: true,
+                            hidden:isHidden,
+                            disabled:isDisable,
+                            layout: 'hbox'
+                        });
+                        links.add(linkUnitCon);
+                        var addLnkBtn = links.down('#addLink');
+                        var hdnLnkFld = Ext.create('Ext.form.field.Hidden', {
+                            name:fIdx,
+                            itemId:fIdx + '_hidden'
+                        });
+                        links.add(hdnLnkFld);
+                        addLnkBtn.on('click', function(){
+                            var lnkWin = Ext.create(appName + '.view.LinkingWindow', {
+                                itemId:fIdx,
+                                maxHeight:windowMaxHeight,
+                                openner:target.up('window')
+                            }).show();
+                        });
+                        target.add(linkLabel);
+                        target.add(links);
+                        if(isEditMode){
+                            /* bd_idx Array */
+                            var lnkData = entry.data_val.split(',');
+                            for(i=0; i<lnkData.length; i++){
+                                /* get information of each data in link from server */
+                                Ext.data.JsonP.request({
+                                    url:getDataWriteApi() + '?bd_idx=' + lnkData[i].trim(),
+                                    success:function(response){
+                                        if(response.binderBean.bd_file === undefined) return;
+                                        var unit = Ext.create(appName + '.view.LinkUnit', {
+                                            bd_idx:response.binderBean.bd_idx,
+                                            itemId:'unit_' + response.binderBean.bd_idx
+                                        });
+                                        var path = 'resources/images/ico_noimage.gif';
+                                        if(response.binderBean.bd_file.length > 0){
+                                            path = response.binderBean.bd_file[0].thumb_path;
+                                        }
+                                        unit.down('#image').setStyle('background-image', 'url(' +path+ ')');
+                                        unit.getViewModel().setData({
+                                            unitTitle:response.binderBean.bd_subject,
+                                            src:path
+                                        });
+                                        linkUnitCon.add(unit);
                                     }
-                                    unit.down('#image').setStyle('background-image', 'url(' +path+ ')');
-                                    unit.getViewModel().setData({
-                                        unitTitle:response.binderBean.bd_subject,
-                                        src:path
-                                    });
-                                    linkUnitCon.add(unit);
-                                }
-                            });
+                                });
+                            }
                         }
                     }
                 }

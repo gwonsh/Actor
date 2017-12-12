@@ -123,7 +123,9 @@ Ext.define('resources.js.forms.CloneViewer', {
 					}
 				}
 				if(entry.cols_type == 'number' && fldOpt.numberFormat !== undefined){
-                    if(entries[index].data_val.indexOf(',') == -1) entries[i].data_val = Ext.util.Format.number(entries[i].data_val, fldOpt.numberFormat);
+                    for(i=0; i<entries.length; i++){
+                    if(entries[i].data_val.indexOf(',') == -1) entries[i].data_val = Ext.util.Format.number(entries[i].data_val, fldOpt.numberFormat);
+                    }
 				}
 				if(entry.cols_type == 'dataset'){
 		html += '		<tr>';
@@ -240,7 +242,7 @@ Ext.define('resources.js.forms.CloneViewer', {
 		html += '		</tr>';
 					}
 					else if(isGetRecord){
-                        var recVal = decodeURIComponent(entries[i].data_val);
+                        var recVal = decodeURIComponent(values[0]);
                         if(recVal.indexOf('file_name=') != -1 && recVal.indexOf('bd_subject=') != -1 && recVal.indexOf('bd_idx=') != -1) {
         html +=	'		<tr>';
                             for(i=0; i<entries.length; i++){
